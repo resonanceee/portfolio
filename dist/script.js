@@ -1,6 +1,27 @@
-skrollr.init();
+window.addEventListener("DOMContentLoaded",() => {
+	const ms = new LogoAnimation("#logo",".logo");
+});
 
-/* HEY THERE!
-This cave thingy is based on this pen of mine here: https://codepen.io/Ovoce/pen/jucIg/
-So go check it out... You might need it 20 years in the future.
-*/
+class LogoAnimation {
+	constructor(buttonQS,svgQS) {
+		this.button = document.querySelector(buttonQS);
+		this.svg = document.querySelector(svgQS);
+		this.lastAnimPart = this.svg?.querySelector(`${svgQS} [data-anim]`);
+		this.playClass = "logo--running";
+
+		this.button?.addEventListener("click",this.replay.bind(this));
+		this.lastAnimPart?.addEventListener("animationend",this.stop.bind(this));
+
+		this.replay();
+	}
+	replay() {
+		if (!this.button.disabled) {
+			this.button.disabled = true;
+			this.svg?.classList.add(this.playClass);
+		}
+	}
+	stop() {
+		this.button.disabled = false;
+		this.svg?.classList.remove(this.playClass);
+	}
+}
