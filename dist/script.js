@@ -1,27 +1,19 @@
-window.addEventListener("DOMContentLoaded",() => {
-	const ms = new LogoAnimation("#logo",".logo");
-});
+const subtitle = document.getElementsByClassName("card-subtitle")[0];
 
-class LogoAnimation {
-	constructor(buttonQS,svgQS) {
-		this.button = document.querySelector(buttonQS);
-		this.svg = document.querySelector(svgQS);
-		this.lastAnimPart = this.svg?.querySelector(`${svgQS} [data-anim]`);
-		this.playClass = "logo--running";
-
-		this.button?.addEventListener("click",this.replay.bind(this));
-		this.lastAnimPart?.addEventListener("animationend",this.stop.bind(this));
-
-		this.replay();
-	}
-	replay() {
-		if (!this.button.disabled) {
-			this.button.disabled = true;
-			this.svg?.classList.add(this.playClass);
-		}
-	}
-	stop() {
-		this.button.disabled = false;
-		this.svg?.classList.remove(this.playClass);
-	}
+const createWord = (text, index) => {
+  const word = document.createElement("span");
+  
+  word.innerHTML = `${text} `;
+  
+  word.classList.add("card-subtitle-word");
+  
+  word.style.transitionDelay = `${index * 40}ms`;
+  
+  return word;
 }
+
+const addWord = (text, index) => subtitle.appendChild(createWord(text, index));
+
+const createSubtitle = text => text.split(" ").map(addWord);
+
+createSubtitle("Anarchy.bz è un server anarchy di Minecraft dove non esistono regole e dove ogni giocatore può fare ciò che vuole, come utilizzare client modificati, distruggere le basi degli altri giocatori e tentare di hackerare il server stesso. Potrai accedere al server a partire dal venerdì 12 maggio e l'indirizzo IP per accedervi è anarchy.bz. Ti preghiamo di attendere, stiamo lavorando sugli ultimi dettagli del server per darvi un'esperienza impeccabile.");
