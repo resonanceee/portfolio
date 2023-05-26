@@ -484,7 +484,7 @@ nav .menu .menu_icon:hover .icon:after {
   align-items: center;
   position: absolute;
   z-index: 2;
-  animation: anime404 0.6s cubic-bezier(0.3, 0.8, 1, 1.05) both;
+  animation: animtitle 0.6s cubic-bezier(0.3, 0.8, 1, 1.05) both;
   animation-delay: 1.2s;
 }
 @media screen and (max-width: 799px) {
@@ -492,7 +492,7 @@ nav .menu .menu_icon:hover .icon:after {
     font-size: 100px;
   }
 }
-@keyframes anime404 {
+@keyframes animtitle {
   0% {
     opacity: 0;
     transform: scale(10) skew(20deg, 20deg);
