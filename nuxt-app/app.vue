@@ -1,6 +1,5 @@
 <template>
-      
-  <NuxtLayout name="default" /> <!-- links broken-->
+  <NuxtLayout name="default" />
   <NuxtPage />
 </template>
 
