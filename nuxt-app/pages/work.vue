@@ -12,12 +12,11 @@
           <img src="/assets/icons/arrow-down-solid.svg" class="arrow-down" alt="">
         </div>
       </div>
-      <Skills />
+      <Projects />
     </div>
-  </template>
+</template>
   
-  <script>
-  // gotta slow down the scroll speed
+<script>
   export default {
     data() {
       return {
@@ -30,7 +29,7 @@
       handleScroll() {
         const scrollPosition = window.scrollY;
         const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const scrollPercentage = scrollPosition / windowHeight;
+        const scrollPercentage = (scrollPosition / windowHeight) / 8; // final division is a hack to slow down scroll speed
         const newStripeSize = this.initialStripeSize + (scrollPercentage * (this.maxStripeSize - this.initialStripeSize));
         this.updateBackgroundGradient(newStripeSize);
         this.updateFadeInOpacity(scrollPercentage);
@@ -41,8 +40,8 @@
           const transparentSize = Math.max(90 - stripeSize, 0);
           bgElement.style.background = `repeating-linear-gradient(
             -45deg,
-            #c38a16,
-            #c38a16 ${stripeSize}px,
+            #efa819,
+            #efa819 ${stripeSize}px,
             black 1px,
             transparent 4px,
             transparent ${transparentSize}px
@@ -69,19 +68,26 @@
       window.removeEventListener('scroll', this.handleScroll);
     },
   };
-  </script>
+</script>
 
 <style scoped>
-/*gotta add reactivity based on screen size*/ 
 
 .fade-in-color {
   position: absolute;
   top: 0;
   left: 0;
   width: 100vw;
-  height: 250vh;
-  background-color: #c38a16;
+  height: 200vh;
+  background-color: #efa819;
   transition: opacity 0.5s ease;
+  z-index: -1;
+}
+
+.container {
+    display: flex;
+    position: relative;
+    align-items: flex-start;
+    flex-direction: column;
 }
 
 .fullscreen-container {
@@ -96,12 +102,12 @@
 
 .bg {
     display: flex;
-    height: 250vh;
+    height: 200vh;
     width: 100vw;
     background: repeating-linear-gradient(
         -45deg,
-        #c38a16,
-        #c38a16 5px,
+        #efa819,
+        #efa819 5px,
         black 1px,
         transparent 4px,
         transparent 95px
@@ -145,7 +151,9 @@
     font-size: 35rem;
     font-weight: 700;
     margin-right: auto;
-    animation: fadeInUp 1s ease-out forwards;;
+    animation: fadeInUp 1s ease-out forwards;
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+
 }
 
 @keyframes fadeInUp {
@@ -161,6 +169,8 @@
 
 .heading-text {
     font-size: 5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);    
+    animation: fadeInUp 1s ease-out forwards;
 }
 
 .scroll-down-indicator {
@@ -191,6 +201,42 @@
     }
     to {
         transform: rotate(360deg);
+    }
+}
+
+@media (max-width: 768px) {
+    .heading-title {
+        margin: 0;
+        padding: 0;
+        line-height: 1;
+    }
+
+    .heading-title {
+        font-size: 25rem;
+    }
+
+    .heading-text {
+        font-size: 2rem;
+    }
+
+    .scroll-down-text {
+        animation: spin-slow 3s linear infinite;
+        width: 100px;
+    }
+
+    .arrow-down {
+        width: 25px;
+    }
+
+}
+
+@media (max-width: 425px) {
+    .heading-title {
+        font-size: 20rem;
+    }
+
+    .heading-text {
+        font-size: 2rem;
     }
 }
 </style>
