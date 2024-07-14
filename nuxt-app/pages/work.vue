@@ -1,49 +1,88 @@
 <template>
-    <div class="fullscreen-container">
-        <div class="bg"></div>
+    <div class="container">
+      <div class="bg"></div>
+      <div class="fade-in-color" :style="{ opacity: fadeOpacity }"></div>
+      <div class="fullscreen-container">
         <div class="heading-content">
-            <div class="heading"><p class="heading-title">5</p></div>
-            <div class="heading"><p class="heading-text">projects</p></div>
+          <div class="heading"><p class="heading-title">5</p></div>
+          <div class="heading"><p class="heading-text">projects</p></div>
         </div>
         <div ref="scrollDownIndicator" class="scroll-down-indicator">
-            <img src="/assets/icons/scroll-down-text.png" class="scroll-down-text" alt="">
-            <img src="/assets/icons/arrow-down-solid.svg" class="arrow-down" alt="">
+          <img src="/assets/icons/scroll-down-text.png" class="scroll-down-text" alt="">
+          <img src="/assets/icons/arrow-down-solid.svg" class="arrow-down" alt="">
         </div>
+      </div>
+      <Skills />
     </div>
-</template>
-
-<script>
-import { ref, onMounted, onUnmounted } from 'vue';
-
-export default {
-  setup() {
-    const scrollDownIndicator = ref(null);
-
-    const handleScroll = () => {
-      if (window.scrollY > 0) {
-        scrollDownIndicator.value.style.opacity = 0;
-        // Optional: Remove the event listener if you want the indicator to only fade out once
-        window.removeEventListener('scroll', handleScroll);
+  </template>
+  
+  <script>
+  // gotta slow down the scroll speed
+  export default {
+    data() {
+      return {
+        initialStripeSize: 5,
+        maxStripeSize: 190,
+        fadeOpacity: 0,
+      };
+    },
+    methods: {
+      handleScroll() {
+        const scrollPosition = window.scrollY;
+        const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercentage = scrollPosition / windowHeight;
+        const newStripeSize = this.initialStripeSize + (scrollPercentage * (this.maxStripeSize - this.initialStripeSize));
+        this.updateBackgroundGradient(newStripeSize);
+        this.updateFadeInOpacity(scrollPercentage);
+      },
+      updateBackgroundGradient(stripeSize) {
+        const bgElement = document.querySelector('.bg');
+        if (bgElement) {
+          const transparentSize = Math.max(90 - stripeSize, 0);
+          bgElement.style.background = `repeating-linear-gradient(
+            -45deg,
+            #c38a16,
+            #c38a16 ${stripeSize}px,
+            black 1px,
+            transparent 4px,
+            transparent ${transparentSize}px
+          )`;
+        }
+      },
+      updateFadeInOpacity(scrollPercentage) {
+        const fadeStart = 0;
+        const fadeEnd = 0.1;
+        if (scrollPercentage > fadeStart && scrollPercentage < fadeEnd) {
+          const adjustedPercentage = (scrollPercentage - fadeStart) / (fadeEnd - fadeStart);
+          this.fadeOpacity = Math.min(adjustedPercentage, 1);
+        } else if (scrollPercentage >= fadeEnd) {
+          this.fadeOpacity = 1;
+        } else {
+          this.fadeOpacity = 0;
+        }
       }
-    };
-
-    onMounted(() => {
-      window.addEventListener('scroll', handleScroll);
-    });
-
-    onUnmounted(() => {
-      window.removeEventListener('scroll', handleScroll);
-    });
-
-    return {
-      scrollDownIndicator,
-    };
-  },
-};
-</script>
+    },
+    mounted() {
+      window.addEventListener('scroll', this.handleScroll);
+    },
+    beforeDestroy() {
+      window.removeEventListener('scroll', this.handleScroll);
+    },
+  };
+  </script>
 
 <style scoped>
 /*gotta add reactivity based on screen size*/ 
+
+.fade-in-color {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 250vh;
+  background-color: #c38a16;
+  transition: opacity 0.5s ease;
+}
 
 .fullscreen-container {
     display: flex;
@@ -57,12 +96,12 @@ export default {
 
 .bg {
     display: flex;
-    height: 100vh;
+    height: 250vh;
     width: 100vw;
     background: repeating-linear-gradient(
         -45deg,
-        rgba(255, 166, 0, 0.205),
-        rgba(255, 166, 0, 0.425) 5px,
+        #c38a16,
+        #c38a16 5px,
         black 1px,
         transparent 4px,
         transparent 95px
