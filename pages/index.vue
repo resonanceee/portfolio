@@ -1,63 +1,84 @@
 <template>
-    <div>
-        <section class="wrapper">
-            <div class="container" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
-                <div id="scene" class="scene" data-hover-only="false">
-                    <div class="circle" data-depth="1.2"></div>
-                    <div class="one" data-depth="0.9">
-                        <div class="content">
-                            <span class="piece"></span>
-                            <span class="piece"></span>
-                            <span class="piece"></span>
-                        </div>
-                    </div>
-                    <div class="two" data-depth="0.60">
-                        <div class="content">
-                            <span class="piece"></span>
-                            <span class="piece"></span>
-                            <span class="piece"></span>
-                        </div>
-                    </div>
-                    <div class="three" data-depth="0.40">
-                        <div class="content">
-                            <span class="piece"></span>
-                            <span class="piece"></span>
-                            <span class="piece"></span>
-                        </div>
-                    </div>
-                    <p class="pcenter" data-depth="0.50">Resonance</p>
-                    <p class="pcenter" data-depth="0.10">Resonance</p>
-                </div>
-                <div class="text">
-                    <article>
-                        <p>Hello, I'm a developer.<br>Check out some of my stuff by clicking on the top-right buttons!</p>
-                    </article>
-                </div>
+  <div>
+    <section class="wrapper">
+      <div
+        class="container"
+        style="
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        "
+      >
+        <div id="scene" class="scene" data-hover-only="false">
+          <div class="circle" data-depth="1.2"></div>
+          <div class="one" data-depth="0.9">
+            <div class="content">
+              <span class="piece"></span>
+              <span class="piece"></span>
+              <span class="piece"></span>
             </div>
-        </section>
-    </div>
+          </div>
+          <div class="two" data-depth="0.60">
+            <div class="content">
+              <span class="piece"></span>
+              <span class="piece"></span>
+              <span class="piece"></span>
+            </div>
+          </div>
+          <div class="three" data-depth="0.40">
+            <div class="content">
+              <span class="piece"></span>
+              <span class="piece"></span>
+              <span class="piece"></span>
+            </div>
+          </div>
+          <p class="pcenter" data-depth="0.50">Resonance</p>
+          <p class="pcenter" data-depth="0.10">Resonance</p>
+        </div>
+        <div class="text">
+          <article>
+            <p>
+              Hello, I'm a developer.<br />Check out some of my stuff by
+              clicking on the top-right buttons!
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script setup>
-import { useHead } from '#imports'
+import { useHead } from "#imports";
 
 useHead({
   script: [
-    { src: 'https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js', defer: true },
-    { src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js', defer: true },
-    { src: '/script.js', defer: true }
-  ]
-})
+    {
+      src: "https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js",
+      defer: true,
+    },
+    {
+      src: "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js",
+      defer: true,
+    },
+    { src: "/script.js", defer: true },
+  ],
+});
 </script>
 
 <style>
+.pcenter {
+  font-size: clamp(3.8rem, 10vw, 100rem) !important;
+}
+
 .wrapper {
   display: grid;
   grid-template-columns: 1fr;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 .wrapper .container {
   margin: 0 auto;
@@ -133,10 +154,10 @@ useHead({
 }
 @media screen and (max-width: 799px) {
   .wrapper .container .one,
-.wrapper .container .two,
-.wrapper .container .three,
-.wrapper .container .circle,
-.wrapper .container .pcenter {
+  .wrapper .container .two,
+  .wrapper .container .three,
+  .wrapper .container .circle,
+  .wrapper .container .pcenter {
     width: 90%;
     height: 90%;
     top: 5% !important;
@@ -147,10 +168,10 @@ useHead({
 }
 @media screen and (max-height: 660px) {
   .wrapper .container .one,
-.wrapper .container .two,
-.wrapper .container .three,
-.wrapper .container .circle,
-.wrapper .container .pcenter {
+  .wrapper .container .two,
+  .wrapper .container .three,
+  .wrapper .container .circle,
+  .wrapper .container .pcenter {
     min-width: 280px;
     min-height: 280px;
     width: 60%;
@@ -204,7 +225,7 @@ useHead({
   font-size: 18px;
   letter-spacing: 0.6px;
   margin-bottom: 40px;
-  text-shadow: 6px 6px 10px #32243E;
+  text-shadow: 6px 6px 10px #32243e;
 }
 .wrapper .container .text article button {
   height: 40px;
@@ -223,7 +244,7 @@ useHead({
 .wrapper .container .text article button:hover {
   box-shadow: 0px 10px 10px -10px rgba(80, 35, 118, 0.5);
   transform: translateY(5px);
-  background: #FB8A8A;
+  background: #fb8a8a;
   color: white;
 }
 .wrapper .container .pcenter {
@@ -270,7 +291,10 @@ useHead({
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: inset 5px 20px 40px rgba(42, 8, 74, 0.393), inset 5px 0px 5px rgba(50, 36, 62, 0.3), inset 5px 5px 20px rgba(50, 36, 62, 0.25), 2px 2px 5px rgba(255, 255, 255, 0.2);
+  box-shadow: inset 5px 20px 40px rgba(42, 8, 74, 0.393),
+    inset 5px 0px 5px rgba(50, 36, 62, 0.3),
+    inset 5px 5px 20px rgba(50, 36, 62, 0.25),
+    2px 2px 5px rgba(255, 255, 255, 0.2);
   animation: circle 0.8s cubic-bezier(1, 0.06, 0.25, 1) backwards;
 }
 @keyframes circle {
@@ -292,7 +316,10 @@ useHead({
   height: 600px;
   background-color: rgba(46, 0, 131, 0.3);
   border-radius: 100%;
-  box-shadow: inset 5px 20px 40px rgba(54, 24, 79, 0.25), inset 5px 0px 5px rgba(50, 36, 62, 0.3), inset 5px 5px 20px rgba(50, 36, 62, 0.25), 2px 2px 5px rgba(255, 255, 255, 0.2);
+  box-shadow: inset 5px 20px 40px rgba(54, 24, 79, 0.25),
+    inset 5px 0px 5px rgba(50, 36, 62, 0.3),
+    inset 5px 5px 20px rgba(50, 36, 62, 0.25),
+    2px 2px 5px rgba(255, 255, 255, 0.2);
   animation: circle 0.8s 0.4s cubic-bezier(1, 0.06, 0.25, 1) backwards;
 }
 @media screen and (max-width: 799px) {
@@ -302,7 +329,7 @@ useHead({
   }
 }
 .wrapper .container .one .content .piece {
-  background: linear-gradient(90deg, #8077EA 13.7%, #EB73FF 94.65%);
+  background: linear-gradient(90deg, #8077ea 13.7%, #eb73ff 94.65%);
 }
 .wrapper .container .one .content .piece:nth-child(1) {
   right: 15%;
@@ -329,7 +356,7 @@ useHead({
   animation-name: pieceLeft;
 }
 .wrapper .container .two .content .piece {
-  background: linear-gradient(90deg, #FFEDC0 0%, #FF9D87 100%);
+  background: linear-gradient(90deg, #ffedc0 0%, #ff9d87 100%);
 }
 .wrapper .container .two .content .piece:nth-child(1) {
   left: 0%;
@@ -356,7 +383,7 @@ useHead({
   animation-name: pieceRight;
 }
 .wrapper .container .three .content .piece {
-  background: #FB8A8A;
+  background: #fb8a8a;
 }
 .wrapper .container .three .content .piece:nth-child(1) {
   left: 25%;
