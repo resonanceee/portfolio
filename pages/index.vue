@@ -57,7 +57,7 @@ useHead({
   justify-content: center;
   align-items: center;
   height: 100vh;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 .wrapper .container {
   margin: 0 auto;
