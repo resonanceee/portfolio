@@ -20,66 +20,61 @@
         />
       </div>
     </div>
-    <Projects />
+    <Project />
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      initialStripeSize: 5,
-      maxStripeSize: 190,
-      fadeOpacity: 0,
-    };
-  },
-  methods: {
-    handleScroll() {
-      const scrollPosition = window.scrollY;
-      const windowHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
-      const scrollPercentage = scrollPosition / windowHeight / 8; // final division is a hack to slow down scroll speed
-      const newStripeSize =
-        this.initialStripeSize +
-        scrollPercentage * (this.maxStripeSize - this.initialStripeSize);
-      this.updateBackgroundGradient(newStripeSize);
-      this.updateFadeInOpacity(scrollPercentage);
-    },
-    updateBackgroundGradient(stripeSize) {
-      const bgElement = document.querySelector(".bg");
-      if (bgElement) {
-        const transparentSize = Math.max(90 - stripeSize, 0);
-        bgElement.style.background = `repeating-linear-gradient(
-            -45deg,
-            #efa819,
-            #efa819 ${stripeSize}px,
-            black 1px,
-            transparent 4px,
-            transparent ${transparentSize}px
-          )`;
-      }
-    },
-    updateFadeInOpacity(scrollPercentage) {
-      const fadeStart = 0;
-      const fadeEnd = 0.1;
-      if (scrollPercentage > fadeStart && scrollPercentage < fadeEnd) {
-        const adjustedPercentage =
-          (scrollPercentage - fadeStart) / (fadeEnd - fadeStart);
-        this.fadeOpacity = Math.min(adjustedPercentage, 1);
-      } else if (scrollPercentage >= fadeEnd) {
-        this.fadeOpacity = 1;
-      } else {
-        this.fadeOpacity = 0;
-      }
-    },
-  },
-  mounted() {
-    window.addEventListener("scroll", this.handleScroll);
-  },
-  beforeDestroy() {
-    window.removeEventListener("scroll", this.handleScroll);
-  },
-};
+<script setup>
+import { ref, onMounted, onBeforeUnmount } from 'vue';
+
+const initialStripeSize = 5;
+const maxStripeSize = 190;
+const fadeOpacity = ref(0);
+
+function handleScroll() {
+  const scrollPosition = window.scrollY;
+  const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const scrollPercentage = scrollPosition / windowHeight / 8; // final division is a hack to slow down scroll speed
+  const newStripeSize = initialStripeSize + scrollPercentage * (maxStripeSize - initialStripeSize);
+  updateBackgroundGradient(newStripeSize);
+  updateFadeInOpacity(scrollPercentage);
+}
+
+function updateBackgroundGradient(stripeSize) {
+  const bgElement = document.querySelector(".bg");
+  if (bgElement) {
+    const transparentSize = Math.max(90 - stripeSize, 0);
+    bgElement.style.background = `repeating-linear-gradient(
+      -45deg,
+      #efa819,
+      #efa819 ${stripeSize}px,
+      black 1px,
+      transparent 4px,
+      transparent ${transparentSize}px
+    )`;
+  }
+}
+
+function updateFadeInOpacity(scrollPercentage) {
+  const fadeStart = 0;
+  const fadeEnd = 0.1;
+  if (scrollPercentage > fadeStart && scrollPercentage < fadeEnd) {
+    const adjustedPercentage = (scrollPercentage - fadeStart) / (fadeEnd - fadeStart);
+    fadeOpacity.value = Math.min(adjustedPercentage, 1);
+  } else if (scrollPercentage >= fadeEnd) {
+    fadeOpacity.value = 1;
+  } else {
+    fadeOpacity.value = 0;
+  }
+}
+
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
 </script>
 
 <style scoped>
