@@ -20,7 +20,9 @@
         />
       </div>
     </div>
-    <Project />
+    <div class="projects"> <!-- gotta add side scrolling when bottom of this div is hit -->
+      <Project /> <!-- gotta add props-->
+    </div> 
   </div>
 </template>
 
@@ -245,5 +247,15 @@ onBeforeUnmount(() => {
   .heading-text {
     font-size: 2rem;
   }
+}
+
+.projects {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  padding: 20 20vw;
 }
 </style>
