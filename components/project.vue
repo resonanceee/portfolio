@@ -45,4 +45,22 @@
     padding-bottom: 1%;
     font-weight: 600;
 }
+@media (max-width: 768px) {
+    .specs {
+        flex-direction: column;
+    }
+    .heading{
+        margin-bottom: 1vh;
+    }
+    .type{
+        margin-bottom: 1vh;
+    }
+    .role {
+        margin-bottom: 1vh;
+    }
+    .text {
+        font-size: 1.1rem;
+        color: #333;
+    }
+}
 </style>

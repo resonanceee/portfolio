@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="max-height: 100vh; overflow: auto;">
     <section class="wrapper">
       <div
         class="container"
@@ -58,10 +58,6 @@ useHead({
       src: "https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js",
       defer: true,
     },
-    {
-      src: "https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js",
-      defer: true,
-    },
     { src: "/script.js", defer: true },
   ],
 });
@@ -69,9 +65,8 @@ useHead({
 
 <style>
 .pcenter {
-  font-size: clamp(3.8rem, 10vw, 100rem) !important;
+  font-size: clamp(3.8rem, 15vw, 100rem) !important;
 }
-
 .wrapper {
   display: grid;
   grid-template-columns: 1fr;
@@ -90,8 +85,8 @@ useHead({
 }
 .wrapper .container .scene {
   position: absolute;
-  width: 100vw;
-  height: 100vh;
+  max-width: 100vw;
+  max-height: 100vh;
   vertical-align: middle;
 }
 .wrapper .container .one,
@@ -152,20 +147,6 @@ useHead({
     width: 10%;
   }
 }
-@media screen and (max-width: 799px) {
-  .wrapper .container .one,
-  .wrapper .container .two,
-  .wrapper .container .three,
-  .wrapper .container .circle,
-  .wrapper .container .pcenter {
-    width: 90%;
-    height: 90%;
-    top: 5% !important;
-    left: 5% !important;
-    min-width: 280px;
-    min-height: 280px;
-  }
-}
 @media screen and (max-height: 660px) {
   .wrapper .container .one,
   .wrapper .container .two,
@@ -183,7 +164,7 @@ useHead({
 .wrapper .container .text {
   width: 60%;
   height: 40%;
-  min-width: 400px;
+  min-width: 300px;
   min-height: 500px;
   position: absolute;
   margin: 40px 0;
@@ -193,12 +174,6 @@ useHead({
   0% {
     opacity: 0;
     transform: translateY(40px);
-  }
-}
-@media screen and (max-width: 799px) {
-  .wrapper .container .text {
-    min-height: 400px;
-    height: 80%;
   }
 }
 .wrapper .container .text article {
@@ -215,11 +190,6 @@ useHead({
   left: 50%;
   transform: translateX(-50%);
 }
-@media screen and (max-width: 799px) {
-  .wrapper .container .text article {
-    width: 100%;
-  }
-}
 .wrapper .container .text article p {
   color: white;
   font-size: 18px;
@@ -227,28 +197,7 @@ useHead({
   margin-bottom: 40px;
   text-shadow: 6px 6px 10px #32243e;
 }
-.wrapper .container .text article button {
-  height: 40px;
-  padding: 0 30px;
-  border-radius: 50px;
-  cursor: pointer;
-  box-shadow: 0px 15px 20px rgba(53, 16, 83, 0.5);
-  z-index: 3;
-  color: #695681;
-  background-color: white;
-  text-transform: uppercase;
-  font-weight: 600;
-  font-size: 12px;
-  transition: all 0.3s ease;
-}
-.wrapper .container .text article button:hover {
-  box-shadow: 0px 10px 10px -10px rgba(80, 35, 118, 0.5);
-  transform: translateY(5px);
-  background: #fb8a8a;
-  color: white;
-}
 .wrapper .container .pcenter {
-  font-size: 200px;
   font-weight: 700;
   letter-spacing: 4px;
   color: white;
@@ -259,11 +208,6 @@ useHead({
   z-index: 2;
   animation: animtitle 0.6s cubic-bezier(0.3, 0.8, 1, 1.05) both;
   animation-delay: 1.2s;
-}
-@media screen and (max-width: 799px) {
-  .wrapper .container .pcenter {
-    font-size: 75px;
-  }
 }
 @keyframes animtitle {
   0% {
@@ -303,12 +247,6 @@ useHead({
     height: 0;
   }
 }
-@media screen and (max-width: 799px) {
-  .wrapper .container .circle:before {
-    width: 400px;
-    height: 400px;
-  }
-}
 .wrapper .container .one .content:before {
   content: "";
   position: absolute;
@@ -323,6 +261,29 @@ useHead({
   animation: circle 0.8s 0.4s cubic-bezier(1, 0.06, 0.25, 1) backwards;
 }
 @media screen and (max-width: 799px) {
+  .wrapper .container .one,
+  .wrapper .container .two,
+  .wrapper .container .three,
+  .wrapper .container .circle,
+  .wrapper .container .pcenter {
+    width: 90%;
+    height: 90%;
+    top: 5% !important;
+    left: 5% !important;
+    min-width: 280px;
+    min-height: 280px;
+  }
+  .wrapper .container .text {
+    min-height: 400px;
+    height: 80%;
+  }
+  .wrapper .container .text article {
+    width: 100%;
+  }
+  .wrapper .container .circle:before {
+    width: 400px;
+    height: 400px;
+  }
   .wrapper .container .one .content:before {
     width: 300px;
     height: 300px;
