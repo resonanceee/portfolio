@@ -12,8 +12,10 @@
             <span class="icon"></span>
           </div>
         </div>
-        <div v-if="isVisible" class="toggle-div" :class="{ 'active': isVisible }" @click="toggleVisibility">
-        Menu
+        <div v-if="isVisible" class="toggle-div" @click="toggleVisibility" ref="hamburgerTransition">
+            <NuxtLink to="/" class="burgerlink">home</NuxtLink>
+            <NuxtLink to="/work" class="burgerlink">work</NuxtLink>
+            <a href="" class="burgerlink">contact me</a>
       </div>
     </nav>
   </div>
@@ -29,6 +31,17 @@ export default {
   methods: {
     toggleVisibility() {
       this.isVisible = !this.isVisible;
+      
+      if (this.isVisible) {
+        this.$nextTick(() => {
+          const hamburgerTransition = this.$refs.hamburgerTransition;
+          hamburgerTransition.style.animation = 'hamburgerTransition 0.3s forwards';
+        });
+      // commented out because I have no idea why it does not work but it's barely noticeable and maybe even looks better this way
+      // } else {
+      //   const hamburgerTransition = this.$refs.hamburgerTransition;
+      //  hamburgerTransition.style.animation = 'hamburgerTransition 0.3s backwards';  
+      }
     }
   }
 };
@@ -178,14 +191,34 @@ nav .menu .menu_icon.active .icon:after {
   background-color: #4c217e;
   color: white;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: left;
   justify-content: center;
   z-index: 2;
   pointer-events: none;
-  transition: right 3s ease;
+  margin-right: 20px;
 }
 
 .toggle-div * {
   pointer-events: auto;
+}
+
+@keyframes hamburgerTransition {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.burgerlink {
+  color: white;
+  text-transform: uppercase;
+  font-size: clamp(3rem, 6vw, 4rem);
+  font-weight: 200;
+  margin-right: 50px;
+  letter-spacing: 2px;
+  position: relative;
+  transition: all 0.3s 0.2s ease;
+  padding-bottom: 25px;
+  text-decoration: underline;
+
 }
 </style>
