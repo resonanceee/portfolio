@@ -205,7 +205,7 @@ useHead({
   width: 400px;
   position: absolute;
   bottom: 0;
-  z-index: 4;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;

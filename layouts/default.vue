@@ -2,25 +2,20 @@
   <div>
     <nav>
       <div class="menu">
-        <p class="website_name"></p>
-        <div class="menu_links">
-          <NuxtLink to="/" class="link">home</NuxtLink>
-          <NuxtLink to="/work" class="link">work</NuxtLink>
-          <a href="" class="link">contact me</a>
+          <p class="website_name"></p>
+          <div class="menu_links">
+            <NuxtLink to="/" class="link">home</NuxtLink>
+            <NuxtLink to="/work" class="link">work</NuxtLink>
+            <a href="" class="link">contact me</a>
+          </div>
+          <div class="menu_icon" :class="{ 'active': isVisible }" @click="toggleVisibility">
+            <span class="icon"></span>
+          </div>
         </div>
-        <div 
-          class="menu_icon" 
-          @touchstart="onTouchStart" 
-          @touchend="onTouchEnd"
-        >
-          <span class="icon"></span>
-        </div>
+        <div v-if="isVisible" class="toggle-div" :class="{ 'active': isVisible }" @click="toggleVisibility">
+        Menu
       </div>
     </nav>
-
-    <div v-if="isVisible" class="toggle-div" @touchstart="onTouchStart" @touchend="onTouchEnd">
-      Now you see me!
-    </div>
   </div>
 </template>
 
@@ -28,25 +23,12 @@
 export default {
   data() {
     return {
-      touchStartTime: 0,
-      isVisible: false // State to manage visibility
+      isVisible: false
     };
   },
   methods: {
-    onTouchStart() {
-      this.touchStartTime = Date.now();
-    },
-    onTouchEnd() {
-      const touchEndTime = Date.now();
-      const touchDuration = touchEndTime - this.touchStartTime;
-
-      // Check if the touch duration is less than a threshold (e.g., 300 ms)
-      if (touchDuration < 300) {
-        this.toggleVisibility();
-      }
-    },
     toggleVisibility() {
-      this.isVisible = !this.isVisible; // Toggle the visibility state
+      this.isVisible = !this.isVisible;
     }
   }
 };
@@ -140,43 +122,70 @@ nav .menu .menu_icon .icon {
   height: 2px;
   background: white;
   position: absolute;
-  z-index: 10;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  cursor: pointer;
 }
-nav .menu .menu_icon .icon:before, nav .menu .menu_icon .icon:after {
+
+nav .menu .menu_icon .icon:before, 
+nav .menu .menu_icon .icon:after {
   content: "";
   width: 100%;
   height: 100%;
   background: inherit;
   position: absolute;
-  transition: all 0.3s cubic-bezier(0.49, 0.04, 0, 1.55);
+  transition: all 0.3s ease;
 }
+
 nav .menu .menu_icon .icon:before {
   transform: translateY(-8px);
 }
+
 nav .menu .menu_icon .icon:after {
   transform: translateY(8px);
 }
-nav .menu .menu_icon:hover .icon {
+
+nav .menu .menu_icon:hover .icon,
+nav .menu .menu_icon:hover .icon:before,
+nav .menu .menu_icon:hover .icon:after {
   background: #FFEDC0;
 }
-nav .menu .menu_icon:hover .icon:before {
-  transform: translateY(-10px);
+
+nav .menu .menu_icon.active .icon {
+  transform: rotate(135deg);
+  cursor: pointer;
 }
-nav .menu .menu_icon:hover .icon:after {
-  transform: translateY(10px);
+
+nav .menu .menu_icon.active .icon:before {
+  top: 0;
+  transform: rotate(90deg);
+}
+
+nav .menu .menu_icon.active .icon:after {
+  top: 0;
+  transform: rotate(0);
 }
 
 .toggle-div {
   position: fixed;
   top: 0;
   left: 0;
+  right: -100%;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-size: 100% 100%;
+  background-position: 0px 0px,0px 0px,0px 0px,0px 0px,0px 0px;
+  background-color: #4c217e;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 5;
+  z-index: 2;
+  pointer-events: none;
+  transition: right 3s ease;
+}
+
+.toggle-div * {
+  pointer-events: auto;
 }
 </style>
