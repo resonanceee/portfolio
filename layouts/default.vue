@@ -1,21 +1,57 @@
 <template>
-    <div>
-      <nav>
-        <div class="menu">
-          <p class="website_name"></p>
-          <div class="menu_links">
-            <NuxtLink to="/" class="link">home</NuxtLink>
-            <NuxtLink to="/work" class="link">work</NuxtLink>
-            <a href="" class="link">contact me</a>
-          </div>
-          <div class="menu_icon">
-            <span class="icon"></span>
-          </div>
+  <div>
+    <nav>
+      <div class="menu">
+        <p class="website_name"></p>
+        <div class="menu_links">
+          <NuxtLink to="/" class="link">home</NuxtLink>
+          <NuxtLink to="/work" class="link">work</NuxtLink>
+          <a href="" class="link">contact me</a>
         </div>
-      </nav>
+        <div 
+          class="menu_icon" 
+          @touchstart="onTouchStart" 
+          @touchend="onTouchEnd"
+        >
+          <span class="icon"></span>
+        </div>
+      </div>
+    </nav>
+
+    <div v-if="isVisible" class="toggle-div" @touchstart="onTouchStart" @touchend="onTouchEnd">
+      Now you see me!
     </div>
+  </div>
 </template>
-  
+
+<script>
+export default {
+  data() {
+    return {
+      touchStartTime: 0,
+      isVisible: false // State to manage visibility
+    };
+  },
+  methods: {
+    onTouchStart() {
+      this.touchStartTime = Date.now();
+    },
+    onTouchEnd() {
+      const touchEndTime = Date.now();
+      const touchDuration = touchEndTime - this.touchStartTime;
+
+      // Check if the touch duration is less than a threshold (e.g., 300 ms)
+      if (touchDuration < 300) {
+        this.toggleVisibility();
+      }
+    },
+    toggleVisibility() {
+      this.isVisible = !this.isVisible; // Toggle the visibility state
+    }
+  }
+};
+</script>
+
 <style>
 nav .menu {
   width: 100%;
@@ -32,7 +68,6 @@ nav .menu .website_name {
   width: 75px;
   height: 75px;
   z-index: 0;
-  /*background-image: url(img/pom-removebg-preview.png); */ 
   background-size: 50%;
   background-repeat: no-repeat;
   background-position: 0px 30px;
@@ -45,7 +80,7 @@ nav .menu .website_name:hover {
 nav .menu .menu_links {
   transition: all 0.4s ease;
   opacity: 0.5;
-}w
+}
 nav .menu .menu_links:hover {
   opacity: 1;
 }
@@ -93,6 +128,7 @@ nav .menu .menu_icon {
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  z-index: 7;
 }
 @media screen and (max-width: 799px) {
   nav .menu .menu_icon {
@@ -104,6 +140,7 @@ nav .menu .menu_icon .icon {
   height: 2px;
   background: white;
   position: absolute;
+  z-index: 10;
 }
 nav .menu .menu_icon .icon:before, nav .menu .menu_icon .icon:after {
   content: "";
@@ -127,5 +164,19 @@ nav .menu .menu_icon:hover .icon:before {
 }
 nav .menu .menu_icon:hover .icon:after {
   transform: translateY(10px);
+}
+
+.toggle-div {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
 }
 </style>
