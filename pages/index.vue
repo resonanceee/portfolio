@@ -39,8 +39,7 @@
         <div class="text">
           <article>
             <p>
-              Hello, I'm a developer.<br />Check out some of my stuff by
-              clicking on the top-right buttons!
+              Hello, I'm a developer.<br />Make sure to check out the work tab!
             </p>
           </article>
         </div>
@@ -224,26 +223,6 @@ useHead({
   letter-spacing: 0.6px;
   margin-bottom: 40px;
   text-shadow: 6px 6px 10px #32243e;
-}
-.wrapper .container .text article button {
-  height: 40px;
-  padding: 0 30px;
-  border-radius: 50px;
-  cursor: pointer;
-  box-shadow: 0px 15px 20px rgba(53, 16, 83, 0.5);
-  z-index: 3;
-  color: #695681;
-  background-color: white;
-  text-transform: uppercase;
-  font-weight: 600;
-  font-size: 12px;
-  transition: all 0.3s ease;
-}
-.wrapper .container .text article button:hover {
-  box-shadow: 0px 10px 10px -10px rgba(80, 35, 118, 0.5);
-  transform: translateY(5px);
-  background: #fb8a8a;
-  color: white;
 }
 .wrapper .container .pcenter {
   font-size: 200px;

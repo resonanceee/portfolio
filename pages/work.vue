@@ -20,18 +20,24 @@
         />
       </div>
     </div>
-    <div class="projects"> <!-- gotta add side scrolling when bottom of this div is hit -->
-      <Project /> <!-- gotta add props-->
+    <div class="projects" > <!-- gotta add side scrolling when bottom of this div is hit -->
+      <Project :head="head1" :type="type1" :role="role1" :text="text1"/>
     </div> 
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
+import Project from '../components/project.vue'; 
 
 const initialStripeSize = 5;
 const maxStripeSize = 190;
 const fadeOpacity = ref(0);
+
+const head1 = 'EyeHide';
+const type1 = 'startup';
+const role1 = 'co-founder';
+const text1 = 'At EyeHide, we are deeply concerned about the growing trend of neglecting user privacy, especially with the rise of AI and large language models. We believe everyone deserves a secure digital experience without compromising their privacy.';
 
 function handleScroll() {
   const scrollPosition = window.scrollY;
@@ -40,6 +46,19 @@ function handleScroll() {
   const newStripeSize = initialStripeSize + scrollPercentage * (maxStripeSize - initialStripeSize);
   updateBackgroundGradient(newStripeSize);
   updateFadeInOpacity(scrollPercentage);
+  const scrollThreshold = window.innerHeight * 2; // 200vh
+  const currentScroll = window.scrollY;
+  if (currentScroll > scrollThreshold) {
+    if (!isHorizontalScroll.value) {
+      isHorizontalScroll.value = true;
+    }
+    const horizontalScroll = currentScroll - scrollThreshold;
+    document.querySelector(".horizontal-scroll-container").scrollLeft = horizontalScroll;
+  } else {
+    if (isHorizontalScroll.value) {
+      isHorizontalScroll.value = false;
+    }
+  }
 }
 
 function updateBackgroundGradient(stripeSize) {

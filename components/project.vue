@@ -1,15 +1,27 @@
 <template>
     <div class="wrapper">
         <div class="title">
-            <h1 class="heading">EyeHide</h1>
+            <h1 class="heading">{{ head }}</h1>
             <div class="specs">
-                <p class="type">startup</p>
-                <p class="role">co-founder</p>
+                <p class="type">{{ type }}</p>
+                <p class="role">{{ role }}</p>
             </div>
-            <p class="text">At EyeHide, we are deeply concerned about the growing trend of neglecting user privacy, especially with the rise of AI and large language models. We believe everyone deserves a secure digital experience without compromising their privacy.</p>
+            <p class="text">{{ text }}</p>
         </div>
     </div>
 </template>
+
+<script>
+export default {
+  name: 'Project',
+  props: {
+    head: String,
+    type: String,
+    role: String,
+    text: String,
+  },
+};
+</script>
 
 <style scoped>
 .wrapper {
