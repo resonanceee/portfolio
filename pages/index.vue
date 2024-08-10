@@ -56,8 +56,16 @@ useHead({
       src: "https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js",
       defer: true,
     },
-    { src: "/script.js", defer: true },
   ],
+});
+
+onMounted(() => {
+  const scene = document.getElementById('scene');
+  if (!scene) {
+    console.error('Error: The element with ID "scene" was not found.');
+    return;
+  }
+  const parallax = new Parallax(scene);
 });
 </script>
 <style>
