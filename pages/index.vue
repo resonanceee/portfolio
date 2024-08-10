@@ -1,4 +1,5 @@
 <template>
+  <LoadingBar/>
   <div style="max-height: 100%; overflow: auto;">
     <section class="wrapper">
       <div
@@ -117,13 +118,8 @@ useHead({
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  animation: content 0.8s cubic-bezier(1, 0.06, 0.25, 1) backwards;
 }
-@keyframes content {
-  0% {
-    width: 0;
-  }
-}
+
 .wrapper .container .one .content .piece,
 .wrapper .container .two .content .piece,
 .wrapper .container .three .content .piece,
@@ -184,13 +180,6 @@ useHead({
   min-height: 500px;
   position: absolute;
   margin: 40px 0;
-  animation: text 0.6s 1.8s ease backwards;
-}
-@keyframes text {
-  0% {
-    opacity: 0;
-    transform: translateY(40px);
-  }
 }
 @media screen and (max-width: 799px) {
   .wrapper .container .text {
@@ -234,20 +223,13 @@ useHead({
   align-items: center;
   position: absolute;
   z-index: 2;
-  animation: animtitle 0.6s cubic-bezier(0.3, 0.8, 1, 1.05) both;
-  animation-delay: 1.2s;
 }
 @media screen and (max-width: 799px) {
   .wrapper .container .pcenter {
     font-size: 75px;
   }
 }
-@keyframes animtitle {
-  0% {
-    opacity: 0;
-    transform: scale(10) skew(20deg, 20deg);
-  }
-}
+
 .wrapper .container .pcenter:nth-of-type(2) {
   color: #1f0336;
   z-index: 1;
@@ -272,14 +254,8 @@ useHead({
     inset 5px 0px 5px rgba(50, 36, 62, 0.3),
     inset 5px 5px 20px rgba(50, 36, 62, 0.25),
     2px 2px 5px rgba(255, 255, 255, 0.2);
-  animation: circle 0.8s cubic-bezier(1, 0.06, 0.25, 1) backwards;
 }
-@keyframes circle {
-  0% {
-    width: 0;
-    height: 0;
-  }
-}
+
 @media screen and (max-width: 799px) {
   .wrapper .container .circle:before {
     width: 400px;

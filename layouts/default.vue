@@ -36,11 +36,7 @@ export default {
         this.$nextTick(() => {
           const hamburgerTransition = this.$refs.hamburgerTransition;
           hamburgerTransition.style.animation = 'hamburgerTransition 0.3s forwards';
-        });
-      // commented out because I have no idea why it does not work but it's barely noticeable and maybe even looks better this way
-      // } else {
-      //   const hamburgerTransition = this.$refs.hamburgerTransition;
-      //  hamburgerTransition.style.animation = 'hamburgerTransition 0.3s backwards';  
+        }); 
       }
     }
   }
