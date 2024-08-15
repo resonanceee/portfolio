@@ -247,7 +247,15 @@ onBeforeUnmount(() => {
   transform: translateY(-110px) !important;
   animation: fadeInUp 1s ease-out forwards;
 }
-
+@media (max-width: 1920px) and (max-height: 1080px) {
+  .heading-title {
+    font-size: 20rem;
+  }
+  .heading-text {
+    font-size: 3rem;
+    padding-top: 50px;
+  }
+}
 .scroll-down-indicator {
   transition: opacity 0.5s ease-out;
   position: absolute;
@@ -332,10 +340,19 @@ onBeforeUnmount(() => {
 }
 @media (max-width: 768px) {
   .projects > * {
+    height: 50vh;
     width: 75%;
     transform: translateY(150px);
   }
 }
+
+@media (min-aspect-ratio: 21/9) {
+  .projects > * {
+    width: 30%;
+    transform: translateY(250px);
+  }
+}
+
 .projects > *.in-view {
   opacity: 1;
   transform: translateY(0);
