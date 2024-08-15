@@ -20,8 +20,15 @@
         />
       </div>
     </div>
-    <div class="projects" > <!-- gotta add side scrolling when bottom of this div is hit -->
-      <Project :head="head1" :type="type1" :role="role1" :text="text1"/>
+    <div class="projects">
+      <Project ref="scrollingGuy"
+        v-for="(project, index) in projects"
+        :key="index"
+        :head="project.head"
+        :type="project.type"
+        :role="project.role"
+        :text="project.text"
+      />
     </div> 
   </div>
 </template>
@@ -34,19 +41,49 @@ const initialStripeSize = 5;
 const maxStripeSize = 190;
 const fadeOpacity = ref(0);
 
-const head1 = 'EyeHide';
-const type1 = 'startup';
-const role1 = 'co-founder';
-const text1 = 'At EyeHide, we are deeply concerned about the growing trend of neglecting user privacy, especially with the rise of AI and large language models. We believe everyone deserves a secure digital experience without compromising their privacy.';
+const projects = [
+// placeholders
+  {
+    head: 'EyeHide',
+    type: 'startup',
+    role: 'co-founder',
+    text: 'At EyeHide, we are deeply concerned about the growing trend of neglecting user privacy, especially with the rise of AI and large language models. We believe everyone deserves a secure digital experience without compromising their privacy.'
+  },
+  {
+    head: 'EyeHide',
+    type: 'startup',
+    role: 'co-founder',
+    text: 'At EyeHide, we are deeply concerned about the growing trend of neglecting user privacy, especially with the rise of AI and large language models. We believe everyone deserves a secure digital experience without compromising their privacy.'
+  },
+  {
+    head: 'EyeHide',
+    type: 'startup',
+    role: 'co-founder',
+    text: 'At EyeHide, we are deeply concerned about the growing trend of neglecting user privacy, especially with the rise of AI and large language models. We believe everyone deserves a secure digital experience without compromising their privacy.'
+  },
+  {
+    head: 'EyeHide',
+    type: 'startup',
+    role: 'co-founder',
+    text: 'At EyeHide, we are deeply concerned about the growing trend of neglecting user privacy, especially with the rise of AI and large language models. We believe everyone deserves a secure digital experience without compromising their privacy.'
+  },
+  {
+    head: 'EyeHide',
+    type: 'startup',
+    role: 'co-founder',
+    text: 'At EyeHide, we are deeply concerned about the growing trend of neglecting user privacy, especially with the rise of AI and large language models. We believe everyone deserves a secure digital experience without compromising their privacy.'
+  },
+];
+
 
 function handleScroll() {
   const scrollPosition = window.scrollY;
   const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const scrollPercentage = scrollPosition / windowHeight / 8; // final division is a hack to slow down scroll speed
+  const scrollPercentage = scrollPosition / windowHeight / 1.8; // final division is a hack to slow down scroll speed
   const newStripeSize = initialStripeSize + scrollPercentage * (maxStripeSize - initialStripeSize);
   updateBackgroundGradient(newStripeSize);
   updateFadeInOpacity(scrollPercentage);
-  const scrollThreshold = window.innerHeight * 2; // 200vh
+  const scrollThreshold = window.innerHeight * 2;
   const currentScroll = window.scrollY;
   if (currentScroll > scrollThreshold) {
     if (!isHorizontalScroll.value) {
@@ -88,14 +125,69 @@ function updateFadeInOpacity(scrollPercentage) {
     fadeOpacity.value = 0;
   }
 }
+let scrollingGuy = ref();
+let scrollingContent = ref();
+let pageTitle = ref();
+let pageTitleCont = ref();
+let laptopImage = ref();
+let backgroundEffect = ref();
+let scrolledPercentage = ref(0);
+let scrollDownIndicator = ref();
+const scrollHandler = () => {
+    if (!scrollingGuy.value) return;
+    scrolledPercentage.value = (scrollingContent.value.getBoundingClientRect().top - scrollingGuy.value.getBoundingClientRect().top) / scrollingContent.value.getBoundingClientRect().height;
+    pageTitle.value.style.backgroundImage = `linear-gradient(60deg, #623bb0 0%, #975cfb ${scrolledPercentage.value * 50}%, #623bb0 100%)`;
+    pageTitle.value.style.opacity = `${scrolledPercentage.value * 1.4 + 0.5}`
+    pageTitleCont.value.style.transform = `translateY(${Math.max(scrolledPercentage.value * scrollingContent.value.getBoundingClientRect().height / 2.5 * -1, -260)}px)`
+    laptopImage.value.style.transform = `translateY(${Math.max(scrolledPercentage.value * -90 - 40, -110)}%)`
+    laptopImage.value.style.scale = Math.min(scrolledPercentage.value * 2.25, 1.35);
+    backgroundEffect.value.style.opacity = scrolledPercentage.value
+
+    if (scrolledPercentage.value > 0.4) {
+        scrollDownIndicator.value.style.opacity = 0;
+    } else {
+        scrollDownIndicator.value.style.opacity = 1;
+    }
+};
+
+const isInViewport = (element) => {
+    const rect = element.getBoundingClientRect();
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+    const visibilityThreshold = 0.8;
+    return (
+        rect.top + rect.height * visibilityThreshold >= 0 &&
+        rect.left + rect.width * visibilityThreshold >= 0 &&
+        rect.bottom - rect.height * visibilityThreshold <= windowHeight &&
+        rect.right - rect.width * visibilityThreshold <= windowWidth
+    );
+}
 
 onMounted(() => {
   window.addEventListener("scroll", handleScroll);
+  
+  // fadein
+  const interval = () => {
+      const els = [...document.querySelectorAll(".fadein")];
+      setInterval(() => {
+          els.forEach((el) => {
+            if (isInViewport(el)) {
+                el.classList.add("fadein-active");
+            } else {
+            }
+        });
+    });
+  }
+  interval();
+  // scroll
+  scrollHandler();
+  window.addEventListener("scroll", scrollHandler)
 });
 
 onBeforeUnmount(() => {
   window.removeEventListener("scroll", handleScroll);
 });
+
 </script>
 
 <style scoped>
@@ -104,7 +196,7 @@ onBeforeUnmount(() => {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 200vh;
+  height: 600vh;
   background-color: #efa819;
   transition: opacity 0.5s ease;
   z-index: -1;
@@ -130,7 +222,7 @@ onBeforeUnmount(() => {
 
 .bg {
   display: flex;
-  height: 200vh;
+  height: 600vh;
   width: 100vw;
   background: repeating-linear-gradient(
     -45deg,
@@ -274,7 +366,12 @@ onBeforeUnmount(() => {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100vh;
-  padding: 20 20vw;
+  height: 500vh;
+}
+.projects > * {
+  height: 40vh;
+  margin-bottom: 50vh;
+  width: 40%;
+  animation: fadeInUp 1s ease-out forwards;
 }
 </style>
