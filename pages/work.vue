@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="projects">
-      <Project ref="scrollingGuy"
+      <Project
         v-for="(project, index) in projects"
         :key="index"
         :head="project.head"
@@ -36,6 +36,7 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import Project from '../components/project.vue'; 
+import { useIntersectionObserver } from '~/composables/useIntersectionObserver';
 
 const initialStripeSize = 5;
 const maxStripeSize = 190;
@@ -125,63 +126,17 @@ function updateFadeInOpacity(scrollPercentage) {
     fadeOpacity.value = 0;
   }
 }
-let scrollingGuy = ref();
-let scrollingContent = ref();
-let pageTitle = ref();
-let pageTitleCont = ref();
-let laptopImage = ref();
-let backgroundEffect = ref();
-let scrolledPercentage = ref(0);
-let scrollDownIndicator = ref();
-const scrollHandler = () => {
-    if (!scrollingGuy.value) return;
-    scrolledPercentage.value = (scrollingContent.value.getBoundingClientRect().top - scrollingGuy.value.getBoundingClientRect().top) / scrollingContent.value.getBoundingClientRect().height;
-    pageTitle.value.style.backgroundImage = `linear-gradient(60deg, #623bb0 0%, #975cfb ${scrolledPercentage.value * 50}%, #623bb0 100%)`;
-    pageTitle.value.style.opacity = `${scrolledPercentage.value * 1.4 + 0.5}`
-    pageTitleCont.value.style.transform = `translateY(${Math.max(scrolledPercentage.value * scrollingContent.value.getBoundingClientRect().height / 2.5 * -1, -260)}px)`
-    laptopImage.value.style.transform = `translateY(${Math.max(scrolledPercentage.value * -90 - 40, -110)}%)`
-    laptopImage.value.style.scale = Math.min(scrolledPercentage.value * 2.25, 1.35);
-    backgroundEffect.value.style.opacity = scrolledPercentage.value
 
-    if (scrolledPercentage.value > 0.4) {
-        scrollDownIndicator.value.style.opacity = 0;
-    } else {
-        scrollDownIndicator.value.style.opacity = 1;
-    }
-};
-
-const isInViewport = (element) => {
-    const rect = element.getBoundingClientRect();
-    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-    const windowWidth = window.innerWidth || document.documentElement.clientWidth;
-    const visibilityThreshold = 0.8;
-    return (
-        rect.top + rect.height * visibilityThreshold >= 0 &&
-        rect.left + rect.width * visibilityThreshold >= 0 &&
-        rect.bottom - rect.height * visibilityThreshold <= windowHeight &&
-        rect.right - rect.width * visibilityThreshold <= windowWidth
-    );
-}
+useIntersectionObserver((entry) => {
+  if (entry.isIntersecting) {
+    entry.target.classList.add('in-view');
+  } else {
+    entry.target.classList.remove('in-view');
+  }
+});
 
 onMounted(() => {
   window.addEventListener("scroll", handleScroll);
-  
-  // fadein
-  const interval = () => {
-      const els = [...document.querySelectorAll(".fadein")];
-      setInterval(() => {
-          els.forEach((el) => {
-            if (isInViewport(el)) {
-                el.classList.add("fadein-active");
-            } else {
-            }
-        });
-    });
-  }
-  interval();
-  // scroll
-  scrollHandler();
-  window.addEventListener("scroll", scrollHandler)
 });
 
 onBeforeUnmount(() => {
@@ -359,7 +314,6 @@ onBeforeUnmount(() => {
     font-size: 2rem;
   }
 }
-
 .projects {
   display: flex;
   flex-direction: column;
@@ -370,8 +324,21 @@ onBeforeUnmount(() => {
 }
 .projects > * {
   height: 40vh;
-  margin-bottom: 50vh;
+  margin-bottom: 40vh;
   width: 40%;
-  animation: fadeInUp 1s ease-out forwards;
+  opacity: 0;
+  transform: translateY(450px);
+  transition: opacity 1.5s ease-out, transform 1s ease-out;
 }
+@media (max-width: 768px) {
+  .projects > * {
+    width: 75%;
+    transform: translateY(150px);
+  }
+}
+.projects > *.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 </style>
