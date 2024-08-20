@@ -1,11 +1,11 @@
 <template>
-  <div class="wrapper">
+  <div class="wrapper" @mousemove="handleMouseMove">
     <div class="content-container">
       <div class="left-section">
         <div class="heading-container">
           <div class="heading">
-            <p class="title">GET IN TOUCH FOR PROJECT INQUIRIES.</p>
-            <p class="subtitle">CURRENTLY AVAILABLE FOR FREELANCE PROJECTS.</p>
+            <p class="ltitle">GET IN TOUCH FOR PROJECT INQUIRIES.</p>
+            <p class="lsubtitle">CURRENTLY AVAILABLE FOR FREELANCE PROJECTS.</p>
           </div>
         </div>
       </div>
@@ -13,7 +13,7 @@
         <div class="heading-container">
           <div class="heading">
             <p class="title">MAIL</p>
-            <p class="content">yaroslav.rivny@gmail.com</p>
+            <p class="content" @mouseover="showCopyBubble" @mouseleave="hideCopyBubble" @click="copyToClipboard">yaroslav.rivny@gmail.com</p>
             <p class="title">X</p>
             <a class="content" href="https://x.com/_resonanceee_">@_resonanceee_</a>
             <p class="title">GitHub</p>
@@ -22,21 +22,86 @@
         </div>
       </div>
     </div>
+    <div v-if="!isMobile && !showCopy" class="bubble" :class="{ 'hovered': isHovered }" :style="bubbleStyle">
+      <span v-if="isHovered">Click me!</span>
+    </div>
+    <div v-if="showCopy" class="bubble hovered" :style="bubbleStyle">
+      <span>Click to copy!</span>
+    </div>
   </div>
 </template>
 
+<script setup>
+import { ref, onMounted } from 'vue';
+
+const bubbleStyle = ref({
+  left: '0px',
+  top: '0px',
+});
+
+const isMobile = ref(false);
+const isHovered = ref(false);
+const showCopy = ref(false);
+
+onMounted(() => {
+  isMobile.value = /Mobi|Android/i.test(navigator.userAgent);
+});
+
+const handleMouseMove = (event) => {
+  if (!isMobile.value) {
+    const { clientX, clientY } = event;
+    const targetX = clientX - 25;
+    const targetY = clientY - 25;
+
+    bubbleStyle.value = {
+      left: `${targetX}px`,
+      top: `${targetY}px`,
+      transition: 'left 0.2s ease-out, top 0.2s ease-out',
+    };
+
+    const elementUnderCursor = document.elementFromPoint(clientX, clientY);
+    isHovered.value = elementUnderCursor && elementUnderCursor.tagName === 'A';
+  }
+};
+
+const showCopyBubble = (event) => {
+  const { clientX, clientY } = event;
+  const targetX = clientX - 25;
+  const targetY = clientY - 25;
+
+  bubbleStyle.value = {
+    left: `${targetX}px`,
+    top: `${targetY}px`,
+    transition: 'left 0.2s ease-out, top 0.2s ease-out',
+  };
+
+  showCopy.value = true;
+};
+
+const hideCopyBubble = () => {
+  showCopy.value = false;
+};
+
+const copyToClipboard = () => {
+  navigator.clipboard.writeText('yaroslav.rivny@gmail.com').then(() => {
+    alert('Email address copied to clipboard!');
+  });
+};
+</script>
+
 <style scoped>
-/*gotta fiddle around with background colors*/
 .wrapper {
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #50879a;
+  background-color: #f26d6d;
+  cursor: none;
 }
 
 .content-container {
+  position: relative;
   display: flex;
   width: 90%;
   height: 80%;
@@ -47,7 +112,7 @@
 
 .left-section {
   width: 55%;
-  background-color: #ffffff;
+  background-color: #893bdb;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -56,7 +121,7 @@
 
 .right-section {
   width: 45%;
-  background-color: #ffc531;
+  background-color: #fcac14;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -81,8 +146,21 @@
   margin-bottom: 10px;
 }
 
+.ltitle {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #ffffff;
+}
+
+.lsubtitle {
+  font-size: 1.4rem;
+  color: #fafafa;
+  margin-bottom: 20px;
+}
+
 .subtitle {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
   color: #666;
   margin-bottom: 20px;
 }
@@ -91,9 +169,47 @@
   font-size: 1.2rem;
   margin-bottom: 10px;
   text-decoration: none;
+  cursor: none;
 }
 
 .content:hover {
   text-decoration: underline;
+}
+
+.bubble {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background: white;
+  border-radius: 50%;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  animation: bubble 5s ease-in-out infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  color: black;
+  transition: width 0.5s ease-out, height 0.5s ease-out, border-radius 0.5s ease-out, background 0.5s ease-out, transform 0.5s ease-out;
+  cursor: none;
+}
+
+.bubble.hovered {
+  width: 120px;
+  height: 60px;
+  border-radius: 20px 20px 20px 0;
+  background: yellow;
+  mix-blend-mode: normal;
+  transform: scale(1.1);
+  cursor: none;
+}
+
+@keyframes bubble {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
 }
 </style>
