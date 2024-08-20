@@ -3,12 +3,19 @@
     <div class="title">
       <div class="heading-container">
         <h1 class="heading">{{ head }}</h1>
-        <a v-if="link" :href="link" target="_blank" class="check-it-out">
+        <a   :href="link" 
+          target="_blank" 
+          class="check-it-out" 
+          :class="{ 'disabled-link': isPrivate }"
+          @click="isPrivate && $event.preventDefault()">
           <span v-if="link.includes('github')">
             Check it out <img src="assets/icons/github-mark.png" alt="GitHub" class="icon"/>
           </span>
-          <span v-else>
+          <span v-else-if="!isPrivate">
             Check it out 🌐
+          </span>
+          <span span v-if="isPrivate" class="private">
+            Private 🔒
           </span>
         </a>
       </div>
@@ -38,6 +45,11 @@ export default {
       default: ''
     }
   },
+  computed: {
+    isPrivate() {
+      return this.link && this.link.includes('private');
+    }
+  }
 };
 </script>
 
@@ -66,11 +78,11 @@ export default {
 .specs p {
   margin: 0 10px;
   line-height: 1.6rem;
-  font-size: 1.7rem;
-  font-weight: 400;
+  font-size: 1.5rem;
+  font-weight: 500;
 }
 .type {
-  color: #4c217e;
+  color: #6315c2;
 }
 .separator {
   border-left: 1px solid #000;
@@ -81,18 +93,20 @@ export default {
   padding: 20px;
 }
 .text {
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: #333;
 }
 .check-it-out {
   text-decoration: none;
   font-size: 1.5rem;
-  color: #6433c5;
+  color: #9b59b6;
   display: flex;
   align-items: center;
+  font-weight: 600;
   border-radius: 30px;
-  border: 1px solid #6433c5;
+  border: 1px solid #9b59b6;
   padding: 5px 10px;
+  white-space: nowrap;
 }
 .check-it-out:hover {
   background-color: #6433c5;
@@ -101,6 +115,14 @@ export default {
 .check-it-out:hover .icon {
   content: url('assets/icons/github-mark-white.png');
 }
+.check-it-out.disabled-link {
+  background-color: #6433c5;
+  color: #efa819;
+  cursor: not-allowed !important;
+}
+.check-it-out.disabled-link:hover {
+  cursor: not-allowed !important;
+}
 .icon {
   width: 20px;
   height: 20px;
@@ -108,21 +130,33 @@ export default {
 }
 @media (max-width: 768px) {
   .specs {
-    flex-direction: column;
+    flex-direction: row;
   }
   .heading-container {
     flex-direction: column;
     align-items: flex-start;
   }
   .heading {
+    font-size: 2rem;
     margin-bottom: 1vh;
   }
-  .type, .role, .org {
-    margin-bottom: 1vh;
+  .specs p {
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 0.5vh;
+    margin: 0;
   }
   .text {
-    font-size: 1.5rem;
+    font-size: 1rem;
     color: #333;
+  }
+  .check-it-out {
+    font-size: 1rem;
+    padding: 3px 7px;
+  }
+  .icon {
+    width: 15px;
+    height: 15px;
   }
 }
 </style>

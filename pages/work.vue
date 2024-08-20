@@ -57,15 +57,16 @@ const projects = [
     head: 'WaveLab Station',
     type: 'project',
     role: 'developer',
-    org: 'VMware / WaveLab',
+    org: 'VMware',
     text: 'This project enhances the EV charging experience for users and provides valuable analytics to vehicle manufacturers. Utilizing computer vision, we continuously analyze live feeds to monitor various factors, such as misuse of electric parking spots and user mood. This technology also enables personalized recommendations for nearby attractions. Due to confidentiality requested by VMware, further details cannot be disclosed.',  
+    link: 'private'
   },
   {
     head: 'ACS Emissions dashboard',
     type: 'project',
     role: 'developer',
-    org: 'ACS Data Systems S.p.A.',
-    text: 'ACS Data Systems S.p.A. tasked us with creating a dashboard to track their mobility emissions. Despite successfully delivering the product, they ceased communication, citing the lack of API keys for dkvmobility as the reason.',
+    org: 'ACS',
+    text: 'ACS Data Systems S.p.A. tasked us with creating a dashboard to track their mobility emissions. Despite successfully delivering the product, they ceased communication, citing their failure to acquire lack of API keys for dkvmobility as the reason.',
     link: 'https://github.com/SysWhiteDev/ACS-Challenge-2023'
   },
   {
@@ -79,8 +80,8 @@ const projects = [
     head: 'Weather Component',
     type: 'project',
     role: 'developer',
-    org: 'Open Data Hub',
-    text: "This project was created during the ODH Bootcamp 2024, the goal was to create a way to visualise weather data from the Open Data Hub, the component we developed features a dynamic map and data loading, near webcams search, live weather data, 3-hour gap forecast, day-by-day forecast, component attributes options, and dark/light mode support. It was highly appreciated at the conference, with attendees praising its 'spicy' UI. Post-conference, the Open Data Hub requested to feature our widget on their website.",
+    org: 'ODH',
+    text: "Created during the ODH Bootcamp 2024, this project visualizes weather data from the Open Data Hub. It features a dynamic map, data loading, nearby webcams search, live weather data, 3-hour forecast, daily forecast, component options, and dark/light mode. Highly praised at the conference, the Open Data Hub requested to feature our widget on their website.",
     link: 'https://weather.syswhite.dev/'
   },
 ];
@@ -340,7 +341,7 @@ onBeforeUnmount(() => {
   height: 500vh;
 }
 .projects > * {
-  height: 40vh;
+  height: 45vh;
   margin-bottom: 40vh;
   width: 40%;
   opacity: 0;
@@ -349,11 +350,17 @@ onBeforeUnmount(() => {
 }
 @media (max-width: 768px) {
   .projects > * {
-    height: 50vh;
+    height: 55vh;
     width: 75%;
     transform: translateY(150px);
   }
+  /*hack because text is too long for some devices and gets hidden after overflowing */
+  .projects > div:last-child {
+    margin-bottom: 0;
+    padding-bottom: 10vh;
+  }
 }
+
 
 @media (min-aspect-ratio: 21/9) {
   .projects > * {
