@@ -6,7 +6,7 @@
           <div class="menu_links">
             <NuxtLink to="/" class="link">home</NuxtLink>
             <NuxtLink to="/work" class="link">work</NuxtLink>
-            <a href="" class="link">contact me</a>
+            <NuxtLink to="/contact"class="link">contact me</NuxtLink>
           </div>
           <div class="menu_icon" :class="{ 'active': isVisible }" @click="toggleVisibility">
             <span class="icon"></span>
@@ -15,7 +15,7 @@
         <div v-if="isVisible" class="toggle-div" @click="toggleVisibility" ref="hamburgerTransition">
             <NuxtLink to="/" class="burgerlink">home</NuxtLink>
             <NuxtLink to="/work" class="burgerlink">work</NuxtLink>
-            <a href="" class="burgerlink">contact me</a>
+            <NuxtLink to="/contact"class="burgerlink">contact me</NuxtLink>
       </div>
     </nav>
   </div>
