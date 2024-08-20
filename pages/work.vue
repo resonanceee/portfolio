@@ -27,7 +27,9 @@
         :head="project.head"
         :type="project.type"
         :role="project.role"
+        :org="project.org"
         :text="project.text"
+        :link="project.link"
       />
     </div> 
   </div>
@@ -43,36 +45,43 @@ const maxStripeSize = 190;
 const fadeOpacity = ref(0);
 
 const projects = [
-// placeholders
+
   {
     head: 'EyeHide',
     type: 'startup',
     role: 'co-founder',
-    text: 'At EyeHide, we are deeply concerned about the growing trend of neglecting user privacy, especially with the rise of AI and large language models. We believe everyone deserves a secure digital experience without compromising their privacy.'
+    text: 'At EyeHide, we are deeply concerned about the growing trend of neglecting user privacy, especially with the rise of AI and large language models. We believe everyone deserves a secure digital experience without compromising their privacy.', // placeholder
+    link: 'https://eyehide.org'
   },
   {
-    head: 'EyeHide',
-    type: 'startup',
-    role: 'co-founder',
-    text: 'At EyeHide, we are deeply concerned about the growing trend of neglecting user privacy, especially with the rise of AI and large language models. We believe everyone deserves a secure digital experience without compromising their privacy.'
+    head: 'WaveLab Station',
+    type: 'project',
+    role: 'developer',
+    org: 'VMware / WaveLab',
+    text: 'This project enhances the EV charging experience for users and provides valuable analytics to vehicle manufacturers. Utilizing computer vision, we continuously analyze live feeds to monitor various factors, such as misuse of electric parking spots and user mood. This technology also enables personalized recommendations for nearby attractions. Due to confidentiality requested by VMware, further details cannot be disclosed.',  
   },
   {
-    head: 'EyeHide',
-    type: 'startup',
-    role: 'co-founder',
-    text: 'At EyeHide, we are deeply concerned about the growing trend of neglecting user privacy, especially with the rise of AI and large language models. We believe everyone deserves a secure digital experience without compromising their privacy.'
+    head: 'ACS Emissions dashboard',
+    type: 'project',
+    role: 'developer',
+    org: 'ACS Data Systems S.p.A.',
+    text: 'ACS Data Systems S.p.A. tasked us with creating a dashboard to track their mobility emissions. Despite successfully delivering the product, they ceased communication, citing the lack of API keys for dkvmobility as the reason.',
+    link: 'https://github.com/SysWhiteDev/ACS-Challenge-2023'
   },
   {
-    head: 'EyeHide',
-    type: 'startup',
-    role: 'co-founder',
-    text: 'At EyeHide, we are deeply concerned about the growing trend of neglecting user privacy, especially with the rise of AI and large language models. We believe everyone deserves a secure digital experience without compromising their privacy.'
+  head: 'TrashTracer',
+  type: 'project',
+  role: 'developer',
+  text: "This project started at the NOI Hackathon 2022, aiming to use displays to show a leaderboard for top recyclers. It evolved for the Progetto Rocca competition, where we revamped the codebase and developed a new app to enhance user experience. The project won awards at both events, recognizing our commitment to environmental sustainability and innovative design.",
+  link: 'https://github.com/trashtracer'
   },
   {
-    head: 'EyeHide',
-    type: 'startup',
-    role: 'co-founder',
-    text: 'At EyeHide, we are deeply concerned about the growing trend of neglecting user privacy, especially with the rise of AI and large language models. We believe everyone deserves a secure digital experience without compromising their privacy.'
+    head: 'Weather Component',
+    type: 'project',
+    role: 'developer',
+    org: 'Open Data Hub',
+    text: "This project was created during the ODH Bootcamp 2024, the goal was to create a way to visualise weather data from the Open Data Hub, the component we developed features a dynamic map and data loading, near webcams search, live weather data, 3-hour gap forecast, day-by-day forecast, component attributes options, and dark/light mode support. It was highly appreciated at the conference, with attendees praising its 'spicy' UI. Post-conference, the Open Data Hub requested to feature our widget on their website.",
+    link: 'https://weather.syswhite.dev/'
   },
 ];
 
