@@ -26,7 +26,7 @@
       <span v-if="isHovered">Click me!</span>
     </div>
     <div v-if="showCopy" class="bubble hovered" :style="bubbleStyle">
-      <span>Click to copy!</span>
+      <span>{{ bubbleText }}</span>
     </div>
   </div>
 </template>
@@ -42,6 +42,7 @@ const bubbleStyle = ref({
 const isMobile = ref(false);
 const isHovered = ref(false);
 const showCopy = ref(false);
+const bubbleText = ref('Click me!');
 
 onMounted(() => {
   isMobile.value = /Mobi|Android/i.test(navigator.userAgent);
@@ -56,7 +57,6 @@ const handleMouseMove = (event) => {
     bubbleStyle.value = {
       left: `${targetX}px`,
       top: `${targetY}px`,
-      transition: 'left 0.2s ease-out, top 0.2s ease-out',
     };
 
     const elementUnderCursor = document.elementFromPoint(clientX, clientY);
@@ -73,7 +73,6 @@ const showCopyBubble = (event) => {
     bubbleStyle.value = {
       left: `${targetX}px`,
       top: `${targetY}px`,
-      transition: 'left 0.2s ease-out, top 0.2s ease-out',
     };
 
     showCopy.value = true;
@@ -88,11 +87,13 @@ const hideCopyBubble = () => {
 
 const copyToClipboard = () => {
   navigator.clipboard.writeText('yaroslav.rivny@gmail.com').then(() => {
-    alert('Email address copied to clipboard!');
+    bubbleText.value = 'Copied!';
+    setTimeout(() => {
+      bubbleText.value = 'Click me!';
+    }, 1000);
   });
 };
 </script>
-
 <style scoped>
 .wrapper {
   width: 100vw;
@@ -174,6 +175,7 @@ const copyToClipboard = () => {
   margin-bottom: 10px;
   text-decoration: none;
   cursor: none;
+  transition: text-decoration 0.3s ease;
 }
 
 .content:hover {
@@ -194,7 +196,7 @@ const copyToClipboard = () => {
   align-items: center;
   font-size: 1rem;
   color: black;
-  transition: width 0.5s ease-out, height 0.5s ease-out, border-radius 0.5s ease-out, background 0.5s ease-out, transform 0.5s ease-out;
+  transition: width 0.3s ease, height 0.3s ease, border-radius 0.3s ease, background 0.3s ease, transform 0.3s ease;
   cursor: none;
 }
 

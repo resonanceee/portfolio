@@ -161,7 +161,7 @@ onBeforeUnmount(() => {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 600vh;
+  height: 520vh;
   background-color: #efa819;
   transition: opacity 0.5s ease;
   z-index: -1;
@@ -187,7 +187,7 @@ onBeforeUnmount(() => {
 
 .bg {
   display: flex;
-  height: 600vh;
+  height: 520vh;
   width: 100vw;
   background: repeating-linear-gradient(
     -45deg,
@@ -338,7 +338,7 @@ onBeforeUnmount(() => {
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 500vh;
+  height: 420vh;
 }
 .projects > * {
   height: 45vh;

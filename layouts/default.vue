@@ -1,23 +1,21 @@
 <template>
-  <div>
-    <nav>
-      <div class="menu">
-          <p class="website_name"></p>
-          <div class="menu_links">
-            <NuxtLink to="/" class="link">home</NuxtLink>
-            <NuxtLink to="/work" class="link">work</NuxtLink>
-            <NuxtLink to="/contact"class="link">contact me</NuxtLink>
-          </div>
-          <div class="menu_icon" :class="{ 'active': isVisible }" @click="toggleVisibility">
-            <span class="icon"></span>
-          </div>
-        </div>
-        <div v-if="isVisible" class="toggle-div" @click="toggleVisibility" ref="hamburgerTransition">
-            <NuxtLink to="/" class="burgerlink">home</NuxtLink>
-            <NuxtLink to="/work" class="burgerlink">work</NuxtLink>
-            <NuxtLink to="/contact"class="burgerlink">contact me</NuxtLink>
+  <div style="position: fixed; top: 0; z-index: 999; right: 0; left: 0;" class="nav">
+    <div class="menu">
+      <p class="website_name"></p>
+      <div class="menu_links">
+        <NuxtLink to="/" class="link">home</NuxtLink>
+        <NuxtLink to="/work" class="link">work</NuxtLink>
+        <NuxtLink to="/contact"class="link">contact me</NuxtLink>
       </div>
-    </nav>
+      <div class="menu_icon" :class="{ 'active': isVisible }" @click="toggleVisibility">
+        <span class="icon"></span>
+      </div>
+      </div>
+      <div v-if="isVisible" class="toggle-div" @click="toggleVisibility" ref="hamburgerTransition">
+          <NuxtLink to="/" class="burgerlink">home</NuxtLink>
+          <NuxtLink to="/work" class="burgerlink">work</NuxtLink>
+          <NuxtLink to="/contact"class="burgerlink">contact me</NuxtLink>
+      </div>
   </div>
 </template>
 
@@ -52,10 +50,10 @@ export default {
 .page-leave-to {
   opacity: 0;
 }
-nav .menu {
+.nav .menu {
   width: 100%;
   height: 80px;
-  position: absolute;
+  position: sticky;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -63,7 +61,7 @@ nav .menu {
   box-sizing: border-box;
   z-index: 3;
 }
-nav .menu .website_name {
+.nav .menu .website_name {
   width: 75px;
   height: 75px;
   z-index: 0;
@@ -73,22 +71,22 @@ nav .menu .website_name {
   bottom: 0;
   right: 0;
 }
-nav .menu .website_name:hover {
+.nav .menu .website_name:hover {
   opacity: 1;
 }
-nav .menu .menu_links {
+.nav .menu .menu_links {
   transition: all 0.4s ease;
   opacity: 0.5;
 }
-nav .menu .menu_links:hover {
+.nav .menu .menu_links:hover {
   opacity: 1;
 }
 @media screen and (max-width: 799px) {
-  nav .menu .menu_links {
+  .nav .menu .menu_links {
     display: none;
   }
 }
-nav .menu .menu_links .link {
+.nav .menu .menu_links .link {
   color: white;
   text-transform: uppercase;
   font-weight: 500;
@@ -97,10 +95,10 @@ nav .menu .menu_links .link {
   position: relative;
   transition: all 0.3s 0.2s ease;
 }
-nav .menu .menu_links .link:last-child {
+.nav .menu .menu_links .link:last-child {
   margin-right: 0;
 }
-nav .menu .menu_links .link:before {
+.nav .menu .menu_links .link:before {
   content: "";
   position: absolute;
   width: 0px;
@@ -111,15 +109,15 @@ nav .menu .menu_links .link:before {
   transition: all 0.4s cubic-bezier(0.82, 0.02, 0.13, 1.26);
   left: 100%;
 }
-nav .menu .menu_links .link:hover {
+.nav .menu .menu_links .link:hover {
   opacity: 1;
   color: #FB8A8A;
 }
-nav .menu .menu_links .link:hover:before {
+.nav .menu .menu_links .link:hover:before {
   width: 40px;
   left: 0;
 }
-nav .menu .menu_icon {
+.nav .menu .menu_icon {
   width: 40px;
   height: 40px;
   position: relative;
@@ -130,11 +128,11 @@ nav .menu .menu_icon {
   z-index: 7;
 }
 @media screen and (max-width: 799px) {
-  nav .menu .menu_icon {
+  .nav .menu .menu_icon {
     display: flex;
   }
 }
-nav .menu .menu_icon .icon {
+.nav .menu .menu_icon .icon {
   width: 24px;
   height: 2px;
   background: white;
@@ -144,8 +142,8 @@ nav .menu .menu_icon .icon {
   cursor: pointer;
 }
 
-nav .menu .menu_icon .icon:before, 
-nav .menu .menu_icon .icon:after {
+.nav .menu .menu_icon .icon:before, 
+.nav .menu .menu_icon .icon:after {
   content: "";
   width: 100%;
   height: 100%;
@@ -154,31 +152,31 @@ nav .menu .menu_icon .icon:after {
   transition: all 0.3s ease;
 }
 
-nav .menu .menu_icon .icon:before {
+.nav .menu .menu_icon .icon:before {
   transform: translateY(-8px);
 }
 
-nav .menu .menu_icon .icon:after {
+.nav .menu .menu_icon .icon:after {
   transform: translateY(8px);
 }
 
-nav .menu .menu_icon:hover .icon,
-nav .menu .menu_icon:hover .icon:before,
-nav .menu .menu_icon:hover .icon:after {
+.nav .menu .menu_icon:hover .icon,
+.nav .menu .menu_icon:hover .icon:before,
+.nav .menu .menu_icon:hover .icon:after {
   background: #FFEDC0;
 }
 
-nav .menu .menu_icon.active .icon {
+.nav .menu .menu_icon.active .icon {
   transform: rotate(135deg);
   cursor: pointer;
 }
 
-nav .menu .menu_icon.active .icon:before {
+.nav .menu .menu_icon.active .icon:before {
   top: 0;
   transform: rotate(90deg);
 }
 
-nav .menu .menu_icon.active .icon:after {
+.nav .menu .menu_icon.active .icon:after {
   top: 0;
   transform: rotate(0);
 }

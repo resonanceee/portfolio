@@ -220,7 +220,7 @@ onMounted(() => {
   font-size: 18px;
   letter-spacing: 0.6px;
   margin-bottom: 40px;
-  text-shadow: 6px 6px 10px #24313e;
+  text-shadow: 6px 6px 10px #32243e;
 }
 .wrapper .container .pcenter {
   font-size: 200px;
@@ -260,8 +260,8 @@ onMounted(() => {
   left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: inset 5px 20px 40px rgba(41, 45, 76, 0.393),
-    inset 5px 0px 5px rgba(36, 39, 62, 0.3),
-    inset 5px 5px 20px rgba(36, 39, 62, 0.25),
+    inset 5px 0px 5px rgba(50, 36, 62, 0.3),
+    inset 5px 5px 20px rgba(50, 36, 62, 0.25),
     2px 2px 5px rgba(255, 255, 255, 0.2);
 }
 
@@ -280,7 +280,7 @@ onMounted(() => {
   border-radius: 100%;
   box-shadow: inset 5px 20px 40px rgba(53, 61, 98, 0.25),
     inset 5px 0px 5px rgba(36, 38, 62, 0.3),
-    inset 5px 5px 20px rgba(36, 42, 62, 0.25),
+    inset 5px 5px 20px rgba(50, 36, 62, 0.25),
     2px 2px 5px rgba(255, 255, 255, 0.2);
   animation: circle 0.8s 0.4s cubic-bezier(1, 0.06, 0.25, 1) backwards;
 }

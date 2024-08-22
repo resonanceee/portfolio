@@ -4,7 +4,6 @@
 </template>
 
 <script>
-// eventually will need to change this to nuxt-parallax
 export default {
     mounted() {
         const script1 = document.createElement('script');
