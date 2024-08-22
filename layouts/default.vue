@@ -192,7 +192,7 @@ nav .menu .menu_icon.active .icon:after {
   height: 100%;
   background-size: 100% 100%;
   background-position: 0px 0px,0px 0px,0px 0px,0px 0px,0px 0px;
-  background-color: #4c217e;
+  background-color: #3c3f58;
   color: white;
   display: flex;
   flex-direction: column;

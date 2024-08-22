@@ -42,7 +42,7 @@ onMounted(() => {
 
 <style>
 .bg {
-  background-color: #4c217e;
+  background-color: #3c3f58;
   color: #fff;
   display: flex;
   justify-content: center;
@@ -60,10 +60,10 @@ onMounted(() => {
 
 @keyframes bgAnimation {
   0% {
-    background-color: #4c217e;
+    background-color: #3c3f58;
   }
   100% {
-    background-color: #6a2c9b;
+    background-color: #404468;
   }
 }
 

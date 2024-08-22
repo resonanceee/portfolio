@@ -59,6 +59,8 @@ export default {
   width: 60vw;
   height: 80vh;
   position: relative;
+  margin: 0;
+  padding: 0;
 }
 .heading-container {
   display: flex;
@@ -75,6 +77,8 @@ export default {
   flex-direction: row;
   align-items: center;
   margin-bottom: 1vh;
+  margin-left: 0;
+  padding-left: 0;
 }
 .specs p {
   margin: 0 10px;
@@ -83,7 +87,7 @@ export default {
   font-weight: 500;
 }
 .type {
-  color: #6315c2;
+  color: #4253f1;
 }
 .separator {
   border-left: 1px solid #000;
@@ -94,30 +98,30 @@ export default {
   padding: 20px;
 }
 .text {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   color: #333;
 }
 .check-it-out {
   text-decoration: none;
   font-size: 1.5rem;
-  color: #9b59b6;
+  color: #4d5280;
   display: flex;
   align-items: center;
   font-weight: 600;
   border-radius: 30px;
-  border: 1px solid #9b59b6;
+  border: 1px solid #4d5280;
   padding: 5px 10px;
   white-space: nowrap;
 }
 .check-it-out:hover {
-  background-color: #6433c5;
+  background-color: #3c3f58;
   color: #efa819;
 }
 .check-it-out:hover .icon {
   content: url('assets/icons/github-mark-white.png');
 }
 .check-it-out.disabled-link {
-  background-color: #6433c5;
+  background-color: #3c3f58;
   color: #efa819;
   cursor: not-allowed !important;
 }
@@ -148,7 +152,7 @@ export default {
     margin: 0;
   }
   .text {
-    font-size: 1rem;
+    font-size: 0.8rem;
     color: #333;
   }
   .check-it-out {

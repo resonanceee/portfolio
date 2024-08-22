@@ -65,21 +65,25 @@ const handleMouseMove = (event) => {
 };
 
 const showCopyBubble = (event) => {
-  const { clientX, clientY } = event;
-  const targetX = clientX - 25;
-  const targetY = clientY - 25;
+  if (!isMobile.value) {
+    const { clientX, clientY } = event;
+    const targetX = clientX - 25;
+    const targetY = clientY - 25;
 
-  bubbleStyle.value = {
-    left: `${targetX}px`,
-    top: `${targetY}px`,
-    transition: 'left 0.2s ease-out, top 0.2s ease-out',
-  };
+    bubbleStyle.value = {
+      left: `${targetX}px`,
+      top: `${targetY}px`,
+      transition: 'left 0.2s ease-out, top 0.2s ease-out',
+    };
 
-  showCopy.value = true;
+    showCopy.value = true;
+  }
 };
 
 const hideCopyBubble = () => {
-  showCopy.value = false;
+  if (!isMobile.value) {
+    showCopy.value = false;
+  }
 };
 
 const copyToClipboard = () => {
@@ -210,6 +214,60 @@ const copyToClipboard = () => {
   }
   50% {
     transform: scale(1.1);
+  }
+}
+
+@media (max-width: 768px) {
+  .content-container {
+    flex-direction: column;
+  }
+
+  .left-section {
+    width: 100%;
+    height: 45%;
+  }
+
+  .right-section {
+    width: 100%;
+    height: 55%;
+    padding-left: 0;
+  }
+
+  .bubble {
+    display: none;
+  }
+  .heading {
+  font-size: 1rem;
+  } 
+
+  .title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+
+  .ltitle {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  .lsubtitle {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    max-width: 90%;
+  }
+
+  .subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 20px;
+  }
+
+  .content {
+    margin-bottom: 10px;
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 }
 </style>

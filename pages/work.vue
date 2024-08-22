@@ -209,7 +209,7 @@ onBeforeUnmount(() => {
   left: 0;
   width: 0;
   height: 0;
-  background: linear-gradient(to bottom right, #4d2282 50%, transparent 50%);
+  background: linear-gradient(to bottom right, #3c3f58 50%, transparent 50%);
   animation: revealStripes 1.2s forwards;
 }
 
