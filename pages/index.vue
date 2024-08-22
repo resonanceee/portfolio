@@ -1,7 +1,7 @@
 <template>
-  <LoadingBar/>
   <div style="max-height: 100%; overflow: auto;">
     <section class="wrapper">
+      <LoadingBar/>
       <div
         class="container"
         style="
@@ -48,7 +48,7 @@
     </section>
   </div>
 </template>
-<script setup>
+<script setup lang="ts">
 import { useHead } from "#imports";
 useHead({
   script: [
@@ -79,6 +79,7 @@ onMounted(() => {
   }
 }
 .wrapper {
+  background-color: #3c3f58;
   display: grid;
   grid-template-columns: 1fr;
   justify-content: center;
@@ -239,7 +240,7 @@ onMounted(() => {
 }
 
 .wrapper .container .pcenter:nth-of-type(2) {
-  color: #1f0336;
+  color: #1a2230;
   z-index: 1;
   animation-delay: 1s;
   filter: blur(10px);
@@ -253,12 +254,12 @@ onMounted(() => {
   position: absolute;
   width: 800px;
   height: 800px;
-  background-color: #4c217e;
+  background-color: #373951;
   border-radius: 100%;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: inset 5px 20px 40px rgba(42, 8, 74, 0.393),
+  box-shadow: inset 5px 20px 40px rgba(41, 45, 76, 0.393),
     inset 5px 0px 5px rgba(50, 36, 62, 0.3),
     inset 5px 5px 20px rgba(50, 36, 62, 0.25),
     2px 2px 5px rgba(255, 255, 255, 0.2);
@@ -275,10 +276,10 @@ onMounted(() => {
   position: absolute;
   width: 600px;
   height: 600px;
-  background-color: rgba(46, 0, 131, 0.3);
+  background-color: #25263630;
   border-radius: 100%;
-  box-shadow: inset 5px 20px 40px rgba(54, 24, 79, 0.25),
-    inset 5px 0px 5px rgba(50, 36, 62, 0.3),
+  box-shadow: inset 5px 20px 40px rgba(53, 61, 98, 0.25),
+    inset 5px 0px 5px rgba(36, 38, 62, 0.3),
     inset 5px 5px 20px rgba(50, 36, 62, 0.25),
     2px 2px 5px rgba(255, 255, 255, 0.2);
   animation: circle 0.8s 0.4s cubic-bezier(1, 0.06, 0.25, 1) backwards;
@@ -290,7 +291,7 @@ onMounted(() => {
   }
 }
 .wrapper .container .one .content .piece {
-  background: linear-gradient(90deg, #8077ea 13.7%, #eb73ff 94.65%);
+  background: linear-gradient(90deg, #6470b9 13.7%, #9754ce 94.65%);
 }
 .wrapper .container .one .content .piece:nth-child(1) {
   right: 15%;
@@ -317,7 +318,7 @@ onMounted(() => {
   animation-name: pieceLeft;
 }
 .wrapper .container .two .content .piece {
-  background: linear-gradient(90deg, #ffedc0 0%, #ff9d87 100%);
+  background: linear-gradient(90deg, #ccb67e 0%, #f66e4f 100%);
 }
 .wrapper .container .two .content .piece:nth-child(1) {
   left: 0%;
@@ -344,7 +345,7 @@ onMounted(() => {
   animation-name: pieceRight;
 }
 .wrapper .container .three .content .piece {
-  background: #fb8a8a;
+  background: #f29090;
 }
 .wrapper .container .three .content .piece:nth-child(1) {
   left: 25%;

@@ -55,6 +55,7 @@ export default {
 
 <style scoped>
 .wrapper {
+  background-color: transparent;
   width: 60vw;
   height: 80vh;
   position: relative;

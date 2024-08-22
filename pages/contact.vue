@@ -96,7 +96,7 @@ const copyToClipboard = () => {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f26d6d;
+  background-color: #3c3f58;
   cursor: none;
 }
 
@@ -112,7 +112,7 @@ const copyToClipboard = () => {
 
 .left-section {
   width: 55%;
-  background-color: #893bdb;
+  background-color: #6d4ab1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -121,7 +121,7 @@ const copyToClipboard = () => {
 
 .right-section {
   width: 45%;
-  background-color: #fcac14;
+  background-color: #e4a82a;
   display: flex;
   justify-content: center;
   align-items: center;
