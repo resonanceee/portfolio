@@ -34,7 +34,6 @@
     </div> 
   </div>
 </template>
-
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import Project from '../components/project.vue'; 
@@ -45,7 +44,6 @@ const maxStripeSize = 190;
 const fadeOpacity = ref(0);
 
 const projects = [
-
   {
     head: 'EyeHide',
     type: 'startup',
@@ -86,7 +84,6 @@ const projects = [
   },
 ];
 
-
 function handleScroll() {
   const scrollPosition = window.scrollY;
   const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -94,19 +91,6 @@ function handleScroll() {
   const newStripeSize = initialStripeSize + scrollPercentage * (maxStripeSize - initialStripeSize);
   updateBackgroundGradient(newStripeSize);
   updateFadeInOpacity(scrollPercentage);
-  const scrollThreshold = window.innerHeight * 2;
-  const currentScroll = window.scrollY;
-  if (currentScroll > scrollThreshold) {
-    if (!isHorizontalScroll.value) {
-      isHorizontalScroll.value = true;
-    }
-    const horizontalScroll = currentScroll - scrollThreshold;
-    document.querySelector(".horizontal-scroll-container").scrollLeft = horizontalScroll;
-  } else {
-    if (isHorizontalScroll.value) {
-      isHorizontalScroll.value = false;
-    }
-  }
 }
 
 function updateBackgroundGradient(stripeSize) {
@@ -152,7 +136,6 @@ onMounted(() => {
 onBeforeUnmount(() => {
   window.removeEventListener("scroll", handleScroll);
 });
-
 </script>
 
 <style scoped>
@@ -173,6 +156,7 @@ onBeforeUnmount(() => {
   align-items: flex-start;
   flex-direction: column;
   overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .fullscreen-container {
