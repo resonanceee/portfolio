@@ -48,7 +48,7 @@ const projects = [
     head: 'EyeHide',
     type: 'startup',
     role: 'co-founder',
-    text: 'At EyeHide, we are deeply concerned about the growing trend of neglecting user privacy, especially with the rise of AI and large language models. We believe everyone deserves a secure digital experience without compromising their privacy.', // placeholder
+    text: "EyeHide is a startup that was founded to adress the deep concern about the growing trend of neglecting user privacy, especially with the rise of AI and large language models. We believe everyone deserves a secure digital experience without compromising their privacy. Our goal is to create user friendly hardware and software to safeguard the user's privacy and security.",
     link: 'https://eyehide.org'
   },
   {
@@ -71,7 +71,7 @@ const projects = [
   head: 'TrashTracer',
   type: 'project',
   role: 'developer',
-  text: "This project started at the NOI Hackathon 2022, aiming to use displays to show a leaderboard for top recyclers. It evolved for the Progetto Rocca competition, where we revamped the codebase and developed a new app to enhance user experience. The project won awards at both events, recognizing our commitment to environmental sustainability and innovative design.",
+  text: "This project started at the NOI Hackathon 2022, aiming to use large format displays to show a leaderboard for top recyclers to entcourage eco-friendly behaviour. It evolved for the Progetto Rocca competition, where we revamped the codebase and developed a new app to enhance user experience. The project won awards at both events.",
   link: 'https://github.com/trashtracer'
   },
   {
@@ -79,7 +79,7 @@ const projects = [
     type: 'project',
     role: 'developer',
     org: 'ODH',
-    text: "Created during the ODH Bootcamp 2024, this project visualizes weather data from the Open Data Hub. It features a dynamic map, data loading, nearby webcams search, live weather data, 3-hour forecast, daily forecast, component options, and dark/light mode. Highly praised at the conference, the Open Data Hub requested to feature our widget on their website.",
+    text: "Created during the ODH Bootcamp 2024, this project was created to visualize weather data from the Open Data Hub trough a modular web component. It features a dynamic map, data loading, nearby webcams search, live weather data, 3-hour forecast, daily forecast, component options, and dark/light mode. Highly praised at the conference, the Open Data Hub requested to feature our widget on their website.",
     link: 'https://weather.syswhite.dev/'
   },
 ];
