@@ -4,8 +4,8 @@
       <div class="left-section">
         <div class="heading-container">
           <div class="heading">
-            <p class="ltitle">GET IN TOUCH FOR PROJECT INQUIRIES.</p>
-            <p class="lsubtitle">CURRENTLY AVAILABLE FOR FREELANCE PROJECTS.</p>
+            <p class="ltitle">GET IN TOUCH!</p>
+          <p class="lsubtitle">You can reach me through any of the following contacts</p>
           </div>
         </div>
       </div>

@@ -12,11 +12,13 @@
           src="/assets/icons/scroll-down-text.png"
           class="scroll-down-text"
           alt=""
-        />
+          :style="{ opacity: 1 - fadeOpacity }"
+          />
         <img
           src="/assets/icons/arrow-down-solid.svg"
           class="arrow-down"
           alt=""
+          :style="{ opacity: 1 - fadeOpacity }"
         />
       </div>
     </div>
@@ -34,7 +36,9 @@
     </div> 
   </div>
 </template>
+
 <script setup>
+// (imports remain unchanged)
 import { ref, onMounted, onBeforeUnmount } from 'vue';
 import Project from '../components/project.vue'; 
 import { useIntersectionObserver } from '~/composables/useIntersectionObserver';
@@ -42,6 +46,9 @@ import { useIntersectionObserver } from '~/composables/useIntersectionObserver';
 const initialStripeSize = 5;
 const maxStripeSize = 190;
 const fadeOpacity = ref(0);
+const scrollDirection = ref(0);
+let lastScroll = typeof window !== 'undefined' ? window.scrollY : 0;
+
 
 const projects = [
   {
@@ -56,7 +63,7 @@ const projects = [
     type: 'project',
     role: 'developer',
     org: 'VMware',
-    text: 'This project enhances the EV charging experience for users and provides valuable analytics to vehicle manufacturers. Utilizing computer vision, we continuously analyze live feeds to monitor various factors, such as misuse of electric parking spots and user mood. This technology also enables personalized recommendations for nearby attractions. Due to confidentiality requested by VMware, further details cannot be disclosed.',  
+    text: 'This project enhances the EV charging experience for users and provides valuable analytics to vehicle manufacturers. Utilizing computer vision, we continuously analyze live feeds to monitor various factors, such as misuse of electric parking spots and user mood. This technology also enables personalized recommendations for nearby attractions. Due to confidentiality requested by VMware, further details cannot be disclosed.',
     link: 'private'
   },
   {
@@ -68,11 +75,11 @@ const projects = [
     link: 'https://github.com/SysWhiteDev/ACS-Challenge-2023'
   },
   {
-  head: 'TrashTracer',
-  type: 'project',
-  role: 'developer',
-  text: "This project started at the NOI Hackathon 2022, aiming to use large format displays to show a leaderboard for top recyclers to entcourage eco-friendly behaviour. It evolved for the Progetto Rocca competition, where we revamped the codebase and developed a new app to enhance user experience. The project won awards at both events.",
-  link: 'https://github.com/trashtracer'
+    head: 'TrashTracer',
+    type: 'project',
+    role: 'developer',
+    text: "This project started at the NOI Hackathon 2022, aiming to use large format displays to show a leaderboard for top recyclers to entcourage eco-friendly behaviour. It evolved for the Progetto Rocca competition, where we revamped the codebase and developed a new app to enhance user experience. The project won awards at both events.",
+    link: 'https://github.com/trashtracer'
   },
   {
     head: 'Weather Component',
@@ -84,10 +91,15 @@ const projects = [
   },
 ];
 
+
 function handleScroll() {
-  const scrollPosition = window.scrollY;
+  if (typeof window === 'undefined') return;
+  const currentScroll = window.scrollY;
+  scrollDirection.value = currentScroll - lastScroll;
+  lastScroll = currentScroll;
+  
   const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const scrollPercentage = scrollPosition / windowHeight / 1.8; // final division is a hack to slow down scroll speed
+  const scrollPercentage = currentScroll / windowHeight;
   const newStripeSize = initialStripeSize + scrollPercentage * (maxStripeSize - initialStripeSize);
   updateBackgroundGradient(newStripeSize);
   updateFadeInOpacity(scrollPercentage);
@@ -121,30 +133,53 @@ function updateFadeInOpacity(scrollPercentage) {
   }
 }
 
+// Use IntersectionObserver to add "in-view" when the project enters the viewport,
+// and add either .down (for scrolling down) or .up (for scrolling upward) when it's leaving.
 useIntersectionObserver((entry) => {
   if (entry.isIntersecting) {
     entry.target.classList.add('in-view');
+    // Remove the directional classes so that the final state is always the same.
+    entry.target.classList.remove('up', 'down');
   } else {
     entry.target.classList.remove('in-view');
+    // If scrolling upward (negative change), add "up"; otherwise add "down"
+    if (scrollDirection.value < 0) {
+      entry.target.classList.add('up');
+      entry.target.classList.remove('down');
+    } else {
+      entry.target.classList.add('down');
+      entry.target.classList.remove('up');
+    }
   }
 });
 
 onMounted(() => {
-  window.addEventListener("scroll", handleScroll);
+  if (typeof window !== 'undefined') {
+    window.addEventListener("scroll", handleScroll);
+  }
 });
-
+  
 onBeforeUnmount(() => {
-  window.removeEventListener("scroll", handleScroll);
+  if (typeof window !== 'undefined') {
+    window.removeEventListener("scroll", handleScroll);
+  }
 });
 </script>
 
 <style scoped>
+:global(html, body) {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  /* Remove fixed height so body grows with content */
+}
+
 .fade-in-color {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 520vh;
+  right: 0;
+  bottom: 0;
   background-color: #efa819;
   transition: opacity 0.5s ease;
   z-index: -1;
@@ -155,10 +190,10 @@ onBeforeUnmount(() => {
   position: relative;
   align-items: flex-start;
   flex-direction: column;
-  overflow-x: hidden;
-  overflow-y: auto;
+  /* Remove overflow-x/overflow-y to avoid creating a nested scrollable area */
 }
 
+/* Keep the fullscreen section intact */
 .fullscreen-container {
   display: flex;
   color: #fff;
@@ -169,10 +204,13 @@ onBeforeUnmount(() => {
   position: relative;
 }
 
+/* Background remains fixed so stripe animation is intact */
 .bg {
-  display: flex;
-  height: 520vh;
-  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: repeating-linear-gradient(
     -45deg,
     #efa819,
@@ -181,7 +219,6 @@ onBeforeUnmount(() => {
     transparent 4px,
     transparent 95px
   );
-  position: absolute;
   transform: rotate(180deg);
   z-index: -10;
 }
@@ -241,6 +278,7 @@ onBeforeUnmount(() => {
   transform: translateY(-110px) !important;
   animation: fadeInUp 1s ease-out forwards;
 }
+
 @media (max-width: 1920px) and (max-height: 1080px) {
   .heading-title {
     font-size: 20rem;
@@ -250,6 +288,7 @@ onBeforeUnmount(() => {
     padding-top: 50px;
   }
 }
+
 .scroll-down-indicator {
   transition: opacity 0.5s ease-out;
   position: absolute;
@@ -316,35 +355,36 @@ onBeforeUnmount(() => {
     font-size: 2rem;
   }
 }
+
 .projects {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 420vh;
+  gap: clamp(1rem, 2vw, 3rem);
+  padding: 2rem 0;
 }
+
 .projects > * {
-  height: 45vh;
-  margin-bottom: 40vh;
   width: 40%;
   opacity: 0;
   transform: translateY(450px);
   transition: opacity 1.5s ease-out, transform 1s ease-out;
 }
+
 @media (max-width: 768px) {
   .projects > * {
     height: 55vh;
     width: 75%;
     transform: translateY(150px);
   }
-  /*hack because text is too long for some devices and gets hidden after overflowing */
+  /* hack because text is too long for some devices and gets hidden after overflowing */
   .projects > div:last-child {
     margin-bottom: 0;
     padding-bottom: 10vh;
   }
 }
-
 
 @media (min-aspect-ratio: 21/9) {
   .projects > * {
@@ -357,5 +397,7 @@ onBeforeUnmount(() => {
   opacity: 1;
   transform: translateY(0);
 }
-
+.projects > *.reverse {
+  transform: translateY(-450px);
+}
 </style>
