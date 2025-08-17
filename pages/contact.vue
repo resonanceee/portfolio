@@ -13,7 +13,7 @@
         <div class="heading-container">
           <div class="heading">
             <p class="title">MAIL</p>
-            <p class="content" @mouseover="showCopyBubble" @mouseleave="hideCopyBubble" @click="copyToClipboard">yaroslav.rivny@gmail.com</p>
+            <p class="content" @mouseover="showCopyBubble" @mouseleave="hideCopyBubble" @click="copyToClipboard">res@onance.dev</p>
             <p class="title">X</p>
             <a class="content" href="https://x.com/_resonanceee_">@_resonanceee_</a>
             <p class="title">GitHub</p>
