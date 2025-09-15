@@ -14,29 +14,33 @@ const visible = ref(false);
 const fadeOut = ref(false);
 const windowWidth = ref(null);
 
-const isMobile = computed(() => {
-  return windowWidth.value !== null && windowWidth.value <= 768;
-});
+const isMobile = computed(() => windowWidth.value !== null && windowWidth.value <= 768);
+
+// Ensure visibility is determined as early as possible on the client to avoid content flash
+if (process.client) {
+  const hasShown = sessionStorage.getItem('hasShownLoadingBar');
+  if (!hasShown) {
+    visible.value = true;
+    sessionStorage.setItem('hasShownLoadingBar', 'true');
+  }
+}
 
 onMounted(() => {
+  if (!process.client) return;
   windowWidth.value = window.innerWidth;
   window.addEventListener('resize', () => {
     windowWidth.value = window.innerWidth;
   });
 
-  const hasShownLoadingBar = sessionStorage.getItem('hasShownLoadingBar');
-
-  if (!hasShownLoadingBar) {
-    visible.value = true;
-    sessionStorage.setItem('hasShownLoadingBar', 'true');
-  }
-
-  setTimeout(() => {
-    fadeOut.value = true;
+  if (visible.value) {
+    // Only run hide animation if we actually showed the loader
     setTimeout(() => {
-      visible.value = false;
-    }, 1000);
-  }, 1175);
+      fadeOut.value = true;
+      setTimeout(() => {
+        visible.value = false;
+      }, 1000);
+    }, 1175);
+  }
 });
 </script>
 

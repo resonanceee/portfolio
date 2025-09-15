@@ -56,8 +56,9 @@ export default {
 <style scoped>
 .wrapper {
   background-color: transparent;
-  width: 60vw;
-  height: 80vh;
+  width: 100%;
+  max-width: 900px;
+  min-height: 60vh;
   position: relative;
   margin: 0;
   padding: 0;
@@ -76,12 +77,12 @@ export default {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 1vh;
-  margin-left: 0;
-  padding-left: 0;
+  justify-content: flex-start; /* align to start */
+  gap: 12px;
+  margin: 0 0 1vh 0;
 }
 .specs p {
-  margin: 0 10px;
+  margin: 0;
   line-height: 1.6rem;
   font-size: 1.5rem;
   font-weight: 500;
@@ -92,7 +93,7 @@ export default {
 .separator {
   border-left: 1px solid #000;
   height: 20px;
-  margin: 0 10px;
+  margin: 0 8px;
 }
 .title {
   padding: 20px;
@@ -138,8 +139,8 @@ export default {
     flex-direction: row;
   }
   .heading-container {
-    flex-direction: column;
-    align-items: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
   }
   .heading {
     font-size: 2rem;

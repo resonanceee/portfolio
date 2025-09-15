@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   ],
   app: {
     head: {
-      title: "Resonances's Portfolio",
+      title: "Res's Portfolio",
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
       ]

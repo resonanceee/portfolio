@@ -13,11 +13,23 @@
         <div class="heading-container">
           <div class="heading">
             <p class="title">MAIL</p>
-            <p class="content" @mouseover="showCopyBubble" @mouseleave="hideCopyBubble" @click="copyToClipboard">res@onance.dev</p>
-            <p class="title">X</p>
-            <a class="content" href="https://x.com/_resonanceee_">@_resonanceee_</a>
+            <a
+              class="content animated-link"
+              href="mailto:res@onance.dev"
+              @mouseover="showCopyBubble"
+              @mouseleave="hideCopyBubble"
+            >
+              res@onance.dev
+            </a>
             <p class="title">GitHub</p>
-            <a class="content" href="https://github.com/resonanceee">@resonanceee</a>
+            <a
+              class="content animated-link"
+              href="https://github.com/resonanceee"
+              target="_blank"
+              rel="noopener"
+            >
+              @resonanceee
+            </a>
           </div>
         </div>
       </div>
@@ -85,14 +97,7 @@ const hideCopyBubble = () => {
   }
 };
 
-const copyToClipboard = () => {
-  navigator.clipboard.writeText('yaroslav.rivny@gmail.com').then(() => {
-    bubbleText.value = 'Copied!';
-    setTimeout(() => {
-      bubbleText.value = 'Click me!';
-    }, 1000);
-  });
-};
+// No click-to-copy; email is now a mailto: link
 </script>
 <style scoped>
 .wrapper {
@@ -173,14 +178,12 @@ const copyToClipboard = () => {
 .content {
   font-size: 1.2rem;
   margin-bottom: 10px;
-  text-decoration: none;
+  text-decoration: none; /* ensure no underline */
   cursor: none;
-  transition: text-decoration 0.3s ease;
 }
 
-.content:hover {
-  text-decoration: underline;
-}
+/* Remove nav-like animated underline from contact links */
+.animated-link { position: static; }
 
 .bubble {
   position: absolute;
@@ -268,8 +271,7 @@ const copyToClipboard = () => {
 
   .content {
     margin-bottom: 10px;
-    text-decoration: underline;
-    text-underline-offset: 3px;
+  text-decoration: none; /* no underline on mobile either */
   }
 }
 </style>

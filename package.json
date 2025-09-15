@@ -6,7 +6,8 @@
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
-    "preview": "nuxt preview",
+  "preview": "nuxt preview",
+  "start": "node .output/server/index.mjs",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
@@ -15,5 +16,8 @@
     "jquery": "^3.7.1",
     "nuxt": "^3.13.0",
     "vue": "latest"
+  },
+  "engines": {
+    "node": ">=18.20.0 || >=20.10.0"
   }
 }

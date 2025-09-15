@@ -1,7 +1,13 @@
 <template>
   <div style="max-height: 100%; overflow: auto;">
-    <section class="wrapper">
-      <LoadingBar/>
+  <section class="wrapper">
+      <button
+        v-if="showMotionPrompt"
+        class="motion-btn"
+        @click="enableMotion"
+      >
+        Enable Motion
+      </button>
       <div
         class="container"
         style="
@@ -49,26 +55,95 @@
   </div>
 </template>
 <script setup lang="ts">
-import { useHead } from "#imports";
-useHead({
-  script: [
-    {
-      src: "https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js",
-      defer: true,
-    },
-  ],
+import { onMounted, onBeforeUnmount, ref } from 'vue';
+
+const showMotionPrompt = ref(false);
+let parallax: any | null = null;
+
+function isIOS() {
+  return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+    (navigator.userAgent.includes('Mac') && 'ontouchend' in document);
+}
+
+function waitForParallax(maxMs = 2000) {
+  return new Promise<void>((resolve) => {
+    if ((window as any).Parallax) return resolve();
+    const start = Date.now();
+    const iv = setInterval(() => {
+      if ((window as any).Parallax || Date.now() - start > maxMs) {
+        clearInterval(iv);
+        resolve();
+      }
+    }, 50);
+  });
+}
+
+async function initParallax() {
+  const scene = document.getElementById('scene');
+  if (!scene) return;
+  await waitForParallax();
+  const ParallaxCtor = (window as any).Parallax;
+  if (!ParallaxCtor) return;
+
+  // Destroy existing instance if any
+  if (parallax && parallax.destroy) parallax.destroy();
+
+  parallax = new ParallaxCtor(scene, {
+    hoverOnly: false, // allow gyroscope on mobile
+  });
+}
+
+async function enableMotion() {
+  try {
+    // iOS 13+ requires explicit permission
+    const D = (window as any).DeviceOrientationEvent;
+    if (D && typeof D.requestPermission === 'function') {
+      const state = await D.requestPermission();
+      if (state === 'granted') {
+        await initParallax();
+        showMotionPrompt.value = false;
+        return;
+      }
+    }
+  } catch (_) {
+    // fall through to init with mouse fallback
+  }
+  await initParallax();
+  showMotionPrompt.value = false;
+}
+
+onMounted(async () => {
+  // If iOS and permission API exists, show prompt; otherwise init immediately
+  const D = (window as any).DeviceOrientationEvent;
+  if (isIOS() && D && typeof D.requestPermission === 'function') {
+    showMotionPrompt.value = true;
+  } else {
+    await initParallax();
+  }
 });
 
-onMounted(() => {
-  const scene = document.getElementById('scene');
-  if (!scene) {
-    console.error('Error: The element with ID "scene" was not found.');
-    return;
+onBeforeUnmount(() => {
+  if (parallax) {
+    if (typeof parallax.destroy === 'function') parallax.destroy();
+    else if (typeof parallax.disable === 'function') parallax.disable();
+    parallax = null;
   }
-  const parallax = new Parallax(scene);
 });
 </script>
 <style>
+.motion-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  background: #ffedc0;
+  color: #3c3f58;
+  font-weight: 600;
+  border: 1px solid #f2c66b;
+  border-radius: 24px;
+  padding: 10px 14px;
+}
+
 .pcenter {
   font-size: clamp(3.8rem, 8vw, 100rem) !important;
 }
