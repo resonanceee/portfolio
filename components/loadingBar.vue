@@ -10,30 +10,28 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 
-const visible = ref(false);
+const hasShownLoadingBar = useCookie('has-shown-loading-bar', { default: () => false });
+
+const visible = ref(!hasShownLoadingBar.value);
 const fadeOut = ref(false);
 const windowWidth = ref(null);
 
-const isMobile = computed(() => windowWidth.value !== null && windowWidth.value <= 768);
-
-// Ensure visibility is determined as early as possible on the client to avoid content flash
-if (process.client) {
-  const hasShown = sessionStorage.getItem('hasShownLoadingBar');
-  if (!hasShown) {
-    visible.value = true;
-    sessionStorage.setItem('hasShownLoadingBar', 'true');
-  }
+// Mark as shown immediately so SSR can skip on subsequent requests
+if (!hasShownLoadingBar.value) {
+  hasShownLoadingBar.value = true;
 }
+
+const isMobile = computed(() => windowWidth.value !== null && windowWidth.value <= 768);
 
 onMounted(() => {
   if (!process.client) return;
+
   windowWidth.value = window.innerWidth;
   window.addEventListener('resize', () => {
     windowWidth.value = window.innerWidth;
   });
 
   if (visible.value) {
-    // Only run hide animation if we actually showed the loader
     setTimeout(() => {
       fadeOut.value = true;
       setTimeout(() => {
