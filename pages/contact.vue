@@ -57,7 +57,10 @@ const showCopy = ref(false);
 const bubbleText = ref('Click me!');
 
 onMounted(() => {
-  isMobile.value = /Mobi|Android/i.test(navigator.userAgent);
+  // ponytail: matchMedia over UA sniff — catches iPad desktop-mode + modern touch devices
+  const coarse = window.matchMedia?.('(pointer: coarse)')?.matches;
+  const noHover = window.matchMedia?.('(hover: none)')?.matches;
+  isMobile.value = Boolean(coarse && noHover);
 });
 
 const handleMouseMove = (event) => {
@@ -107,7 +110,15 @@ const hideCopyBubble = () => {
   justify-content: center;
   align-items: center;
   background-color: #3c3f58;
-  cursor: none;
+}
+
+/* ponytail: cursor:none only on precise-pointer devices, avoids hydration flicker on touch */
+@media (hover: hover) and (pointer: fine) {
+  .wrapper,
+  .content,
+  .bubble {
+    cursor: none;
+  }
 }
 
 .content-container {
@@ -179,7 +190,6 @@ const hideCopyBubble = () => {
   font-size: 1.2rem;
   margin-bottom: 10px;
   text-decoration: none; /* ensure no underline */
-  cursor: none;
 }
 
 /* Remove nav-like animated underline from contact links */
@@ -200,7 +210,14 @@ const hideCopyBubble = () => {
   font-size: 1rem;
   color: black;
   transition: width 0.3s ease, height 0.3s ease, border-radius 0.3s ease, background 0.3s ease, transform 0.3s ease;
-  cursor: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .content,
+  .bubble,
+  .bubble.hovered {
+    cursor: none;
+  }
 }
 
 .bubble.hovered {
@@ -210,7 +227,8 @@ const hideCopyBubble = () => {
   background: yellow;
   mix-blend-mode: normal;
   transform: scale(1.1);
-  cursor: none;
+  /* ponytail: pause idle pulsing so hover-scale transition is visible, not fought by keyframe */
+  animation-play-state: paused;
 }
 
 @keyframes bubble {

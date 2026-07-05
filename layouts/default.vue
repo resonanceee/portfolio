@@ -1,5 +1,5 @@
 <template>
-  <div style="position: fixed; top: 0; z-index: 999; right: 0; left: 0;" class="nav">
+  <div class="nav">
     <div class="menu">
       <p class="website_name"></p>
       <div class="menu_links">
@@ -7,7 +7,7 @@
         <NuxtLink to="/work" class="link">work</NuxtLink>
         <NuxtLink to="/contact"class="link">contact me</NuxtLink>
       </div>
-      <div class="menu_icon" :class="{ 'active': isVisible }" @click="toggleVisibility">
+      <div class="menu_icon" :class="{ 'active': isVisible }" @click="toggleVisibility" :aria-expanded="isVisible" aria-label="Toggle navigation menu">
         <span class="icon"></span>
       </div>
       </div>
@@ -50,10 +50,16 @@ export default {
 .page-leave-to {
   opacity: 0;
 }
+.nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 999;
+}
 .nav .menu {
   width: 100%;
   height: 80px;
-  position: sticky;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -185,7 +191,6 @@ export default {
   position: fixed;
   top: 0;
   left: 0;
-  right: -100%;
   width: 100%;
   height: 100%;
   background-size: 100% 100%;
@@ -199,6 +204,7 @@ export default {
   z-index: 2;
   pointer-events: none;
   margin-right: 20px;
+  transform: translateX(100%);
 }
 
 .toggle-div * {
@@ -206,8 +212,14 @@ export default {
 }
 
 @keyframes hamburgerTransition {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .burgerlink {

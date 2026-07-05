@@ -17,7 +17,7 @@
           justify-content: center;
         "
       >
-        <div id="scene" class="scene" data-hover-only="false">
+        <div id="scene" class="scene">
           <div class="circle" data-depth="1.2"></div>
           <div class="one" data-depth="0.9">
             <div class="content">
@@ -56,6 +56,13 @@
 </template>
 <script setup lang="ts">
 import { onMounted, onBeforeUnmount, ref } from 'vue';
+
+// ponytail: load parallax lib only on the page that uses it, not site-wide
+useHead({
+  script: [
+    { src: 'https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js', defer: true }
+  ]
+});
 
 const showMotionPrompt = ref(false);
 let parallax: any | null = null;
@@ -144,15 +151,6 @@ onBeforeUnmount(() => {
   padding: 10px 14px;
 }
 
-.pcenter {
-  font-size: clamp(3.8rem, 8vw, 100rem) !important;
-}
-
-@media (max-width: 768px) {
-  .pcenter {
-    font-size: clamp(3.8, 15rem, 100rem) !important;
-  }
-}
 .wrapper {
   background-color: #3c3f58;
   display: grid;
@@ -298,7 +296,8 @@ onBeforeUnmount(() => {
   text-shadow: 6px 6px 10px #32243e;
 }
 .wrapper .container .pcenter {
-  font-size: 200px;
+  /* ponytail: hero "Resonance" text scales down on smaller viewports, max 160px */
+  font-size: clamp(3.5rem, 10vw, 10rem);
   font-weight: 700;
   letter-spacing: 4px;
   color: white;
@@ -310,7 +309,7 @@ onBeforeUnmount(() => {
 }
 @media screen and (max-width: 799px) {
   .wrapper .container .pcenter {
-    font-size: 75px;
+    font-size: clamp(3rem, 12vw, 4.5rem);
   }
 }
 
@@ -327,8 +326,9 @@ onBeforeUnmount(() => {
 .wrapper .container .circle:before {
   content: "";
   position: absolute;
-  width: 800px;
-  height: 800px;
+  /* ponytail: disc scales with viewport so it doesn't dominate short laptop screens; max 800px */
+  width: min(800px, 65vmin);
+  height: min(800px, 65vmin);
   background-color: #373951;
   border-radius: 100%;
   top: 50%;
@@ -342,15 +342,16 @@ onBeforeUnmount(() => {
 
 @media screen and (max-width: 799px) {
   .wrapper .container .circle:before {
-    width: 400px;
-    height: 400px;
+    width: min(400px, 60vmin);
+    height: min(400px, 60vmin);
   }
 }
 .wrapper .container .one .content:before {
   content: "";
   position: absolute;
-  width: 600px;
-  height: 600px;
+  /* ponytail: orbit ring scales with viewport, max 600px */
+  width: min(600px, 50vmin);
+  height: min(600px, 50vmin);
   background-color: #25263630;
   border-radius: 100%;
   box-shadow: inset 5px 20px 40px rgba(53, 61, 98, 0.25),
@@ -361,8 +362,8 @@ onBeforeUnmount(() => {
 }
 @media screen and (max-width: 799px) {
   .wrapper .container .one .content:before {
-    width: 300px;
-    height: 300px;
+    width: min(300px, 45vmin);
+    height: min(300px, 45vmin);
   }
 }
 .wrapper .container .one .content .piece {

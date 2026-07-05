@@ -1,5 +1,10 @@
 <template>
-  <div v-if="visible" class="bg" :class="{ 'fade-out': fadeOut }">
+  <div
+    v-if="visible"
+    class="bg"
+    :class="{ 'fade-out': fadeOut }"
+    style="position:fixed;inset:0;z-index:9999;background:#3c3f58;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;"
+  >
     <p class="loading-text">Loading</p>
     <div class="loading-bar"></div>
     <p class="loading-tip" v-if="windowWidth !== null && isMobile">Try rotating your device</p>
@@ -8,7 +13,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 
 const hasShownLoadingBar = useCookie('has-shown-loading-bar', { default: () => false });
 
@@ -16,29 +21,40 @@ const visible = ref(!hasShownLoadingBar.value);
 const fadeOut = ref(false);
 const windowWidth = ref(null);
 
-// Mark as shown immediately so SSR can skip on subsequent requests
-if (!hasShownLoadingBar.value) {
-  hasShownLoadingBar.value = true;
-}
-
+// ponytail: cookie set client-only in onMounted to avoid SSR/client hydration mismatch
 const isMobile = computed(() => windowWidth.value !== null && windowWidth.value <= 768);
+
+let resizeListener = null;
+let fadeTimer = null;
+let removeTimer = null;
 
 onMounted(() => {
   if (!process.client) return;
 
+  // Set cookie client-side so SSR and hydration agree on `visible`
+  if (!hasShownLoadingBar.value) {
+    hasShownLoadingBar.value = true;
+  }
+
   windowWidth.value = window.innerWidth;
-  window.addEventListener('resize', () => {
-    windowWidth.value = window.innerWidth;
-  });
+  resizeListener = () => { windowWidth.value = window.innerWidth; };
+  window.addEventListener('resize', resizeListener);
 
   if (visible.value) {
-    setTimeout(() => {
+    // ponytail: load animation is 1.1s; fade starts at 1175ms so bar fills just before fade
+    fadeTimer = setTimeout(() => {
       fadeOut.value = true;
-      setTimeout(() => {
+      removeTimer = setTimeout(() => {
         visible.value = false;
       }, 1000);
     }, 1175);
   }
+});
+
+onBeforeUnmount(() => {
+  if (resizeListener) window.removeEventListener('resize', resizeListener);
+  if (fadeTimer) clearTimeout(fadeTimer);
+  if (removeTimer) clearTimeout(removeTimer);
 });
 </script>
 
@@ -54,7 +70,7 @@ onMounted(() => {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 9999;
   transition: opacity 1s;
   flex-direction: column;
   animation: bgAnimation 5s infinite alternate;
@@ -103,7 +119,7 @@ onMounted(() => {
   height: 4px;
   background: linear-gradient(90deg, #ffedc0 0%, #dfc086 45%, #ee856e 100%);
   background-size: 200% 100%;
-  animation: load 3s forwards, moveGradient 1s infinite alternate;
+  animation: load 1.1s forwards, moveGradient 1s infinite alternate;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 

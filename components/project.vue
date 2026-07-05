@@ -14,7 +14,7 @@
           <span v-else-if="!isPrivate">
             Check it out 🌐
           </span>
-          <span span v-if="isPrivate" class="private">
+          <span v-else class="private">
             Private 🔒
           </span>
         </a>

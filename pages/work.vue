@@ -132,11 +132,13 @@ function computeGap(text) {
 function updateBackgroundGradient(stripeSize) {
   const bgElement = document.querySelector(".bg");
   if (bgElement) {
-    const transparentSize = Math.max(90 - stripeSize, 0);
+    // ponytail: cap stripe so transparent band stays > 0, avoids solid-orange bg mid-scroll
+    const clampedStripe = Math.min(stripeSize, 85);
+    const transparentSize = Math.max(90 - clampedStripe, 5);
     bgElement.style.background = `repeating-linear-gradient(
       -45deg,
       #efa819,
-      #efa819 ${stripeSize}px,
+      #efa819 ${clampedStripe}px,
       black 1px,
       transparent 4px,
       transparent ${transparentSize}px
@@ -147,11 +149,13 @@ function updateBackgroundGradient(stripeSize) {
 function updateFadeInOpacity(scrollPercentage) {
   const fadeStart = 0;
   const fadeEnd = 0.1;
+  // ponytail: cap at 0.6 so projects stay readable over the orange wash
+  const maxOpacity = 0.6;
   if (scrollPercentage > fadeStart && scrollPercentage < fadeEnd) {
     const adjustedPercentage = (scrollPercentage - fadeStart) / (fadeEnd - fadeStart);
-    fadeOpacity.value = Math.min(adjustedPercentage, 1);
+    fadeOpacity.value = Math.min(adjustedPercentage, 1) * maxOpacity;
   } else if (scrollPercentage >= fadeEnd) {
-    fadeOpacity.value = 1;
+    fadeOpacity.value = maxOpacity;
   } else {
     fadeOpacity.value = 0;
   }
@@ -294,6 +298,14 @@ onBeforeUnmount(() => {
   }
 }
 
+.heading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* ponytail: real gap replaces negative margin so number and "projects" label never collide */
+  gap: clamp(0.5rem, 2vh, 1.5rem);
+}
+
 .heading {
   display: flex;
   position: relative;
@@ -303,10 +315,12 @@ onBeforeUnmount(() => {
 }
 
 .heading-title {
-  font-size: 35rem;
+  /* ponytail: hero number scales with viewport height, ~320px on 1080p laptop, ~560px on 1440p */
+  font-size: clamp(18rem, 35vh, 32rem);
   font-weight: 700;
   animation: fadeInUp 1s ease-out forwards;
   text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
+  line-height: 0.9;
 }
 
 @keyframes fadeInUp {
@@ -321,19 +335,40 @@ onBeforeUnmount(() => {
 }
 
 .heading-text {
-  font-size: 5rem;
+  font-size: clamp(2rem, 5vw, 5rem);
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  transform: translateY(-110px) !important;
   animation: fadeInUp 1s ease-out forwards;
 }
 
-@media (max-width: 1920px) and (max-height: 1080px) {
+@media (max-width: 768px) {
   .heading-title {
-    font-size: 20rem;
+    margin: 0;
+    padding: 0;
+    line-height: 0.9;
+    font-size: clamp(12rem, 38vh, 18rem);
   }
+
   .heading-text {
-    font-size: 3rem;
-    padding-top: 50px;
+    font-size: clamp(1.5rem, 5vw, 2rem);
+  }
+
+  .scroll-down-text {
+    animation: spin-slow 3s linear infinite;
+    width: 100px;
+  }
+
+  .arrow-down {
+    width: 25px;
+  }
+}
+
+@media (max-width: 425px) {
+  .heading-title {
+    font-size: clamp(9rem, 32vh, 14rem);
+  }
+
+  .heading-text {
+    font-size: clamp(1.25rem, 5vw, 2rem);
   }
 }
 
@@ -365,42 +400,6 @@ onBeforeUnmount(() => {
   }
   to {
     transform: rotate(360deg);
-  }
-}
-
-@media (max-width: 768px) {
-  .heading-title {
-    margin: 0;
-    padding: 0;
-    line-height: 1;
-  }
-
-  .heading-title {
-    font-size: 25rem;
-  }
-
-  .heading-text {
-    font-size: 2rem;
-    transform: translateY(-10px) !important;
-  }
-
-  .scroll-down-text {
-    animation: spin-slow 3s linear infinite;
-    width: 100px;
-  }
-
-  .arrow-down {
-    width: 25px;
-  }
-}
-
-@media (max-width: 425px) {
-  .heading-title {
-    font-size: 20rem;
-  }
-
-  .heading-text {
-    font-size: 2rem;
   }
 }
 
