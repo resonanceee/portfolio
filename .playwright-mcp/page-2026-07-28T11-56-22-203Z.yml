@@ -1,0 +1,95 @@
+- generic [ref=e2]:
+  - navigation "Primary" [ref=e3]:
+    - link "home" [ref=e4] [cursor=pointer]:
+      - /url: /
+    - link "work" [ref=e5] [cursor=pointer]:
+      - /url: /work
+    - link "contact" [ref=e6] [cursor=pointer]:
+      - /url: /contact
+  - main [ref=e7]:
+    - generic [ref=e8]:
+      - generic [ref=e13]:
+        - paragraph [ref=e14]: Developer & AI/ML Researcher
+        - heading "R e s o n a n c e" [level=1] [ref=e15]:
+          - generic [ref=e17]: R
+          - generic [ref=e18]: e
+          - generic [ref=e19]: s
+          - generic [ref=e20]: o
+          - generic [ref=e21]: "n"
+          - generic [ref=e22]: a
+          - generic [ref=e23]: "n"
+          - generic [ref=e24]: c
+          - generic [ref=e25]: e
+        - paragraph [ref=e27]:
+          - text: Currently building AI/ML systems at
+          - link "WaveLab" [ref=e28] [cursor=pointer]:
+            - /url: https://wavelab.space
+          - text: a smart EV charging platform.
+        - generic [ref=e33]:
+          - link "See work" [ref=e34] [cursor=pointer]:
+            - /url: /work
+          - link "Get in touch" [ref=e37] [cursor=pointer]:
+            - /url: /contact
+      - generic [ref=e38]: scroll
+    - generic [ref=e40]:
+      - generic [ref=e41]:
+        - heading "Selected work" [level=2] [ref=e42]
+        - link "View all projects →" [ref=e43] [cursor=pointer]:
+          - /url: /work
+      - generic [ref=e44]:
+        - link "WaveLab Current AI/ML Research WaveLab Smart EV charging platform — turning charging infrastructure into a smart, connected system that generates value. Visit" [ref=e45] [cursor=pointer]:
+          - /url: https://wavelab.space
+          - generic [ref=e46]:
+            - img "WaveLab" [ref=e47]
+            - generic [ref=e49]: Current
+          - generic [ref=e50]:
+            - generic [ref=e51]: AI/ML Research
+            - heading "WaveLab" [level=3] [ref=e53]
+            - paragraph [ref=e54]: Smart EV charging platform — turning charging infrastructure into a smart, connected system that generates value.
+            - generic [ref=e55]: Visit
+        - link "AtomHR Startup Startup AtomHR AI platform slashing bureaucracy and streamlining HR for Italian startups and SMEs. Visit" [ref=e58] [cursor=pointer]:
+          - /url: https://www.atomhr.it/
+          - generic [ref=e59]:
+            - img "AtomHR" [ref=e60]
+            - generic [ref=e62]: Startup
+          - generic [ref=e63]:
+            - generic [ref=e64]: Startup
+            - heading "AtomHR" [level=3] [ref=e66]
+            - paragraph [ref=e67]: AI platform slashing bureaucracy and streamlining HR for Italian startups and SMEs.
+            - generic [ref=e68]: Visit
+        - link "TrashTracer Award Hackathon winner TrashTracer Large-format leaderboard for top recyclers — won awards at NOI Hackathon & Progetto Rocca. Visit" [ref=e71] [cursor=pointer]:
+          - /url: https://github.com/trashtracer
+          - generic [ref=e72]:
+            - img "TrashTracer" [ref=e73]
+            - generic [ref=e75]: Award
+          - generic [ref=e76]:
+            - generic [ref=e77]: Hackathon winner
+            - heading "TrashTracer" [level=3] [ref=e79]
+            - paragraph [ref=e80]: Large-format leaderboard for top recyclers — won awards at NOI Hackathon & Progetto Rocca.
+            - generic [ref=e81]: Visit
+    - paragraph [ref=e86]:
+      - generic [ref=e87]: Currently
+      - generic [ref=e88]: building
+      - generic [ref=e89]: AI/ML
+      - generic [ref=e90]: systems
+      - generic [ref=e91]: at
+      - generic [ref=e92]: WaveLab
+      - generic [ref=e93]: —
+      - generic [ref=e94]: turning
+      - generic [ref=e95]: charging
+      - generic [ref=e96]: infrastructure
+      - generic [ref=e97]: into
+      - generic [ref=e98]: a
+      - generic [ref=e99]: smart,
+      - generic [ref=e100]: connected
+      - generic [ref=e101]: platform
+      - generic [ref=e102]: that
+      - generic [ref=e103]: generates
+      - generic [ref=e104]: value.
+      - generic [ref=e105]: Connect,
+      - generic [ref=e106]: activate,
+      - generic [ref=e107]: grow.
+    - generic [ref=e109]:
+      - heading "Let’s build something." [level=2] [ref=e110]: Let’s buildsomething.
+      - link "Start a conversation" [ref=e111] [cursor=pointer]:
+        - /url: /contact

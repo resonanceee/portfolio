@@ -1,0 +1,182 @@
+- generic [ref=f17e2]:
+  - navigation "Primary" [ref=f17e3]:
+    - link "home" [ref=f17e4] [cursor=pointer]:
+      - /url: /
+    - link "work" [ref=f17e5] [cursor=pointer]:
+      - /url: /work
+    - link "contact" [ref=f17e6] [cursor=pointer]:
+      - /url: /contact
+  - main [ref=f17e7]:
+    - generic [ref=f17e12]:
+      - paragraph [ref=f17e13]: 10 projects
+      - heading "Work" [level=1] [ref=f17e14]
+      - paragraph [ref=f17e15]: A mix of startups, research, hackathon wins, and open-source contributions — with a focus on AI/ML and developer experience.
+    - generic [ref=f17e17]:
+      - generic [ref=f17e18]:
+        - heading "Featured" [level=2] [ref=f17e19]
+        - paragraph [ref=f17e20]: hover to reveal
+      - generic [ref=f17e21]:
+        - 'link "Current W AI/ML Research / Current WaveLab Smart EV charging platform. Currently leading AI/ML research: turning charging infrastructure into a smart, connected platform that generates value. Connect, activate, grow. Trusted by CDP, ELIS, NOI Techpark, Plug and Play. Visit" [ref=f17e22] [cursor=pointer]':
+          - /url: https://wavelab.space
+          - generic [ref=f17e23]:
+            - generic [ref=f17e26]: Current
+            - generic [ref=f17e27]: W
+          - generic [ref=f17e28]:
+            - generic [ref=f17e29]:
+              - generic [ref=f17e30]: AI/ML Research
+              - generic [ref=f17e31]: /
+              - generic [ref=f17e32]: Current
+            - heading "WaveLab" [level=3] [ref=f17e33]
+            - paragraph [ref=f17e34]: "Smart EV charging platform. Currently leading AI/ML research: turning charging infrastructure into a smart, connected platform that generates value. Connect, activate, grow. Trusted by CDP, ELIS, NOI Techpark, Plug and Play."
+            - generic [ref=f17e35]: Visit
+        - link "Startup A Startup / Independent AtomHR AI platform that slashes bureaucracy and streamlines HR processes for Italian startups and SMEs. Visit" [ref=f17e38] [cursor=pointer]:
+          - /url: https://www.atomhr.it/
+          - generic [ref=f17e39]:
+            - generic [ref=f17e42]: Startup
+            - generic [ref=f17e43]: A
+          - generic [ref=f17e44]:
+            - generic [ref=f17e45]:
+              - generic [ref=f17e46]: Startup
+              - generic [ref=f17e47]: /
+              - generic [ref=f17e48]: Independent
+            - heading "AtomHR" [level=3] [ref=f17e49]
+            - paragraph [ref=f17e50]: AI platform that slashes bureaucracy and streamlines HR processes for Italian startups and SMEs.
+            - generic [ref=f17e51]: Visit
+        - link "Award T Hackathon winner / Independent TrashTracer Large-format leaderboard for top recyclers to encourage eco-friendly behaviour. Won awards at NOI Hackathon 2022 and Progetto Rocca. Visit" [ref=f17e54] [cursor=pointer]:
+          - /url: https://github.com/trashtracer
+          - generic [ref=f17e55]:
+            - generic [ref=f17e58]: Award
+            - generic [ref=f17e59]: T
+          - generic [ref=f17e60]:
+            - generic [ref=f17e61]:
+              - generic [ref=f17e62]: Hackathon winner
+              - generic [ref=f17e63]: /
+              - generic [ref=f17e64]: Independent
+            - heading "TrashTracer" [level=3] [ref=f17e65]
+            - paragraph [ref=f17e66]: Large-format leaderboard for top recyclers to encourage eco-friendly behaviour. Won awards at NOI Hackathon 2022 and Progetto Rocca.
+            - generic [ref=f17e67]: Visit
+        - link "ODH WC Project / ODH Weather Component Modular web component visualizing Open Data Hub weather data — live map, forecasts, webcams, dark/light mode. Featured on the ODH website. Visit" [ref=f17e70] [cursor=pointer]:
+          - /url: https://weather.syswhite.dev/
+          - generic [ref=f17e71]:
+            - generic [ref=f17e74]: ODH
+            - generic [ref=f17e75]: WC
+          - generic [ref=f17e76]:
+            - generic [ref=f17e77]:
+              - generic [ref=f17e78]: Project
+              - generic [ref=f17e79]: /
+              - generic [ref=f17e80]: ODH
+            - heading "Weather Component" [level=3] [ref=f17e81]
+            - paragraph [ref=f17e82]: Modular web component visualizing Open Data Hub weather data — live map, forecasts, webcams, dark/light mode. Featured on the ODH website.
+            - generic [ref=f17e83]: Visit
+        - generic [ref=f17e86]:
+          - generic [ref=f17e87]:
+            - generic [ref=f17e90]: Startup
+            - generic [ref=f17e91]: E
+          - generic [ref=f17e92]:
+            - generic [ref=f17e93]:
+              - generic [ref=f17e94]: Startup
+              - generic [ref=f17e95]: /
+              - generic [ref=f17e96]: Independent
+            - heading "EyeHide" [level=3] [ref=f17e97]
+            - paragraph [ref=f17e98]: Privacy-first hardware and software safeguarding users against the growing risks of AI and large language models. A secure digital experience without compromising privacy.
+            - generic [ref=f17e99]: Private
+        - generic [ref=f17e103]:
+          - paragraph [ref=f17e104]: By the numbers
+          - generic [ref=f17e105]:
+            - generic [ref=f17e106]:
+              - paragraph [ref=f17e107]: "2"
+              - paragraph [ref=f17e108]: startups
+            - generic [ref=f17e109]:
+              - paragraph [ref=f17e110]: "6"
+              - paragraph [ref=f17e111]: awards
+            - generic [ref=f17e112]:
+              - paragraph [ref=f17e113]: "2"
+              - paragraph [ref=f17e114]: ODH projects
+    - generic [ref=f17e116]:
+      - generic [ref=f17e117]:
+        - heading "More work" [level=2] [ref=f17e118]
+        - paragraph [ref=f17e119]: Hover or scroll to explore.
+      - generic [ref=f17e120]:
+        - generic [ref=f17e121] [cursor=pointer]:
+          - generic [ref=f17e124]: AI Hallucination Solution
+          - generic [ref=f17e126]:
+            - generic [ref=f17e127]: AI/ML
+            - heading "AI Hallucination Solution" [level=3] [ref=f17e129]
+            - paragraph [ref=f17e130]: A solution to AI hallucinations, built at the Galileo Galilei high school in early 2023 — at a time when hallucinations were already a well-known and widespread issue without a known solution — and presented to the Italian Minister of Education and Merit. Team project with Gennaro Iaccarino and Michele Magri.
+            - generic [ref=f17e131]: Private
+        - generic [ref=f17e135] [cursor=pointer]:
+          - generic [ref=f17e138]: Localbrain
+          - generic [ref=f17e140]:
+            - generic [ref=f17e141]: Open Source
+            - heading "Localbrain" [level=3] [ref=f17e143]
+            - paragraph [ref=f17e144]: Open-source LLM platform. Contributed the option to run open-source LLMs on local hardware and expose that hardware to other users of the service as a decentralized hardware network.
+            - link "Visit" [ref=f17e145]:
+              - /url: https://github.com/bCommonsLAB
+        - generic [ref=f17e148] [cursor=pointer]:
+          - generic [ref=f17e151]: ODH Data Quality
+          - generic [ref=f17e153]:
+            - generic [ref=f17e154]: Project
+            - heading "ODH Data Quality" [level=3] [ref=f17e156]
+            - paragraph [ref=f17e157]: Data quality checker for the NOI / Open Data Hub — automated validation tool ensuring accuracy and consistency of data within the Open Data Hub.
+            - link "Visit" [ref=f17e158]:
+              - /url: https://github.com/noi-techpark/automated-data-quality-monitoring-tool/
+        - generic [ref=f17e161] [cursor=pointer]:
+          - generic [ref=f17e164]: WaveLab Station
+          - generic [ref=f17e166]:
+            - generic [ref=f17e167]: Computer Vision
+            - heading "WaveLab Station" [level=3] [ref=f17e169]
+            - paragraph [ref=f17e170]: Enhances the EV charging experience with computer vision — live-feed analysis of misuse, user mood, and personalized recommendations for nearby attractions. Confidential per WaveLab.
+            - generic [ref=f17e171]: Private
+        - generic [ref=f17e175] [cursor=pointer]:
+          - generic [ref=f17e178]: ACS Emissions
+          - generic [ref=f17e180]:
+            - generic [ref=f17e181]: Dashboard
+            - heading "ACS Emissions" [level=3] [ref=f17e183]
+            - paragraph [ref=f17e184]: Dashboard tracking mobility emissions for ACS Data Systems. Delivered successfully; partner later declined to acquire the dkvmobility API keys.
+            - link "Visit" [ref=f17e185]:
+              - /url: https://github.com/SysWhiteDev/ACS-Challenge-2023
+    - generic [ref=f17e189]:
+      - generic [ref=f17e190]:
+        - heading "Honors & awards" [level=2] [ref=f17e191]
+        - paragraph [ref=f17e192]: Recognition from hackathons, competitions, and academic excellence.
+      - list [ref=f17e193]:
+        - listitem [ref=f17e194]:
+          - generic [ref=f17e195]: Jan 2024
+          - generic [ref=f17e196]:
+            - paragraph [ref=f17e197]: Certificate of Merit for Excellence
+            - paragraph [ref=f17e198]: Autonomous Province of Bolzano — South Tyrol
+            - paragraph [ref=f17e199]: Outstanding achievement at the FIRST Lego League competition in Rovereto (Jan 21, 2024), as a student at G. Galilei High School (LSSA program).
+        - listitem [ref=f17e200]:
+          - generic [ref=f17e201]: Nov 2023
+          - generic [ref=f17e202]:
+            - paragraph [ref=f17e203]: Certificate of Merit for Excellence
+            - paragraph [ref=f17e204]: Autonomous Province of Bolzano — South Tyrol
+            - paragraph [ref=f17e205]: Outstanding performance at the NOI Hackathon SFSCON Edition (Nov 10–11, 2023) at NOI Techpark, Bolzano.
+        - listitem [ref=f17e206]:
+          - generic [ref=f17e207]: Nov 2023
+          - generic [ref=f17e208]:
+            - paragraph [ref=f17e209]: Winner, Premio Fabrizio Rocca
+            - paragraph [ref=f17e210]: Premio Fabrizio Rocca
+            - paragraph [ref=f17e211]: Recognized for an app that makes recycling more engaging through gamification.
+        - listitem [ref=f17e212]:
+          - generic [ref=f17e213]: Nov 2022
+          - generic [ref=f17e214]:
+            - paragraph [ref=f17e215]: NOI Hackathon SFScon Edition Winner
+            - paragraph [ref=f17e216]: ACS Data Systems AG
+            - paragraph [ref=f17e217]: Won the 24-hour hackathon using Large Format Displays (LFD) to enhance user engagement and promote awareness on a sponsor challenge.
+        - listitem [ref=f17e218]:
+          - generic [ref=f17e219]: Nov 2022
+          - generic [ref=f17e220]:
+            - paragraph [ref=f17e221]: Certificate of Merit for Excellence
+            - paragraph [ref=f17e222]: Autonomous Province of Bolzano — South Tyrol
+            - paragraph [ref=f17e223]: Outstanding performance at the NOI Hackathon SFSCON Edition (Nov 11–12, 2022) at NOI Techpark, Bolzano.
+        - listitem [ref=f17e224]:
+          - generic [ref=f17e225]: May 2022
+          - generic [ref=f17e226]:
+            - paragraph [ref=f17e227]: Certificate of Honorable Mention
+            - paragraph [ref=f17e228]: Autonomous Province of Bolzano — South Tyrol
+            - paragraph [ref=f17e229]: Honorable mention at the BR41N.io Brain-Computer Interface Designers Hackathon (Apr 30 – May 1, 2022) at NOI Techpark, Bolzano.
+    - generic [ref=f17e231]:
+      - heading "Want to build together?" [level=2] [ref=f17e232]: Want to buildtogether?
+      - link "Get in touch" [ref=f17e233] [cursor=pointer]:
+        - /url: /contact

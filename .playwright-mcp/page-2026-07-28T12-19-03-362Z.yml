@@ -1,0 +1,134 @@
+- generic [ref=f11e2]:
+  - navigation "Primary" [ref=f11e3]:
+    - link "home" [ref=f11e4] [cursor=pointer]:
+      - /url: /
+    - link "work" [ref=f11e5] [cursor=pointer]:
+      - /url: /work
+    - link "contact" [ref=f11e6] [cursor=pointer]:
+      - /url: /contact
+  - main [ref=f11e7]:
+    - generic [ref=f11e12]:
+      - paragraph [ref=f11e13]: 9 projects
+      - heading "Work" [level=1] [ref=f11e14]
+      - paragraph [ref=f11e15]: A mix of startups, research, hackathon wins, and open-source contributions — with a focus on AI/ML and developer experience.
+    - generic [ref=f11e17]:
+      - generic [ref=f11e18]:
+        - heading "Featured" [level=2] [ref=f11e19]
+        - paragraph [ref=f11e20]: hover to reveal
+      - generic [ref=f11e21]:
+        - 'link "Current W AI/ML Research / Current WaveLab Smart EV charging platform. Currently leading AI/ML research: turning charging infrastructure into a smart, connected platform that generates value. Connect, activate, grow. Trusted by CDP, ELIS, NOI Techpark, Plug and Play. Visit" [ref=f11e22] [cursor=pointer]':
+          - /url: https://wavelab.space
+          - generic [ref=f11e23]:
+            - generic [ref=f11e26]: Current
+            - generic [ref=f11e27]: W
+          - generic [ref=f11e28]:
+            - generic [ref=f11e29]:
+              - generic [ref=f11e30]: AI/ML Research
+              - generic [ref=f11e31]: /
+              - generic [ref=f11e32]: Current
+            - heading "WaveLab" [level=3] [ref=f11e33]
+            - paragraph [ref=f11e34]: "Smart EV charging platform. Currently leading AI/ML research: turning charging infrastructure into a smart, connected platform that generates value. Connect, activate, grow. Trusted by CDP, ELIS, NOI Techpark, Plug and Play."
+            - generic [ref=f11e35]: Visit
+        - link "Startup A Startup / Independent AtomHR AI platform that slashes bureaucracy and streamlines HR processes for Italian startups and SMEs. Visit" [ref=f11e38] [cursor=pointer]:
+          - /url: https://www.atomhr.it/
+          - generic [ref=f11e39]:
+            - generic [ref=f11e42]: Startup
+            - generic [ref=f11e43]: A
+          - generic [ref=f11e44]:
+            - generic [ref=f11e45]:
+              - generic [ref=f11e46]: Startup
+              - generic [ref=f11e47]: /
+              - generic [ref=f11e48]: Independent
+            - heading "AtomHR" [level=3] [ref=f11e49]
+            - paragraph [ref=f11e50]: AI platform that slashes bureaucracy and streamlines HR processes for Italian startups and SMEs.
+            - generic [ref=f11e51]: Visit
+        - link "Award T Hackathon winner / Independent TrashTracer Large-format leaderboard for top recyclers to encourage eco-friendly behaviour. Won awards at NOI Hackathon 2022 and Progetto Rocca. Visit" [ref=f11e54] [cursor=pointer]:
+          - /url: https://github.com/trashtracer
+          - generic [ref=f11e55]:
+            - generic [ref=f11e58]: Award
+            - generic [ref=f11e59]: T
+          - generic [ref=f11e60]:
+            - generic [ref=f11e61]:
+              - generic [ref=f11e62]: Hackathon winner
+              - generic [ref=f11e63]: /
+              - generic [ref=f11e64]: Independent
+            - heading "TrashTracer" [level=3] [ref=f11e65]
+            - paragraph [ref=f11e66]: Large-format leaderboard for top recyclers to encourage eco-friendly behaviour. Won awards at NOI Hackathon 2022 and Progetto Rocca.
+            - generic [ref=f11e67]: Visit
+        - link "ODH WC Project / ODH Weather Component Modular web component visualizing Open Data Hub weather data — live map, forecasts, webcams, dark/light mode. Featured on the ODH website. Visit" [ref=f11e70] [cursor=pointer]:
+          - /url: https://weather.syswhite.dev/
+          - generic [ref=f11e71]:
+            - generic [ref=f11e74]: ODH
+            - generic [ref=f11e75]: WC
+          - generic [ref=f11e76]:
+            - generic [ref=f11e77]:
+              - generic [ref=f11e78]: Project
+              - generic [ref=f11e79]: /
+              - generic [ref=f11e80]: ODH
+            - heading "Weather Component" [level=3] [ref=f11e81]
+            - paragraph [ref=f11e82]: Modular web component visualizing Open Data Hub weather data — live map, forecasts, webcams, dark/light mode. Featured on the ODH website.
+            - generic [ref=f11e83]: Visit
+        - generic [ref=f11e86]:
+          - generic [ref=f11e87]:
+            - generic [ref=f11e90]: Startup
+            - generic [ref=f11e91]: E
+          - generic [ref=f11e92]:
+            - generic [ref=f11e93]:
+              - generic [ref=f11e94]: Startup
+              - generic [ref=f11e95]: /
+              - generic [ref=f11e96]: Independent
+            - heading "EyeHide" [level=3] [ref=f11e97]
+            - paragraph [ref=f11e98]: Privacy-first hardware and software safeguarding users against the growing risks of AI and large language models. A secure digital experience without compromising privacy.
+            - generic [ref=f11e99]: Private
+        - generic [ref=f11e103]:
+          - paragraph [ref=f11e104]: By the numbers
+          - generic [ref=f11e105]:
+            - generic [ref=f11e106]:
+              - paragraph [ref=f11e107]: "2"
+              - paragraph [ref=f11e108]: startups
+            - generic [ref=f11e109]:
+              - paragraph [ref=f11e110]: "2"
+              - paragraph [ref=f11e111]: awards
+            - generic [ref=f11e112]:
+              - paragraph [ref=f11e113]: "2"
+              - paragraph [ref=f11e114]: ODH projects
+    - generic [ref=f11e116]:
+      - generic [ref=f11e117]:
+        - heading "More work" [level=2] [ref=f11e118]
+        - paragraph [ref=f11e119]: Hover or scroll to explore.
+      - generic [ref=f11e120]:
+        - generic [ref=f11e121] [cursor=pointer]:
+          - generic [ref=f11e124]: Localbrain
+          - generic [ref=f11e126]:
+            - generic [ref=f11e127]: Open Source
+            - heading "Localbrain" [level=3] [ref=f11e129]
+            - paragraph [ref=f11e130]: Open-source LLM platform. Contributed the option to run open-source LLMs on local hardware and expose that hardware to other users of the service as a decentralized hardware network.
+            - link "Visit" [ref=f11e131]:
+              - /url: https://github.com/bCommonsLAB
+        - generic [ref=f11e134] [cursor=pointer]:
+          - generic [ref=f11e137]: ODH Data Quality
+          - generic [ref=f11e139]:
+            - generic [ref=f11e140]: Project
+            - heading "ODH Data Quality" [level=3] [ref=f11e142]
+            - paragraph [ref=f11e143]: Data quality checker for the NOI / Open Data Hub — automated validation tool ensuring accuracy and consistency of data within the Open Data Hub.
+            - link "Visit" [ref=f11e144]:
+              - /url: https://github.com/noi-techpark/automated-data-quality-monitoring-tool/
+        - generic [ref=f11e147] [cursor=pointer]:
+          - generic [ref=f11e150]: WaveLab Station
+          - generic [ref=f11e152]:
+            - generic [ref=f11e153]: Computer Vision
+            - heading "WaveLab Station" [level=3] [ref=f11e155]
+            - paragraph [ref=f11e156]: Enhances the EV charging experience with computer vision — live-feed analysis of misuse, user mood, and personalized recommendations for nearby attractions. Confidential per WaveLab.
+            - generic [ref=f11e157]: Private
+        - generic [ref=f11e161] [cursor=pointer]:
+          - generic [ref=f11e164]: ACS Emissions
+          - generic [ref=f11e166]:
+            - generic [ref=f11e167]: Dashboard
+            - heading "ACS Emissions" [level=3] [ref=f11e169]
+            - paragraph [ref=f11e170]: Dashboard tracking mobility emissions for ACS Data Systems. Delivered successfully; partner later declined to acquire the dkvmobility API keys.
+            - link "Visit" [ref=f11e171]:
+              - /url: https://github.com/SysWhiteDev/ACS-Challenge-2023
+    - generic [ref=f11e175]:
+      - heading "Want to build together?" [level=2] [ref=f11e176]: Want to buildtogether?
+      - link "Get in touch" [ref=f11e177] [cursor=pointer]:
+        - /url: /contact

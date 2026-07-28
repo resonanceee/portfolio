@@ -1,238 +1,103 @@
 <template>
-  <div class="nav">
-    <div class="menu">
-      <p class="website_name"></p>
-      <div class="menu_links">
-        <NuxtLink to="/" class="link">home</NuxtLink>
-        <NuxtLink to="/work" class="link">work</NuxtLink>
-        <NuxtLink to="/contact"class="link">contact me</NuxtLink>
+  <div class="nav-root">
+    <!-- Floating glass pill nav (desktop) -->
+    <nav
+      class="fixed top-5 left-1/2 -translate-x-1/2 z-50 hidden md:flex items-center gap-1 rounded-full border border-white/10 bg-ink/40 backdrop-blur-xl px-2 py-2 shadow-2xl shadow-black/40"
+      aria-label="Primary"
+    >
+      <NuxtLink
+        v-for="item in links"
+        :key="item.to"
+        :to="item.to"
+        class="relative px-5 py-2 rounded-full text-sm font-medium tracking-wide transition-colors duration-300"
+        :class="isActive(item.to)
+          ? 'text-ink bg-cream'
+          : 'text-cream/70 hover:text-cream'"
+      >
+        {{ item.label }}
+      </NuxtLink>
+    </nav>
+
+    <!-- Mobile hamburger trigger -->
+    <button
+      class="fixed top-5 right-5 z-50 md:hidden flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-ink/40 backdrop-blur-xl"
+      :aria-expanded="isOpen"
+      aria-label="Toggle navigation menu"
+      @click="toggle"
+    >
+      <span class="relative block h-4 w-6">
+        <span
+          class="absolute left-0 block h-0.5 w-6 bg-cream transition-all duration-300"
+          :class="isOpen ? 'top-2 rotate-45' : 'top-0'"
+        ></span>
+        <span
+          class="absolute left-0 top-2 block h-0.5 w-6 bg-cream transition-all duration-300"
+          :class="isOpen ? 'opacity-0' : 'opacity-100'"
+        ></span>
+        <span
+          class="absolute left-0 block h-0.5 w-6 bg-cream transition-all duration-300"
+          :class="isOpen ? 'top-2 -rotate-45' : 'top-4'"
+        ></span>
+      </span>
+    </button>
+
+    <!-- Mobile full-screen overlay -->
+    <Transition name="overlay">
+      <div
+        v-if="isOpen"
+        class="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 bg-ink/95 backdrop-blur-2xl md:hidden"
+      >
+        <NuxtLink
+          v-for="item in links"
+          :key="item.to"
+          :to="item.to"
+          class="font-display text-4xl font-light tracking-wide text-cream transition-colors hover:text-orange"
+          @click="close"
+        >
+          {{ item.label }}
+        </NuxtLink>
       </div>
-      <div class="menu_icon" :class="{ 'active': isVisible }" @click="toggleVisibility" :aria-expanded="isVisible" aria-label="Toggle navigation menu">
-        <span class="icon"></span>
-      </div>
-      </div>
-      <div v-if="isVisible" class="toggle-div" @click="toggleVisibility" ref="hamburgerTransition">
-          <NuxtLink to="/" class="burgerlink">home</NuxtLink>
-          <NuxtLink to="/work" class="burgerlink">work</NuxtLink>
-          <NuxtLink to="/contact"class="burgerlink">contact me</NuxtLink>
-      </div>
+    </Transition>
+
+    <slot />
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      isVisible: false
-    };
-  },
-  methods: {
-    toggleVisibility() {
-      this.isVisible = !this.isVisible;
-      
-      if (this.isVisible) {
-        this.$nextTick(() => {
-          const hamburgerTransition = this.$refs.hamburgerTransition;
-          hamburgerTransition.style.animation = 'hamburgerTransition 0.3s forwards';
-        }); 
-      }
-    }
-  }
-};
+<script setup>
+import { ref, watch } from 'vue';
+
+const route = useRoute();
+const links = [
+  { to: '/', label: 'home' },
+  { to: '/work', label: 'work' },
+  { to: '/contact', label: 'contact' },
+];
+
+const isOpen = ref(false);
+
+// ponytail: close overlay on route change so back/forward doesn't leave it stuck open
+watch(() => route.path, () => { isOpen.value = false; });
+
+function isActive(path) {
+  if (path === '/') return route.path === '/';
+  return route.path.startsWith(path);
+}
+
+function toggle() { isOpen.value = !isOpen.value; }
+function close() { isOpen.value = false; }
 </script>
 
 <style>
-.page-enter-active,
-.page-leave-active {
-  transition: opacity 0.4s;
+.nav-root {
+  position: relative;
 }
-.page-enter-from,
-.page-leave-to {
+
+/* Overlay transition: slide + fade */
+.overlay-enter-active, .overlay-leave-active {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.overlay-enter-from, .overlay-leave-to {
   opacity: 0;
-}
-.nav {
-  position: fixed;
-  top: 0;
-  right: 0;
-  left: 0;
-  z-index: 999;
-}
-.nav .menu {
-  width: 100%;
-  height: 80px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 5%;
-  box-sizing: border-box;
-  z-index: 3;
-}
-.nav .menu .website_name {
-  width: 75px;
-  height: 75px;
-  z-index: 0;
-  background-size: 50%;
-  background-repeat: no-repeat;
-  background-position: 0px 30px;
-  bottom: 0;
-  right: 0;
-}
-.nav .menu .website_name:hover {
-  opacity: 1;
-}
-.nav .menu .menu_links {
-  transition: all 0.4s ease;
-  opacity: 0.5;
-}
-.nav .menu .menu_links:hover {
-  opacity: 1;
-}
-@media screen and (max-width: 799px) {
-  .nav .menu .menu_links {
-    display: none;
-  }
-}
-.nav .menu .menu_links .link {
-  color: white;
-  text-transform: uppercase;
-  font-weight: 500;
-  margin-right: 50px;
-  letter-spacing: 2px;
-  position: relative;
-  transition: all 0.3s 0.2s ease;
-}
-.nav .menu .menu_links .link:last-child {
-  margin-right: 0;
-}
-.nav .menu .menu_links .link:before {
-  content: "";
-  position: absolute;
-  width: 0px;
-  height: 4px;
-  background: linear-gradient(90deg, #FFEDC0 0%, #FF9D87 100%);
-  bottom: -10px;
-  border-radius: 4px;
-  transition: all 0.4s cubic-bezier(0.82, 0.02, 0.13, 1.26);
-  left: 100%;
-}
-.nav .menu .menu_links .link:hover {
-  opacity: 1;
-  color: #FB8A8A;
-}
-.nav .menu .menu_links .link:hover:before {
-  width: 40px;
-  left: 0;
-}
-.nav .menu .menu_icon {
-  width: 40px;
-  height: 40px;
-  position: relative;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  z-index: 7;
-}
-@media screen and (max-width: 799px) {
-  .nav .menu .menu_icon {
-    display: flex;
-  }
-}
-.nav .menu .menu_icon .icon {
-  width: 24px;
-  height: 2px;
-  background: white;
-  position: absolute;
-  transition: all 0.3s ease;
-  z-index: 1000;
-  cursor: pointer;
-}
-
-.nav .menu .menu_icon .icon:before, 
-.nav .menu .menu_icon .icon:after {
-  content: "";
-  width: 100%;
-  height: 100%;
-  background: inherit;
-  position: absolute;
-  transition: all 0.3s ease;
-}
-
-.nav .menu .menu_icon .icon:before {
-  transform: translateY(-8px);
-}
-
-.nav .menu .menu_icon .icon:after {
-  transform: translateY(8px);
-}
-
-.nav .menu .menu_icon:hover .icon,
-.nav .menu .menu_icon:hover .icon:before,
-.nav .menu .menu_icon:hover .icon:after {
-  background: #FFEDC0;
-}
-
-.nav .menu .menu_icon.active .icon {
-  transform: rotate(135deg);
-  cursor: pointer;
-}
-
-.nav .menu .menu_icon.active .icon:before {
-  top: 0;
-  transform: rotate(90deg);
-}
-
-.nav .menu .menu_icon.active .icon:after {
-  top: 0;
-  transform: rotate(0);
-}
-
-.toggle-div {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: 100% 100%;
-  background-position: 0px 0px,0px 0px,0px 0px,0px 0px,0px 0px;
-  background-color: #3c3f58;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  justify-content: center;
-  z-index: 2;
-  pointer-events: none;
-  margin-right: 20px;
-  transform: translateX(100%);
-}
-
-.toggle-div * {
-  pointer-events: auto;
-}
-
-@keyframes hamburgerTransition {
-  from {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.burgerlink {
-  color: white;
-  text-transform: uppercase;
-  font-size: clamp(3rem, 6vw, 4rem);
-  font-weight: 200;
-  margin-right: 50px;
-  letter-spacing: 2px;
-  position: relative;
-  transition: all 0.3s 0.2s ease;
-  padding-bottom: 25px;
-  text-decoration: underline;
-
+  transform: scale(1.02);
 }
 </style>

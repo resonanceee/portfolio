@@ -1,450 +1,210 @@
 <template>
-  <div style="max-height: 100%; overflow: auto;">
-  <section class="wrapper">
-      <button
-        v-if="showMotionPrompt"
-        class="motion-btn"
-        @click="enableMotion"
-      >
-        Enable Motion
-      </button>
-      <div
-        class="container"
-        style="
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-        "
-      >
-        <div id="scene" class="scene">
-          <div class="circle" data-depth="1.2"></div>
-          <div class="one" data-depth="0.9">
-            <div class="content">
-              <span class="piece"></span>
-              <span class="piece"></span>
-              <span class="piece"></span>
-            </div>
-          </div>
-          <div class="two" data-depth="0.60">
-            <div class="content">
-              <span class="piece"></span>
-              <span class="piece"></span>
-              <span class="piece"></span>
-            </div>
-          </div>
-          <div class="three" data-depth="0.40">
-            <div class="content">
-              <span class="piece"></span>
-              <span class="piece"></span>
-              <span class="piece"></span>
-            </div>
-          </div>
-          <p class="pcenter" data-depth="0.50">Resonance</p>
-          <p class="pcenter" data-depth="0.10">Resonance</p>
-        </div>
-        <div class="text">
-          <article>
-            <p>
-              Hello, I'm a developer.<br />Make sure to check out the work tab!
-            </p>
-          </article>
+  <main class="overflow-x-hidden w-full max-w-full bg-ink text-cream">
+    <!-- ====================== ATTENTION: HERO ====================== -->
+    <section class="relative flex items-center justify-center px-6 pt-40 pb-28 md:pt-56 md:pb-40 overflow-hidden">
+      <!-- Dark radial wash + ambient blobs (pure CSS, no stock photo) -->
+      <div class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_50%_40%,theme(colors.indigo.900),theme(colors.ink)_70%)]"></div>
+      <div class="absolute -top-40 -left-32 -z-10 h-[36rem] w-[36rem] rounded-full bg-purple/20 blur-[140px]"></div>
+      <div class="absolute -bottom-40 -right-32 -z-10 h-[36rem] w-[36rem] rounded-full bg-orange/10 blur-[140px]"></div>
+
+      <div class="mx-auto w-full max-w-5xl text-center">
+        <p class="mb-8 text-sm font-medium uppercase tracking-[0.3em] text-cream/50 hero-eyebrow">
+          Developer &amp; AI/ML Researcher
+        </p>
+
+        <!-- H1: name-first, max-w-5xl guarantees 1 line on desktop, 2 max on mobile -->
+        <h1
+          ref="heroName"
+          class="font-display font-black tracking-tightest leading-[0.9] text-cream"
+          style="font-size: clamp(3.5rem, 13vw, 11rem);"
+        >
+          Resonance
+        </h1>
+
+        <!-- Sub with inline pill linking WaveLab, EV charging icon replaces the empty gradient swatch -->
+        <p class="mx-auto mt-10 max-w-2xl text-lg md:text-2xl font-medium leading-relaxed text-cream/70 hero-sub">
+          Currently building AI/ML systems at
+          <a
+            href="https://wavelab.space"
+            target="_blank"
+            rel="noopener"
+            class="inline-flex items-center gap-2 align-middle mx-1 rounded-full pl-1.5 pr-3 py-1 bg-cream/10 border border-cream/20 hover:bg-cream/20 hover:border-cream/40 transition-all duration-300 group"
+          >
+            <span class="inline-flex h-7 w-7 items-center justify-center rounded-full bg-orange/20 shrink-0">
+              <svg class="h-4 w-4 text-orange" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 2v5"/><path d="M15 2v5"/><rect x="4" y="7" width="14" height="13" rx="2"/><path d="M12 11l-2.5 4.5h3L10 20"/>
+              </svg>
+            </span>
+            <span class="text-cream font-semibold">WaveLab</span>
+            <svg class="h-3.5 w-3.5 text-cream/60 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+          </a>
+          <br class="hidden md:block" />a smart EV charging platform.
+        </p>
+
+        <!-- Two CTAs, perfect contrast -->
+        <div class="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 hero-cta">
+          <NuxtLink
+            to="/work"
+            class="group inline-flex items-center gap-2 rounded-full bg-cream px-7 py-3.5 text-base font-semibold text-ink transition-all duration-300 hover:bg-orange hover:text-ink shadow-lg shadow-black/30"
+          >
+            See work
+            <svg class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </NuxtLink>
+          <NuxtLink
+            to="/contact"
+            class="inline-flex items-center gap-2 rounded-full border border-cream/30 px-7 py-3.5 text-base font-semibold text-cream transition-all duration-300 hover:border-cream hover:bg-cream/5"
+          >
+            Get in touch
+          </NuxtLink>
         </div>
       </div>
     </section>
-  </div>
+
+    <!-- ====================== INTEREST: FEATURED MINI-BENTO ====================== -->
+    <section class="px-6 py-32 md:py-48">
+      <div class="mx-auto max-w-6xl">
+        <div class="mb-16 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <h2 class="font-display text-4xl md:text-6xl font-bold tracking-tightest text-cream">
+            Selected work
+          </h2>
+          <NuxtLink to="/work" class="text-sm font-medium text-cream/60 hover:text-cream transition-colors tracking-wide">
+            View all projects →
+          </NuxtLink>
+        </div>
+
+        <!-- 4-card mini bento, grid-flow-dense, zero voids:
+             R1: WaveLab(2) + AtomHR(1) = 3 cols
+             R2: TrashTracer(1) + AI Hallucination(2) = 3 cols -->
+        <div class="grid grid-cols-1 md:grid-cols-3 grid-flow-dense gap-5">
+          <Project
+            v-for="(p, i) in featured"
+            :key="p.head"
+            v-bind="p"
+            variant="feature"
+            :index="i"
+            :class="(i === 0 || i === 3) ? 'md:col-span-2 md:row-span-1' : ''"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== DESIRE: SCRUB-REVEAL PARAGRAPH ====================== -->
+    <section class="px-6 py-32 md:py-48 border-t border-cream/5">
+      <div class="mx-auto max-w-4xl">
+        <p ref="scrubText" class="font-display text-2xl md:text-4xl leading-snug font-medium text-cream scrub-word">
+          <span v-for="(w, i) in scrubWords" :key="i" class="inline-block mr-[0.25em] opacity-20">{{ w }}</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ====================== ACTION: CTA ====================== -->
+    <section class="px-6 py-32 md:py-48 border-t border-cream/5">
+      <div class="mx-auto max-w-5xl text-center">
+        <h2 class="font-display font-black tracking-tightest leading-[0.95] text-cream"
+          style="font-size: clamp(2.5rem, 8vw, 6rem);">
+          Let&rsquo;s build<br />something.
+        </h2>
+        <NuxtLink
+          to="/contact"
+          class="mt-12 inline-flex items-center gap-2 rounded-full bg-orange px-8 py-4 text-lg font-bold text-ink transition-all duration-300 hover:bg-cream shadow-xl shadow-orange/20"
+        >
+          Start a conversation
+          <svg class="h-5 w-5 transition-transform duration-300 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </NuxtLink>
+      </div>
+    </section>
+  </main>
 </template>
-<script setup lang="ts">
-import { onMounted, onBeforeUnmount, ref } from 'vue';
 
-// ponytail: load parallax lib only on the page that uses it, not site-wide
-useHead({
-  script: [
-    { src: 'https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js', defer: true }
-  ]
-});
+<script setup>
+import { ref, onMounted, onBeforeUnmount } from 'vue';
+import { useGsap } from '~/composables/useGsap';
 
-const showMotionPrompt = ref(false);
-let parallax: any | null = null;
+const { gsap, ScrollTrigger } = useGsap();
 
-function isIOS() {
-  return /iPad|iPhone|iPod/.test(navigator.userAgent) ||
-    (navigator.userAgent.includes('Mac') && 'ontouchend' in document);
-}
+const heroName = ref(null);
+const scrubText = ref(null);
 
-function waitForParallax(maxMs = 2000) {
-  return new Promise<void>((resolve) => {
-    if ((window as any).Parallax) return resolve();
-    const start = Date.now();
-    const iv = setInterval(() => {
-      if ((window as any).Parallax || Date.now() - start > maxMs) {
-        clearInterval(iv);
-        resolve();
-      }
-    }, 50);
-  });
-}
+const featured = [
+  {
+    head: 'WaveLab',
+    role: 'AI/ML Research',
+    text: 'Smart EV charging platform — turning charging infrastructure into a smart, connected system that generates value.',
+    link: 'https://wavelab.space',
+    tag: 'Current',
+  },
+  {
+    head: 'AtomHR',
+    role: 'Startup',
+    text: 'AI platform slashing bureaucracy and streamlining HR for Italian startups and SMEs.',
+    link: 'https://www.atomhr.it/',
+    tag: 'Startup',
+  },
+  {
+    head: 'TrashTracer',
+    role: 'Hackathon winner',
+    text: 'Large-format leaderboard for top recyclers — won awards at NOI Hackathon & Progetto Rocca.',
+    link: 'https://github.com/trashtracer',
+    tag: 'Award',
+  },
+  {
+    head: 'AI Hallucination Solution',
+    role: 'AI/ML',
+    text: 'A solution to AI hallucinations, built in early 2023 when hallucinations were a well-known and widespread issue without a known solution — and presented to the Italian Minister of Education and Merit.',
+    link: 'private',
+    tag: 'AI/ML',
+  },
+];
 
-async function initParallax() {
-  const scene = document.getElementById('scene');
-  if (!scene) return;
-  await waitForParallax();
-  const ParallaxCtor = (window as any).Parallax;
-  if (!ParallaxCtor) return;
+const scrubSentence = "Currently building AI/ML systems at WaveLab — turning charging infrastructure into a smart, connected platform that generates value. Connect, activate, grow.";
+const scrubWords = scrubSentence.split(' ');
 
-  // Destroy existing instance if any
-  if (parallax && parallax.destroy) parallax.destroy();
+let ctx;
 
-  parallax = new ParallaxCtor(scene, {
-    hoverOnly: false, // allow gyroscope on mobile
-  });
-}
-
-async function enableMotion() {
-  try {
-    // iOS 13+ requires explicit permission
-    const D = (window as any).DeviceOrientationEvent;
-    if (D && typeof D.requestPermission === 'function') {
-      const state = await D.requestPermission();
-      if (state === 'granted') {
-        await initParallax();
-        showMotionPrompt.value = false;
-        return;
-      }
+onMounted(() => {
+  // ponytail: scoped gsap context so animations clean up on route change
+  ctx = gsap.context(() => {
+    // Hero char reveal: split the name into spans, stagger fade-up
+    const name = heroName.value;
+    if (name) {
+      const text = name.textContent;
+      name.innerHTML = '';
+      [...text].forEach((ch) => {
+        const span = document.createElement('span');
+        span.textContent = ch === ' ' ? '\u00A0' : ch;
+        span.className = 'inline-block opacity-0';
+        name.appendChild(span);
+      });
+      gsap.fromTo(name.children,
+        { opacity: 0, y: 40 },
+        { opacity: 1, y: 0, duration: 0.8, stagger: 0.06, ease: 'power3.out', delay: 0.15 }
+      );
     }
-  } catch (_) {
-    // fall through to init with mouse fallback
-  }
-  await initParallax();
-  showMotionPrompt.value = false;
-}
 
-onMounted(async () => {
-  // If iOS and permission API exists, show prompt; otherwise init immediately
-  const D = (window as any).DeviceOrientationEvent;
-  if (isIOS() && D && typeof D.requestPermission === 'function') {
-    showMotionPrompt.value = true;
-  } else {
-    await initParallax();
-  }
+    // Sub + CTA fade in after name
+    gsap.from('.hero-sub', { opacity: 0, y: 20, duration: 0.8, delay: 0.7, ease: 'power2.out' });
+    gsap.from('.hero-cta', { opacity: 0, y: 20, duration: 0.8, delay: 0.9, ease: 'power2.out' });
+    gsap.from('.hero-eyebrow', { opacity: 0, y: 10, duration: 0.6, delay: 0.05, ease: 'power2.out' });
+
+    // Scrub-reveal: words go 0.2 -> 1 opacity as you scroll through
+    if (scrubText.value) {
+      gsap.to(scrubText.value.querySelectorAll('span'), {
+        opacity: 1,
+        ease: 'none',
+        stagger: 0.5,
+        scrollTrigger: {
+          trigger: scrubText.value,
+          start: 'top 80%',
+          end: 'bottom 30%',
+          scrub: true,
+        },
+      });
+    }
+  });
 });
 
 onBeforeUnmount(() => {
-  if (parallax) {
-    if (typeof parallax.destroy === 'function') parallax.destroy();
-    else if (typeof parallax.disable === 'function') parallax.disable();
-    parallax = null;
-  }
+  if (ctx) ctx.revert();
+  ScrollTrigger.getAll().forEach((t) => t.kill());
 });
 </script>
-<style>
-.motion-btn {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 1000;
-  background: #ffedc0;
-  color: #3c3f58;
-  font-weight: 600;
-  border: 1px solid #f2c66b;
-  border-radius: 24px;
-  padding: 10px 14px;
-}
-
-.wrapper {
-  background-color: #3c3f58;
-  display: grid;
-  grid-template-columns: 1fr;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  overflow: hidden;
-}
-.wrapper .container {
-  margin: 0 auto;
-  transition: all 0.4s ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
-.wrapper .container .scene {
-  position: absolute;
-  width: 100vw;
-  height: 100vh;
-  vertical-align: middle;
-}
-.wrapper .container .one,
-.wrapper .container .two,
-.wrapper .container .three,
-.wrapper .container .circle,
-.wrapper .container .pcenter {
-  width: 60%;
-  height: 60%;
-  top: 20% !important;
-  left: 20% !important;
-  min-width: 400px;
-  min-height: 400px;
-}
-.wrapper .container .one .content,
-.wrapper .container .two .content,
-.wrapper .container .three .content,
-.wrapper .container .circle .content,
-.wrapper .container .pcenter .content {
-  width: 600px;
-  height: 600px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.wrapper .container .one .content .piece,
-.wrapper .container .two .content .piece,
-.wrapper .container .three .content .piece,
-.wrapper .container .circle .content .piece,
-.wrapper .container .pcenter .content .piece {
-  width: 200px;
-  height: 80px;
-  display: flex;
-  position: absolute;
-  border-radius: 80px;
-  z-index: 1;
-  animation: pieceLeft 8s cubic-bezier(1, 0.06, 0.25, 1) infinite both;
-}
-@keyframes pieceLeft {
-  50% {
-    left: 80%;
-    width: 10%;
-  }
-}
-@keyframes pieceRight {
-  50% {
-    right: 80%;
-    width: 10%;
-  }
-}
-@media screen and (max-width: 799px) {
-  .wrapper .container .one,
-  .wrapper .container .two,
-  .wrapper .container .three,
-  .wrapper .container .circle,
-  .wrapper .container .pcenter {
-    width: 90%;
-    height: 90%;
-    top: 5% !important;
-    left: 5% !important;
-    min-width: 280px;
-    min-height: 280px;
-  }
-}
-@media screen and (max-height: 660px) {
-  .wrapper .container .one,
-  .wrapper .container .two,
-  .wrapper .container .three,
-  .wrapper .container .circle,
-  .wrapper .container .pcenter {
-    min-width: 280px;
-    min-height: 280px;
-    width: 60%;
-    height: 60%;
-    top: 20% !important;
-    left: 20% !important;
-  }
-}
-.wrapper .container .text {
-  width: 60%;
-  height: 40%;
-  min-width: 400px;
-  min-height: 500px;
-  position: absolute;
-  margin: 40px 0;
-}
-@media screen and (max-width: 799px) {
-  .wrapper .container .text {
-    min-height: 400px;
-    height: 80%;
-  }
-}
-.wrapper .container .text article {
-  width: 400px;
-  position: absolute;
-  bottom: 0;
-  z-index: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
-@media screen and (max-width: 799px) {
-  .wrapper .container .text article {
-    width: 100%;
-  }
-}
-.wrapper .container .text article p {
-  color: white;
-  font-size: 18px;
-  letter-spacing: 0.6px;
-  margin-bottom: 40px;
-  text-shadow: 6px 6px 10px #32243e;
-}
-.wrapper .container .pcenter {
-  /* ponytail: hero "Resonance" text scales down on smaller viewports, max 160px */
-  font-size: clamp(3.5rem, 10vw, 10rem);
-  font-weight: 700;
-  letter-spacing: 4px;
-  color: white;
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  z-index: 2;
-}
-@media screen and (max-width: 799px) {
-  .wrapper .container .pcenter {
-    font-size: clamp(3rem, 12vw, 4.5rem);
-  }
-}
-
-.wrapper .container .pcenter:nth-of-type(2) {
-  color: #1a2230;
-  z-index: 1;
-  animation-delay: 1s;
-  filter: blur(10px);
-  opacity: 0.8;
-}
-.wrapper .container .circle {
-  position: absolute;
-}
-.wrapper .container .circle:before {
-  content: "";
-  position: absolute;
-  /* ponytail: disc scales with viewport so it doesn't dominate short laptop screens; max 800px */
-  width: min(800px, 65vmin);
-  height: min(800px, 65vmin);
-  background-color: #373951;
-  border-radius: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: inset 5px 20px 40px rgba(41, 45, 76, 0.393),
-    inset 5px 0px 5px rgba(50, 36, 62, 0.3),
-    inset 5px 5px 20px rgba(50, 36, 62, 0.25),
-    2px 2px 5px rgba(255, 255, 255, 0.2);
-}
-
-@media screen and (max-width: 799px) {
-  .wrapper .container .circle:before {
-    width: min(400px, 60vmin);
-    height: min(400px, 60vmin);
-  }
-}
-.wrapper .container .one .content:before {
-  content: "";
-  position: absolute;
-  /* ponytail: orbit ring scales with viewport, max 600px */
-  width: min(600px, 50vmin);
-  height: min(600px, 50vmin);
-  background-color: #25263630;
-  border-radius: 100%;
-  box-shadow: inset 5px 20px 40px rgba(53, 61, 98, 0.25),
-    inset 5px 0px 5px rgba(36, 38, 62, 0.3),
-    inset 5px 5px 20px rgba(50, 36, 62, 0.25),
-    2px 2px 5px rgba(255, 255, 255, 0.2);
-  animation: circle 0.8s 0.4s cubic-bezier(1, 0.06, 0.25, 1) backwards;
-}
-@media screen and (max-width: 799px) {
-  .wrapper .container .one .content:before {
-    width: min(300px, 45vmin);
-    height: min(300px, 45vmin);
-  }
-}
-.wrapper .container .one .content .piece {
-  background: linear-gradient(90deg, #6470b9 13.7%, #9754ce 94.65%);
-}
-.wrapper .container .one .content .piece:nth-child(1) {
-  right: 15%;
-  top: 18%;
-  height: 30px;
-  width: 120px;
-  animation-delay: 0.5s;
-  animation-name: pieceRight;
-}
-.wrapper .container .one .content .piece:nth-child(2) {
-  left: 15%;
-  top: 45%;
-  width: 150px;
-  height: 50px;
-  animation-delay: 1s;
-  animation-name: pieceLeft;
-}
-.wrapper .container .one .content .piece:nth-child(3) {
-  left: 10%;
-  top: 75%;
-  height: 20px;
-  width: 70px;
-  animation-delay: 1.5s;
-  animation-name: pieceLeft;
-}
-.wrapper .container .two .content .piece {
-  background: linear-gradient(90deg, #ccb67e 0%, #f66e4f 100%);
-}
-.wrapper .container .two .content .piece:nth-child(1) {
-  left: 0%;
-  top: 25%;
-  height: 40px;
-  width: 120px;
-  animation-delay: 2s;
-  animation-name: pieceLeft;
-}
-.wrapper .container .two .content .piece:nth-child(2) {
-  right: 15%;
-  top: 35%;
-  width: 180px;
-  height: 50px;
-  animation-delay: 2.5s;
-  animation-name: pieceRight;
-}
-.wrapper .container .two .content .piece:nth-child(3) {
-  right: 10%;
-  top: 80%;
-  height: 20px;
-  width: 160px;
-  animation-delay: 3s;
-  animation-name: pieceRight;
-}
-.wrapper .container .three .content .piece {
-  background: #f29090;
-}
-.wrapper .container .three .content .piece:nth-child(1) {
-  left: 25%;
-  top: 35%;
-  height: 20px;
-  width: 80px;
-  animation-name: pieceLeft;
-  animation-delay: 3.5s;
-}
-.wrapper .container .three .content .piece:nth-child(2) {
-  right: 10%;
-  top: 55%;
-  width: 140px;
-  height: 40px;
-  animation-name: pieceRight;
-  animation-delay: 4s;
-}
-.wrapper .container .three .content .piece:nth-child(3) {
-  left: 40%;
-  top: 68%;
-  height: 20px;
-  width: 80px;
-  animation-name: pieceLeft;
-  animation-delay: 4.5s;
-}
-</style>

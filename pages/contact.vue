@@ -1,60 +1,97 @@
 <template>
-  <div class="wrapper" @mousemove="handleMouseMove">
-    <div class="content-container">
-      <div class="left-section">
-        <div class="heading-container">
-          <div class="heading">
-            <p class="ltitle">GET IN TOUCH!</p>
-          <p class="lsubtitle">You can reach me through any of the following contacts</p>
+  <main class="overflow-x-hidden w-full max-w-full bg-ink text-cream" @mousemove="handleMouseMove">
+    <!-- ambient blobs -->
+    <div class="absolute top-1/4 left-1/4 -z-10 h-[28rem] w-[28rem] rounded-full bg-purple/15 blur-[140px] pointer-events-none"></div>
+    <div class="absolute bottom-1/4 right-1/4 -z-10 h-[28rem] w-[28rem] rounded-full bg-orange/10 blur-[140px] pointer-events-none"></div>
+
+    <section class="min-h-screen flex items-center justify-center px-6 py-32 md:py-48">
+      <div class="mx-auto w-full max-w-6xl">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-px rounded-3xl overflow-hidden border border-cream/10 bg-cream/5 backdrop-blur-sm">
+
+          <!-- LEFT: headline -->
+          <div class="relative bg-indigo-900/60 p-10 md:p-16 flex flex-col justify-center">
+            <p class="mb-6 text-sm font-medium uppercase tracking-[0.3em] text-cream/50">Contact</p>
+            <h1 class="font-display font-black tracking-tightest leading-[0.95] text-cream"
+              style="font-size: clamp(2.75rem, 6vw, 5rem);">
+              Let&rsquo;s<br />talk.
+            </h1>
+            <p class="mt-8 max-w-md text-lg md:text-xl text-cream/65 leading-relaxed">
+              Open to AI/ML research, developer tooling, and ambitious side projects.
+              Currently building at WaveLab.
+            </p>
+            <div class="mt-10 flex items-center gap-2 text-sm text-cream/40">
+              <span class="relative flex h-2 w-2">
+                <span class="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-60 animate-ping"></span>
+                <span class="relative inline-flex h-2 w-2 rounded-full bg-green-400"></span>
+              </span>
+              available for select work
+            </div>
+          </div>
+
+          <!-- RIGHT: links -->
+          <div class="bg-ink/60 p-10 md:p-16 flex flex-col justify-center gap-10">
+            <div>
+              <p class="text-xs font-medium uppercase tracking-[0.25em] text-orange mb-3">Email</p>
+              <a
+                href="mailto:res@onance.dev"
+                class="group inline-flex items-center gap-2 font-display text-2xl md:text-3xl font-semibold text-cream hover:text-orange transition-colors contact-link"
+                @mouseover="showCopyBubble"
+                @mouseleave="hideCopyBubble"
+              >
+                res@onance.dev
+                <svg class="h-4 w-4 opacity-50 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+              </a>
+            </div>
+
+            <div>
+              <p class="text-xs font-medium uppercase tracking-[0.25em] text-orange mb-3">GitHub</p>
+              <a
+                href="https://github.com/resonanceee"
+                target="_blank"
+                rel="noopener"
+                class="group inline-flex items-center gap-2 font-display text-2xl md:text-3xl font-semibold text-cream hover:text-orange transition-colors contact-link"
+              >
+                @resonanceee
+                <svg class="h-4 w-4 opacity-50 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+              </a>
+            </div>
+
+            <div>
+              <p class="text-xs font-medium uppercase tracking-[0.25em] text-orange mb-3">Currently</p>
+              <a
+                href="https://wavelab.space"
+                target="_blank"
+                rel="noopener"
+                class="group inline-flex items-center gap-2 font-display text-2xl md:text-3xl font-semibold text-cream hover:text-orange transition-colors contact-link"
+              >
+                WaveLab
+                <svg class="h-4 w-4 opacity-50 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
+              </a>
+              <p class="mt-2 text-sm text-cream/45">AI/ML research · smart EV charging</p>
+            </div>
           </div>
         </div>
       </div>
-      <div class="right-section">
-        <div class="heading-container">
-          <div class="heading">
-            <p class="title">MAIL</p>
-            <a
-              class="content animated-link"
-              href="mailto:res@onance.dev"
-              @mouseover="showCopyBubble"
-              @mouseleave="hideCopyBubble"
-            >
-              res@onance.dev
-            </a>
-            <p class="title">GitHub</p>
-            <a
-              class="content animated-link"
-              href="https://github.com/resonanceee"
-              target="_blank"
-              rel="noopener"
-            >
-              @resonanceee
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div v-if="!isMobile && !showCopy" class="bubble" :class="{ 'hovered': isHovered }" :style="bubbleStyle">
-      <span v-if="isHovered">Click me!</span>
+    </section>
+
+    <!-- Custom cursor bubble (desktop only) -->
+    <div v-if="!isMobile && !showCopy" class="bubble" :class="{ hovered: isHovered }" :style="bubbleStyle">
+      <span v-if="isHovered">click</span>
     </div>
     <div v-if="showCopy" class="bubble hovered" :style="bubbleStyle">
       <span>{{ bubbleText }}</span>
     </div>
-  </div>
+  </main>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue';
 
-const bubbleStyle = ref({
-  left: '0px',
-  top: '0px',
-});
-
+const bubbleStyle = ref({ left: '0px', top: '0px' });
 const isMobile = ref(false);
 const isHovered = ref(false);
 const showCopy = ref(false);
-const bubbleText = ref('Click me!');
+const bubbleText = ref('click');
 
 onMounted(() => {
   // ponytail: matchMedia over UA sniff — catches iPad desktop-mode + modern touch devices
@@ -64,232 +101,61 @@ onMounted(() => {
 });
 
 const handleMouseMove = (event) => {
-  if (!isMobile.value) {
-    const { clientX, clientY } = event;
-    const targetX = clientX - 25;
-    const targetY = clientY - 25;
-
-    bubbleStyle.value = {
-      left: `${targetX}px`,
-      top: `${targetY}px`,
-    };
-
-    const elementUnderCursor = document.elementFromPoint(clientX, clientY);
-    isHovered.value = elementUnderCursor && elementUnderCursor.tagName === 'A';
-  }
+  if (isMobile.value) return;
+  const { clientX, clientY } = event;
+  bubbleStyle.value = {
+    left: `${clientX - 25}px`,
+    top: `${clientY - 25}px`,
+  };
+  const el = document.elementFromPoint(clientX, clientY);
+  isHovered.value = !!(el && el.closest('a.contact-link'));
 };
 
 const showCopyBubble = (event) => {
-  if (!isMobile.value) {
-    const { clientX, clientY } = event;
-    const targetX = clientX - 25;
-    const targetY = clientY - 25;
-
-    bubbleStyle.value = {
-      left: `${targetX}px`,
-      top: `${targetY}px`,
-    };
-
-    showCopy.value = true;
-  }
+  if (isMobile.value) return;
+  const { clientX, clientY } = event;
+  bubbleStyle.value = { left: `${clientX - 25}px`, top: `${clientY - 25}px` };
+  showCopy.value = true;
 };
 
 const hideCopyBubble = () => {
-  if (!isMobile.value) {
-    showCopy.value = false;
-  }
+  if (isMobile.value) return;
+  showCopy.value = false;
 };
-
-// No click-to-copy; email is now a mailto: link
 </script>
-<style scoped>
-.wrapper {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #3c3f58;
-}
 
+<style scoped>
 /* ponytail: cursor:none only on precise-pointer devices, avoids hydration flicker on touch */
 @media (hover: hover) and (pointer: fine) {
-  .wrapper,
-  .content,
-  .bubble {
+  main, .contact-link, .bubble {
     cursor: none;
   }
 }
 
-.content-container {
-  position: relative;
-  display: flex;
-  width: 90%;
-  height: 80%;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  overflow: hidden;
-}
-
-.left-section {
-  width: 55%;
-  background-color: #6d4ab1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-
-.right-section {
-  width: 45%;
-  background-color: #e4a82a;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
-}
-
-.heading-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-}
-
-.heading {
-  font-size: 1.5rem;
-  color: #333;
-}
-
-.title {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.ltitle {
-  font-size: 3rem;
-  font-weight: bold;
-  margin-bottom: 10px;
-  color: #ffffff;
-}
-
-.lsubtitle {
-  font-size: 1.4rem;
-  color: #fafafa;
-  margin-bottom: 20px;
-}
-
-.subtitle {
-  font-size: 1.4rem;
-  color: #666;
-  margin-bottom: 20px;
-}
-
-.content {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-  text-decoration: none; /* ensure no underline */
-}
-
-/* Remove nav-like animated underline from contact links */
-.animated-link { position: static; }
-
 .bubble {
-  position: absolute;
+  position: fixed;
   width: 50px;
   height: 50px;
-  background: white;
+  background: #ffedc0;
   border-radius: 50%;
   pointer-events: none;
   mix-blend-mode: difference;
-  animation: bubble 5s ease-in-out infinite;
+  z-index: 100;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1rem;
-  color: black;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #1a2230;
   transition: width 0.3s ease, height 0.3s ease, border-radius 0.3s ease, background 0.3s ease, transform 0.3s ease;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .content,
-  .bubble,
-  .bubble.hovered {
-    cursor: none;
-  }
-}
-
 .bubble.hovered {
-  width: 120px;
-  height: 60px;
+  width: 90px;
+  height: 50px;
   border-radius: 20px 20px 20px 0;
-  background: yellow;
+  background: #efa819;
   mix-blend-mode: normal;
-  transform: scale(1.1);
-  /* ponytail: pause idle pulsing so hover-scale transition is visible, not fought by keyframe */
-  animation-play-state: paused;
-}
-
-@keyframes bubble {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-}
-
-@media (max-width: 768px) {
-  .content-container {
-    flex-direction: column;
-  }
-
-  .left-section {
-    width: 100%;
-    height: 45%;
-  }
-
-  .right-section {
-    width: 100%;
-    height: 55%;
-    padding-left: 0;
-  }
-
-  .bubble {
-    display: none;
-  }
-  .heading {
-  font-size: 1rem;
-  } 
-
-  .title {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-
-  .ltitle {
-    font-size: 2rem;
-    margin-bottom: 10px;
-  }
-
-  .lsubtitle {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    overflow-wrap: break-word;
-    word-break: break-word;
-    max-width: 90%;
-  }
-
-  .subtitle {
-    font-size: 1.2rem;
-    color: #666;
-    margin-bottom: 20px;
-  }
-
-  .content {
-    margin-bottom: 10px;
-  text-decoration: none; /* no underline on mobile either */
-  }
+  transform: scale(1.05);
 }
 </style>

@@ -1,19 +1,7 @@
-@import url("https://fonts.googleapis.com/css?family=Barlow+Condensed:300,400,500,600,700,800,900|Barlow:300,400,500,600,700,800,900&display=swap");
+/* ponytail: @nuxtjs/tailwindcss module injects its own tailwind directives —
+   duplicating @tailwind here would double-inject base/components/utilities. Keep only resets. */
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-ul,
-li,
-button,
-a,
-i,
-input,
-body {
+h1, h2, h3, h4, h5, h6, p, ul, li, button, a, i, input, body {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -22,9 +10,11 @@ body {
   text-decoration: none;
   color: inherit;
 }
+
 *:focus:not(:focus-visible) {
   outline: 0;
 }
+
 *:focus-visible {
   outline: 2px solid #efa819;
   outline-offset: 2px;
@@ -34,28 +24,27 @@ body {
   margin: 0;
   padding: 0;
   height: auto;
-  font-family: "Barlow", sans-serif;
-  background: #3c3f58;
+  font-family: "Cabinet Grotesk", "Barlow", ui-sans-serif, system-ui, sans-serif;
+  background: #1a2230;
+  color: #ffedc0;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-.logo {
-  position: fixed;
-  z-index: 5;
-  bottom: 10px;
-  right: 10px;
-  width: 40px;
-  height: 40px;
-  border-radius: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 100%;
-  backdrop-filter: blur(5px);
+/* page transitions (kept from original) */
+.page-enter-active, .page-leave-active {
+  transition: opacity 0.4s;
 }
-.logo img {
-  width: 55%;
-  height: 55%;
-  transform: translateY(-1px);
-  opacity: 0.8;
+.page-enter-from, .page-leave-to {
+  opacity: 0;
+}
+
+/* ponytail: respect reduced motion globally — GSAP animations gate on this too */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

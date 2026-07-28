@@ -1,12 +1,17 @@
 export default defineNuxtConfig({
-  css: [
-    '~/assets/css/global.css'
-  ],
+  modules: ['@nuxtjs/tailwindcss'],
+  css: ['~/assets/css/global.css'],
   app: {
     head: {
-      title: "Res's Portfolio",
+      title: "Resonance — Developer & AI/ML Researcher",
+      htmlAttrs: { lang: 'en' },
       link: [
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'preconnect', href: 'https://api.fontshare.com' },
+        {
+          rel: 'stylesheet',
+          href: 'https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@400,500,700,800,900&display=swap'
+        }
       ]
     },
     pageTransition: { name: 'page', mode: 'out-in' },

@@ -1,465 +1,324 @@
 <template>
-  <div class="container">
-    <div class="bg"></div>
-    <div class="fade-in-color" :style="{ opacity: fadeOpacity }"></div>
-    <div class="fullscreen-container">
-      <div class="heading-content">
-  <div class="heading"><p class="heading-title">{{ projects.length }}</p></div>
-        <div class="heading"><p class="heading-text">projects</p></div>
+  <main class="overflow-x-hidden w-full max-w-full bg-ink text-cream">
+    <!-- ====================== HERO (gradient, scrub shift) ====================== -->
+    <section class="relative h-screen flex items-end overflow-hidden px-6 pb-20 md:pb-28">
+      <div ref="heroBg" class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_30%_30%,theme(colors.purple)_0%,theme(colors.indigo.900)_45%,theme(colors.ink)_85%)]"></div>
+      <!-- ponytail: CSS texture overlay, no external image -->
+      <div class="absolute inset-0 -z-10 opacity-20 mix-blend-overlay" style="background-image: repeating-linear-gradient(135deg, transparent 0 14px, rgba(255,255,255,0.05) 14px 15px);"></div>
+      <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/40 to-transparent"></div>
+
+      <div class="mx-auto w-full max-w-6xl">
+        <p class="mb-4 text-sm font-medium uppercase tracking-[0.3em] text-cream/60">{{ total }} projects</p>
+        <h1 class="font-display font-black tracking-tightest leading-[0.9] text-cream"
+          style="font-size: clamp(3.5rem, 13vw, 11rem);">
+          Work
+        </h1>
+        <p class="mt-6 max-w-xl text-lg md:text-xl text-cream/70 leading-relaxed">
+          A mix of startups, research, hackathon wins, and open-source contributions —
+          with a focus on AI/ML and developer experience.
+        </p>
       </div>
-      <div ref="scrollDownIndicator" class="scroll-down-indicator">
-        <img
-          src="/assets/icons/scroll-down-text.png"
-          class="scroll-down-text"
-          alt=""
-          :style="{ opacity: 1 - fadeOpacity }"
+    </section>
+
+    <!-- ====================== BENTO GRID (gapless, grid-flow-dense) ====================== -->
+    <section class="px-6 py-24 md:py-32">
+      <div class="mx-auto max-w-6xl">
+        <div class="mb-12 flex items-end justify-between">
+          <h2 class="font-display text-3xl md:text-5xl font-bold tracking-tightest">Featured</h2>
+          <p class="text-sm text-cream/40 hidden md:block">hover to reveal</p>
+        </div>
+
+        <!-- 4-col × 3-row bento, grid-flow-dense, zero voids:
+             R1: WaveLab(2) + AtomHR(2) = 4
+             R2: WaveLab(cont 2) + TrashTracer(1) + Weather(1) = 4
+             R3: EyeHide(2) + Stats(2) = 4 -->
+        <div class="grid grid-cols-1 md:grid-cols-4 grid-flow-dense gap-4 md:gap-5 auto-rows-[minmax(220px,auto)]">
+          <Project v-bind="bento.wavelab" variant="bento" :index="0" class="md:col-span-2 md:row-span-2" />
+          <Project v-bind="bento.atomhr" variant="bento" :index="1" class="md:col-span-2 md:row-span-1" />
+          <Project v-bind="bento.trashtracer" variant="bento" :index="2" class="md:col-span-1 md:row-span-1" />
+          <Project v-bind="bento.weather" variant="bento" :index="3" class="md:col-span-1 md:row-span-1" />
+          <Project v-bind="bento.eyehide" variant="bento" :index="4" class="md:col-span-2 md:row-span-1" />
+          <div class="md:col-span-2 md:row-span-1 rounded-2xl border border-cream/10 bg-indigo-900/40 p-7 flex flex-col justify-between">
+            <p class="font-display text-2xl md:text-3xl font-bold tracking-tight leading-tight text-cream">
+              By the numbers
+            </p>
+            <div class="grid grid-cols-3 gap-4 mt-4">
+              <div>
+                <p class="font-display text-4xl md:text-5xl font-black text-orange">{{ stats.startups }}</p>
+                <p class="text-xs uppercase tracking-wider text-cream/50 mt-1">startups</p>
+              </div>
+              <div>
+                <p class="font-display text-4xl md:text-5xl font-black text-cream">{{ stats.awards }}</p>
+                <p class="text-xs uppercase tracking-wider text-cream/50 mt-1">awards</p>
+              </div>
+              <div>
+                <p class="font-display text-4xl md:text-5xl font-black text-coral">{{ stats.odh }}</p>
+                <p class="text-xs uppercase tracking-wider text-cream/50 mt-1">ODH projects</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================== HORIZONTAL ACCORDION (remaining work) ====================== -->
+    <section class="px-6 py-24 md:py-32 border-t border-cream/5">
+      <div class="mx-auto max-w-6xl">
+        <div class="mb-12">
+          <h2 class="font-display text-3xl md:text-5xl font-bold tracking-tightest">More work</h2>
+          <p class="mt-3 text-cream/50 max-w-lg">Hover or scroll to explore.</p>
+        </div>
+
+        <!-- accordion: flex row, slices expand on hover -->
+        <div ref="accordion" class="flex flex-col md:flex-row gap-3 md:gap-4 h-[60vh] md:h-[480px]">
+          <Project
+            v-for="(p, i) in accordionProjects"
+            :key="p.head"
+            v-bind="p"
+            variant="accordion"
+            :index="i"
+            :open="openIndex === i"
+            @open="openIndex = $event"
           />
-        <img
-          src="/assets/icons/arrow-down-solid.svg"
-          class="arrow-down"
-          alt=""
-          :style="{ opacity: 1 - fadeOpacity }"
-        />
+        </div>
       </div>
-    </div>
-    <div class="projects">
-      <Project
-        v-for="(project, index) in projects"
-        :key="index"
-        :head="project.head"
-        :type="project.type"
-  :role="project.role"
-  :org="project.org"
-  :text="project.text"
-  :link="project.link"
-  :style="{ '--project-gap': computeGap(project.text) + 'px' }"
-      />
-    </div> 
-  </div>
+    </section>
+
+    <!-- ====================== HONORS & AWARDS ====================== -->
+    <section class="px-6 py-24 md:py-32 border-t border-cream/5">
+      <div class="mx-auto max-w-4xl">
+        <div class="mb-12">
+          <h2 class="font-display text-3xl md:text-5xl font-bold tracking-tightest">Honors &amp; awards</h2>
+          <p class="mt-3 text-cream/50 max-w-lg">Recognition from hackathons, competitions, and academic excellence.</p>
+        </div>
+
+        <ul class="divide-y divide-cream/10">
+          <li
+            v-for="(a, i) in awards"
+            :key="i"
+            class="group flex flex-col md:flex-row md:items-baseline gap-1 md:gap-8 py-5 transition-colors"
+          >
+            <span class="font-mono text-sm text-orange/80 md:w-28 shrink-0">{{ a.date }}</span>
+            <div class="flex-1">
+              <p class="font-display text-lg md:text-xl font-semibold text-cream group-hover:text-orange transition-colors">{{ a.title }}</p>
+              <p class="text-sm text-cream/50 mt-1">{{ a.issuer }}</p>
+              <p v-if="a.detail" class="text-sm text-cream/40 mt-2 max-w-2xl">{{ a.detail }}</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ====================== CTA ====================== -->
+    <section class="px-6 py-32 md:py-48 border-t border-cream/5">
+      <div class="mx-auto max-w-5xl text-center">
+        <h2 class="font-display font-black tracking-tightest leading-[0.95]"
+          style="font-size: clamp(2.5rem, 8vw, 6rem);">
+          Want to build<br />together?
+        </h2>
+        <NuxtLink
+          to="/contact"
+          class="mt-12 inline-flex items-center gap-2 rounded-full bg-orange px-8 py-4 text-lg font-bold text-ink transition-all duration-300 hover:bg-cream shadow-xl shadow-orange/20"
+        >
+          Get in touch
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </NuxtLink>
+      </div>
+    </section>
+  </main>
 </template>
 
 <script setup>
-// (imports remain unchanged)
 import { ref, onMounted, onBeforeUnmount } from 'vue';
-import Project from '../components/project.vue'; 
-import { useIntersectionObserver } from '~/composables/useIntersectionObserver';
-// don't reference `projects` before it's declared; initialize with a safe default
-let initialStripeSize = 5;
-const maxStripeSize = 190;
-const fadeOpacity = ref(0);
-const scrollDirection = ref(0);
-let lastScroll = typeof window !== 'undefined' ? window.scrollY : 0;
+import { useGsap } from '~/composables/useGsap';
 
+const { gsap, ScrollTrigger } = useGsap();
 
-const projects = [
-  {
+const heroBg = ref(null);
+const accordion = ref(null);
+const openIndex = ref(0); // first slice open by default
+
+// ponytail: project data stays inline — static portfolio, no CMS needed. No stock images — cards use CSS gradients.
+const bento = {
+  wavelab: {
+    head: 'WaveLab',
+    role: 'AI/ML Research',
+    org: 'Current',
+    text: 'Smart EV charging platform. Currently leading AI/ML research: turning charging infrastructure into a smart, connected platform that generates value. Connect, activate, grow. Trusted by CDP, ELIS, NOI Techpark, Plug and Play.',
+    link: 'https://wavelab.space',
+    tag: 'Current',
+  },
+  atomhr: {
     head: 'AtomHR',
-    type: 'Startup',
+    role: 'Startup',
     org: 'Independent',
-    text: "AtomHR is a platform that leverages AI to slash Bureaucracy and streamline HR processes for Italian Startups and SMEs.",
-    link: 'https://www.atomhr.it/'
+    text: 'AI platform that slashes bureaucracy and streamlines HR processes for Italian startups and SMEs.',
+    link: 'https://www.atomhr.it/',
+    tag: 'Startup',
   },
-  {
-    head: 'Automated Data Quality Monitoring Tool',
-    type: 'Project',
+  trashtracer: {
+    head: 'TrashTracer',
+    role: 'Hackathon winner',
+    org: 'Independent',
+    text: 'Large-format leaderboard for top recyclers to encourage eco-friendly behaviour. Won awards at NOI Hackathon 2022 and Progetto Rocca.',
+    link: 'https://github.com/trashtracer',
+    tag: 'Award',
+  },
+  weather: {
+    head: 'Weather Component',
+    role: 'Project',
     org: 'ODH',
-    text: "The Open Data Hub Data Validation tool is an automated solution designed to ensure the accuracy and quality of data within the Open Data Hub. By implementing advanced validation techniques, it helps identify and rectify data inconsistencies, ultimately enhancing the reliability of the information provided to users.",
-    link: 'https://github.com/noi-techpark/automated-data-quality-monitoring-tool/'
+    text: 'Modular web component visualizing Open Data Hub weather data — live map, forecasts, webcams, dark/light mode. Featured on the ODH website.',
+    link: 'https://weather.syswhite.dev/',
+    tag: 'ODH',
+  },
+  eyehide: {
+    head: 'EyeHide',
+    role: 'Startup',
+    org: 'Independent',
+    text: 'Privacy-first hardware and software safeguarding users against the growing risks of AI and large language models. A secure digital experience without compromising privacy.',
+    link: 'private',
+    tag: 'Startup',
+  },
+};
+
+const accordionProjects = [
+  {
+    head: 'AI Hallucination Solution',
+    role: 'AI/ML',
+    org: 'Galileo Galilei',
+    text: 'A solution to AI hallucinations, built at the Galileo Galilei high school in early 2023 — at a time when hallucinations were already a well-known and widespread issue without a known solution — and presented to the Italian Minister of Education and Merit. Team project with Gennaro Iaccarino and Michele Magri.',
+    link: 'private',
+    tag: 'AI/ML',
   },
   {
-    head: 'EyeHide',
-    type: 'Startup',
-    org: 'Independent',
-    text: "EyeHide is a startup that was founded to adress the deep concern about the growing trend of neglecting user privacy, especially with the rise of AI and large language models. We believe everyone deserves a secure digital experience without compromising their privacy. Our goal is to create user friendly hardware and software to safeguard the user's privacy and security.",
-    link: 'https://eyehide.org'
+    head: 'Localbrain',
+    role: 'Open Source',
+    org: 'bCommonsLAB',
+    text: 'Open-source LLM platform. Contributed the option to run open-source LLMs on local hardware and expose that hardware to other users of the service as a decentralized hardware network.',
+    link: 'https://github.com/bCommonsLAB/LocalBrain',
+    tag: 'OSS',
+  },
+  {
+    head: 'ODH Data Quality',
+    role: 'Project',
+    org: 'ODH',
+    text: 'Data quality checker for the NOI / Open Data Hub — automated validation tool ensuring accuracy and consistency of data within the Open Data Hub.',
+    link: 'https://github.com/noi-techpark/automated-data-quality-monitoring-tool/',
+    tag: 'ODH',
   },
   {
     head: 'WaveLab Station',
-    type: 'Project',
+    role: 'Computer Vision',
     org: 'WaveLab',
-    text: 'This project enhances the EV charging experience for users and provides valuable analytics to vehicle manufacturers. Utilizing computer vision, we continuously analyze live feeds to monitor various factors, such as misuse of electric parking spots and user mood. This technology also enables personalized recommendations for nearby attractions. Due to confidentiality requested by WaveLab, further details cannot be disclosed.',
-    link: 'private'
+    text: 'Enhances the EV charging experience with computer vision — live-feed analysis of misuse, user mood, and personalized recommendations for nearby attractions. Confidential per WaveLab.',
+    link: 'private',
+    tag: 'CV',
   },
   {
-    head: 'ACS Emissions dashboard',
-    type: 'Project',
+    head: 'ACS Emissions',
+    role: 'Dashboard',
     org: 'ACS',
-    text: 'ACS Data Systems S.p.A. tasked us with creating a dashboard to track their mobility emissions. Despite successfully delivering the product, they ceased communication, citing their failure to acquire lack of API keys for dkvmobility as the reason.',
-    link: 'https://github.com/SysWhiteDev/ACS-Challenge-2023'
-  },
-  {
-    head: 'TrashTracer',
-    type: 'Project',
-    org: 'Independent',
-    text: "This project started at the NOI Hackathon 2022, aiming to use large format displays to show a leaderboard for top recyclers to entcourage eco-friendly behaviour. It evolved for the Progetto Rocca competition, where we revamped the codebase and developed a new app to enhance user experience. The project won awards at both events.",
-    link: 'https://github.com/trashtracer'
-  },
-  {
-    head: 'Weather Component',
-    type: 'Project',
-    org: 'ODH',
-    text: "Created during the ODH Bootcamp 2024, this project was created to visualize weather data from the Open Data Hub trough a modular web component. It features a dynamic map, data loading, nearby webcams search, live weather data, 3-hour forecast, daily forecast, component options, and dark/light mode. Highly praised at the conference, the Open Data Hub requested to feature our widget on their website.",
-    link: 'https://weather.syswhite.dev/'
+    text: 'Dashboard tracking mobility emissions for ACS Data Systems.',
+    link: 'https://github.com/SysWhiteDev/ACS-Challenge-2023',
+    tag: 'Data',
   },
 ];
 
-initialStripeSize = projects.length || initialStripeSize;
+// ponytail: counts reflect displayed projects — startups (AtomHR, EyeHide), ODH (Weather, Data Quality), awards (6 honors below)
+const stats = { startups: 2, awards: 6, odh: 2 };
+const total = 10;
 
+// ponytail: honors & awards from LinkedIn — sorted newest event first; date = event date, issuer = recognizing body
+const awards = [
+  {
+    date: 'Jan 2024',
+    title: 'Certificate of Merit for Excellence',
+    issuer: 'Autonomous Province of Bolzano — South Tyrol',
+    detail: 'Outstanding achievement at the FIRST Lego League competition in Rovereto (Jan 21, 2024), as a student at G. Galilei High School (LSSA program).',
+  },
+  {
+    date: 'Nov 2023',
+    title: 'Certificate of Merit for Excellence',
+    issuer: 'Autonomous Province of Bolzano — South Tyrol',
+    detail: 'Outstanding performance at the NOI Hackathon SFSCON Edition (Nov 10–11, 2023) at NOI Techpark, Bolzano.',
+  },
+  {
+    date: 'Nov 2023',
+    title: 'Winner, Premio Fabrizio Rocca',
+    issuer: 'Premio Fabrizio Rocca',
+    detail: 'Recognized for an app that makes recycling more engaging through gamification.',
+  },
+  {
+    date: 'Nov 2022',
+    title: 'NOI Hackathon SFScon Edition Winner',
+    issuer: 'ACS Data Systems AG',
+    detail: 'Won the 24-hour hackathon using Large Format Displays (LFD) to enhance user engagement and promote awareness on a sponsor challenge.',
+  },
+  {
+    date: 'Nov 2022',
+    title: 'Certificate of Merit for Excellence',
+    issuer: 'Autonomous Province of Bolzano — South Tyrol',
+    detail: 'Outstanding performance at the NOI Hackathon SFSCON Edition (Nov 11–12, 2022) at NOI Techpark, Bolzano.',
+  },
+  {
+    date: 'May 2022',
+    title: 'Certificate of Honorable Mention',
+    issuer: 'Autonomous Province of Bolzano — South Tyrol',
+    detail: 'Honorable mention at the BR41N.io Brain-Computer Interface Designers Hackathon (Apr 30 – May 1, 2022) at NOI Techpark, Bolzano.',
+  },
+];
 
-function handleScroll() {
-  if (typeof window === 'undefined') return;
-  const currentScroll = window.scrollY;
-  scrollDirection.value = currentScroll - lastScroll;
-  lastScroll = currentScroll;
-  
-  const windowHeight = document.documentElement.scrollHeight - window.innerHeight;
-  const scrollPercentage = currentScroll / windowHeight;
-  const newStripeSize = initialStripeSize + scrollPercentage * (maxStripeSize - initialStripeSize);
-  updateBackgroundGradient(newStripeSize);
-  updateFadeInOpacity(scrollPercentage);
-}
-
-// Calculate an item spacing (px) from the project's text length.
-// Longer descriptions get more vertical breathing room.
-function computeGap(text) {
-  const len = text ? text.length : 0;
-  // base gap in px, then scale with length and clamp
-  const base = 48;
-  const scaled = Math.round(base + len * 0.35);
-  return Math.min(260, Math.max(24, scaled));
-}
-
-function updateBackgroundGradient(stripeSize) {
-  const bgElement = document.querySelector(".bg");
-  if (bgElement) {
-    // ponytail: cap stripe so transparent band stays > 0, avoids solid-orange bg mid-scroll
-    const clampedStripe = Math.min(stripeSize, 85);
-    const transparentSize = Math.max(90 - clampedStripe, 5);
-    bgElement.style.background = `repeating-linear-gradient(
-      -45deg,
-      #efa819,
-      #efa819 ${clampedStripe}px,
-      black 1px,
-      transparent 4px,
-      transparent ${transparentSize}px
-    )`;
-  }
-}
-
-function updateFadeInOpacity(scrollPercentage) {
-  const fadeStart = 0;
-  const fadeEnd = 0.1;
-  // ponytail: cap at 0.6 so projects stay readable over the orange wash
-  const maxOpacity = 0.6;
-  if (scrollPercentage > fadeStart && scrollPercentage < fadeEnd) {
-    const adjustedPercentage = (scrollPercentage - fadeStart) / (fadeEnd - fadeStart);
-    fadeOpacity.value = Math.min(adjustedPercentage, 1) * maxOpacity;
-  } else if (scrollPercentage >= fadeEnd) {
-    fadeOpacity.value = maxOpacity;
-  } else {
-    fadeOpacity.value = 0;
-  }
-}
-
-// Use IntersectionObserver to add "in-view" when the project enters the viewport,
-// and add either .down (for scrolling down) or .up (for scrolling upward) when it's leaving.
-useIntersectionObserver((entry) => {
-  const el = entry.target;
-  if (entry.isIntersecting) {
-    // Clear exit states when re-entering
-    el.classList.remove('leaving-up', 'leaving-down');
-
-    // Set starting pose based on scroll direction, then transition to in-view
-    if (scrollDirection.value < 0) {
-      // Scrolling up: fall from the top
-      el.classList.add('enter-from-above');
-      el.classList.remove('enter-from-below');
-    } else {
-      // Scrolling down: rise from the bottom
-      el.classList.add('enter-from-below');
-      el.classList.remove('enter-from-above');
-    }
-
-    // Next frame: trigger the transition to in-view
-    requestAnimationFrame(() => {
-      el.classList.add('in-view');
-    });
-
-    // Cleanup the enter classes after the transition completes
-    const onTransitionEnd = (e) => {
-      if (e.propertyName === 'transform' || e.propertyName === 'opacity') {
-        el.classList.remove('enter-from-above', 'enter-from-below');
-        el.removeEventListener('transitionend', onTransitionEnd);
-      }
-    };
-    el.addEventListener('transitionend', onTransitionEnd);
-  } else {
-    el.classList.remove('in-view');
-    // Mark the direction it left the viewport (kept for potential future styling)
-    if (scrollDirection.value < 0) {
-      el.classList.add('leaving-up');
-      el.classList.remove('leaving-down');
-    } else {
-      el.classList.add('leaving-down');
-      el.classList.remove('leaving-up');
-    }
-  }
-});
+let ctx;
 
 onMounted(() => {
-  if (typeof window !== 'undefined') {
-    window.addEventListener("scroll", handleScroll);
-  }
+  ctx = gsap.context(() => {
+    // hero: fade the gradient backdrop as you scroll past — pure CSS bg, no image to scale
+    if (heroBg.value) {
+      gsap.to(heroBg.value, {
+        opacity: 0.3,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: heroBg.value,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: true,
+        },
+      });
+    }
+
+    // bento cards: stagger fade-up on enter
+    // ponytail: immediateRender:false so opacity:0 only applies when ScrollTrigger fires, not on load — prevents cards stuck invisible
+    gsap.utils.toArray('.grid > *').forEach((card) => {
+      gsap.from(card, {
+        opacity: 0,
+        y: 40,
+        duration: 0.8,
+        ease: 'power2.out',
+        immediateRender: false,
+        scrollTrigger: { trigger: card, start: 'top 88%' },
+      });
+    });
+
+    // accordion: stagger the slices in
+    if (accordion.value) {
+      gsap.from(accordion.value.children, {
+        opacity: 0,
+        x: 30,
+        duration: 0.7,
+        stagger: 0.12,
+        ease: 'power2.out',
+        immediateRender: false,
+        scrollTrigger: { trigger: accordion.value, start: 'top 80%' },
+      });
+    }
+  });
+  // ponytail: refresh after a tick so trigger positions match the final layout — fixes sections stuck invisible
+  ScrollTrigger.refresh();
 });
-  
+
 onBeforeUnmount(() => {
-  if (typeof window !== 'undefined') {
-    window.removeEventListener("scroll", handleScroll);
-  }
+  if (ctx) ctx.revert();
+  ScrollTrigger.getAll().forEach((t) => t.kill());
 });
 </script>
-
-<style scoped>
-:global(html, body) {
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  /* Remove fixed height so body grows with content */
-}
-
-.fade-in-color {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #efa819;
-  transition: opacity 0.5s ease;
-  z-index: -1;
-}
-
-.container {
-  display: flex;
-  position: relative;
-  align-items: flex-start;
-  flex-direction: column;
-  /* Remove overflow-x/overflow-y to avoid creating a nested scrollable area */
-}
-
-/* Keep the fullscreen section intact */
-.fullscreen-container {
-  display: flex;
-  color: #fff;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100vw;
-  position: relative;
-}
-
-/* Background remains fixed so stripe animation is intact */
-.bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: repeating-linear-gradient(
-    -45deg,
-    #efa819,
-    #efa819 5px,
-    black 1px,
-    transparent 4px,
-    transparent 95px
-  );
-  transform: rotate(180deg);
-  z-index: -10;
-}
-
-.bg::before {
-  position: absolute;
-  content: "";
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 0;
-  background: linear-gradient(to bottom right, #3c3f58 50%, transparent 50%);
-  animation: revealStripes 1.2s forwards;
-}
-
-@keyframes revealStripes {
-  0% {
-    width: 200%;
-    height: 200%;
-  }
-  100% {
-    width: 0;
-    height: 0;
-  }
-}
-
-.heading-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* ponytail: real gap replaces negative margin so number and "projects" label never collide */
-  gap: clamp(0.5rem, 2vh, 1.5rem);
-}
-
-.heading {
-  display: flex;
-  position: relative;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-}
-
-.heading-title {
-  /* ponytail: hero number scales with viewport height, ~320px on 1080p laptop, ~560px on 1440p */
-  font-size: clamp(18rem, 35vh, 32rem);
-  font-weight: 700;
-  animation: fadeInUp 1s ease-out forwards;
-  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5);
-  line-height: 0.9;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.heading-text {
-  font-size: clamp(2rem, 5vw, 5rem);
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  animation: fadeInUp 1s ease-out forwards;
-}
-
-@media (max-width: 768px) {
-  .heading-title {
-    margin: 0;
-    padding: 0;
-    line-height: 0.9;
-    font-size: clamp(12rem, 38vh, 18rem);
-  }
-
-  .heading-text {
-    font-size: clamp(1.5rem, 5vw, 2rem);
-  }
-
-  .scroll-down-text {
-    animation: spin-slow 3s linear infinite;
-    width: 100px;
-  }
-
-  .arrow-down {
-    width: 25px;
-  }
-}
-
-@media (max-width: 425px) {
-  .heading-title {
-    font-size: clamp(9rem, 32vh, 14rem);
-  }
-
-  .heading-text {
-    font-size: clamp(1.25rem, 5vw, 2rem);
-  }
-}
-
-.scroll-down-indicator {
-  transition: opacity 0.5s ease-out;
-  position: absolute;
-  top: 85%;
-  left: 50%;
-  transform: translate(-50%, -25%);
-  opacity: 1;
-}
-
-.scroll-down-text {
-  animation: spin-slow 3s linear infinite;
-  width: 120px;
-}
-
-.arrow-down {
-  width: 35px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-@keyframes spin-slow {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-.projects {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  /* gap is handled per-item using --project-gap */
-  padding: 2rem 0;
-}
-
-.projects > * {
-  width: 40%;
-  opacity: 0; /* hidden until intersecting */
-  will-change: transform, opacity;
-  transition: opacity 700ms ease, transform 600ms ease;
-  margin-bottom: var(--project-gap, 48px);
-}
-
-@media (max-width: 768px) {
-  .projects > * {
-    height: 55vh;
-    width: 75%;
-  }
-  /* hack because text is too long for some devices and gets hidden after overflowing */
-  .projects > div:last-child {
-    margin-bottom: 0;
-    padding-bottom: 10vh;
-  }
-}
-
-@media (min-aspect-ratio: 21/9) {
-  .projects > * {
-    width: 30%;
-  }
-}
-
-/* Direction-aware enter animations */
-.projects > *.enter-from-below { transform: translateY(140px); opacity: 0; }
-.projects > *.enter-from-above { transform: translateY(-140px); opacity: 0; }
-.projects > *.in-view { opacity: 1; transform: translateY(0); }
-
-/* Provide a tiny extra bottom breathing room on large screens to avoid elastic bounce
-   when the last item is mid-transition (non-layout transform). */
-@media (min-width: 769px) {
-  .projects::after {
-    content: "";
-    display: block;
-    height: 6vh;
-  }
-}
-/* Animate out depending on scroll direction */
-.projects > *.leaving-down {
-  opacity: 0;
-  transform: translateY(450px);
-}
-.projects > *.leaving-up {
-  opacity: 0;
-  transform: translateY(-450px);
-}
-</style>

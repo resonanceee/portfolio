@@ -1,0 +1,36 @@
+- generic [active] [ref=f5e1]:
+  - generic [ref=f5e2]:
+    - navigation "Primary" [ref=f5e3]:
+      - link "home" [ref=f5e4] [cursor=pointer]:
+        - /url: /
+      - link "work" [ref=f5e5] [cursor=pointer]:
+        - /url: /work
+      - link "contact" [ref=f5e6] [cursor=pointer]:
+        - /url: /contact
+    - main [ref=f5e7]:
+      - generic [ref=f5e10]:
+        - generic [ref=f5e11]:
+          - paragraph [ref=f5e12]: Contact
+          - heading "Let’s talk." [level=1] [ref=f5e13]: Let’stalk.
+          - paragraph [ref=f5e14]: Open to AI/ML research, developer tooling, and ambitious side projects. Currently building at WaveLab.
+          - generic [ref=f5e15]: available for select work
+        - generic [ref=f5e19]:
+          - generic [ref=f5e20]:
+            - paragraph [ref=f5e21]: Email
+            - link "res@onance.dev" [ref=f5e22]:
+              - /url: mailto:res@onance.dev
+          - generic [ref=f5e25]:
+            - paragraph [ref=f5e26]: GitHub
+            - link "@resonanceee" [ref=f5e27]:
+              - /url: https://github.com/resonanceee
+          - generic [ref=f5e30]:
+            - paragraph [ref=f5e31]: Currently
+            - link "WaveLab" [ref=f5e32]:
+              - /url: https://wavelab.space
+            - paragraph [ref=f5e35]: AI/ML research · smart EV charging
+  - generic [ref=f5e36]:
+    - button "Toggle Nuxt DevTools" [ref=f5e37] [cursor=pointer]
+    - generic "Page load time" [ref=f5e41]:
+      - generic [ref=f5e42]: "4"
+      - generic [ref=f5e43]: ms
+    - button "Toggle Component Inspector" [ref=f5e45] [cursor=pointer]
