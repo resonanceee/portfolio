@@ -153,7 +153,7 @@ const bento = {
     role: 'Startup',
     org: 'Independent',
     text: 'AI platform that slashes bureaucracy and streamlines HR processes for Italian startups and SMEs.',
-    link: 'https://www.atomhr.it/',
+    link: 'private',
     tag: 'Startup',
   },
   trashtracer: {

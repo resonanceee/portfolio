@@ -137,7 +137,7 @@ const featured = [
     head: 'AtomHR',
     role: 'Startup',
     text: 'AI platform slashing bureaucracy and streamlining HR for Italian startups and SMEs.',
-    link: 'https://www.atomhr.it/',
+    link: 'private',
     tag: 'Startup',
   },
   {
