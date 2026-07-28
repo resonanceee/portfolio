@@ -58,14 +58,6 @@
     <div class="absolute inset-0 opacity-25 mix-blend-overlay" style="background-image: repeating-linear-gradient(135deg, transparent 0 12px, rgba(255,255,255,0.06) 12px 13px);"></div>
     <div class="absolute inset-0 bg-gradient-to-t from-ink/95 via-ink/50 to-ink/20"></div>
 
-    <!-- collapsed label (vertical) -->
-    <div class="absolute inset-y-0 left-0 flex items-center justify-center w-[80px] transition-opacity duration-300"
-      :class="open ? 'opacity-0' : 'opacity-100'">
-      <span class="font-display text-sm font-semibold tracking-tight text-cream [writing-mode:vertical-rl] rotate-180 whitespace-nowrap">
-        {{ head }}
-      </span>
-    </div>
-
     <!-- expanded content -->
     <div class="absolute inset-0 flex flex-col justify-end p-6 transition-opacity duration-300 delay-100"
       :class="open ? 'opacity-100' : 'opacity-0'">
