@@ -36,7 +36,7 @@
           <Project v-bind="bento.wavelab" variant="bento" :index="0" class="md:col-span-2 md:row-span-2" />
           <Project v-bind="bento.atomhr" variant="bento" :index="1" class="md:col-span-2 md:row-span-1" />
           <Project v-bind="bento.trashtracer" variant="bento" :index="2" class="md:col-span-1 md:row-span-1" />
-          <Project v-bind="bento.weather" variant="bento" :index="3" class="md:col-span-1 md:row-span-1" />
+          <Project v-bind="bento.codegram" variant="bento" :index="3" class="md:col-span-1 md:row-span-1" />
           <Project v-bind="bento.eyehide" variant="bento" :index="4" class="md:col-span-2 md:row-span-1" />
           <div class="md:col-span-2 md:row-span-1 rounded-2xl border border-cream/10 bg-indigo-900/40 p-7 flex flex-col justify-between">
             <p class="font-display text-2xl md:text-3xl font-bold tracking-tight leading-tight text-cream">
@@ -164,13 +164,13 @@ const bento = {
     link: 'https://github.com/trashtracer',
     tag: 'Award',
   },
-  weather: {
-    head: 'Weather Component',
-    role: 'Project',
-    org: 'ODH',
-    text: 'Modular web component visualizing Open Data Hub weather data — live map, forecasts, webcams, dark/light mode. Featured on the ODH website.',
-    link: 'https://weather.syswhite.dev/',
-    tag: 'ODH',
+  codegram: {
+    head: 'Codegram',
+    role: 'Side project',
+    org: 'Independent',
+    text: 'Developer tool — see codegram.fyi.',
+    link: 'https://codegram.fyi',
+    tag: 'Dev tool',
   },
   eyehide: {
     head: 'EyeHide',
@@ -224,12 +224,12 @@ const accordionProjects = [
     tag: 'Data',
   },
   {
-    head: 'codegram.fyi',
-    role: 'Side project',
-    org: 'Independent',
-    text: 'Developer tool — see codegram.fyi.',
-    link: 'https://codegram.fyi',
-    tag: 'Dev tool',
+    head: 'Weather Component',
+    role: 'Project',
+    org: 'ODH',
+    text: 'Modular web component visualizing Open Data Hub weather data — live map, forecasts, webcams, dark/light mode. Featured on the ODH website.',
+    link: 'https://weather.syswhite.dev/',
+    tag: 'ODH',
   },
 ];
 
