@@ -223,11 +223,19 @@ const accordionProjects = [
     link: 'https://github.com/SysWhiteDev/ACS-Challenge-2023',
     tag: 'Data',
   },
+  {
+    head: 'codegram.fyi',
+    role: 'Side project',
+    org: 'Independent',
+    text: 'Developer tool — see codegram.fyi.',
+    link: 'https://codegram.fyi',
+    tag: 'Dev tool',
+  },
 ];
 
 // ponytail: counts reflect displayed projects — startups (AtomHR, EyeHide), ODH (Weather, Data Quality), awards (6 honors below)
 const stats = { startups: 2, awards: 6, odh: 2 };
-const total = 10;
+const total = 11;
 
 // ponytail: honors & awards from LinkedIn — sorted newest event first; date = event date, issuer = recognizing body
 const awards = [
