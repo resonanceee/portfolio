@@ -1,5 +1,5 @@
 <template>
-  <main class="overflow-x-hidden w-full max-w-full bg-ink text-cream">
+  <main class="overflow-x-hidden w-full max-w-full bg-ink text-cream isolate">
     <!-- ====================== ATTENTION: HERO ====================== -->
     <section class="relative flex items-center justify-center px-6 pt-40 pb-28 md:pt-56 md:pb-40 overflow-hidden">
       <!-- Dark radial wash + ambient blobs (pure CSS, no stock photo) -->
