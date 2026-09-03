@@ -1,7 +1,7 @@
 <template>
   <main class="overflow-x-hidden w-full max-w-full bg-ink text-cream isolate">
     <!-- ====================== ATTENTION: HERO ====================== -->
-    <section class="relative flex items-center justify-center px-6 pt-40 pb-28 md:pt-56 md:pb-40 overflow-hidden">
+    <section class="relative flex items-center justify-center px-6 pt-40 pb-28 md:pt-56 md:pb-40 overflow-x-hidden">
       <!-- Dark radial wash + ambient blobs (pure CSS, no stock photo) -->
       <div class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_50%_40%,theme(colors.indigo.900),theme(colors.ink)_70%)]"></div>
       <div class="absolute -top-40 -left-32 -z-10 h-[36rem] w-[36rem] rounded-full bg-purple/20 blur-[140px]"></div>

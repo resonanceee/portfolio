@@ -62,7 +62,7 @@
     <slot />
 
     <!-- Custom cursor bubble (desktop only) — ponytail: lives in layout so every page gets it -->
-    <div v-if="!isMobile" class="cursor-bubble" :class="{ hovered: isHovered }" :style="bubbleStyle">
+    <div v-if="!isMobile" class="cursor-bubble" :class="{ hovered: isHovered, dimmed: isDimmed }" :style="bubbleStyle">
       <span v-if="isHovered">click</span>
     </div>
   </div>
@@ -95,12 +95,16 @@ function close() { isOpen.value = false; }
 const bubbleStyle = ref({ left: '-100px', top: '-100px' });
 const isMobile = ref(false);
 const isHovered = ref(false);
+const isDimmed = ref(false);
 
 function handleMouseMove(event) {
   const { clientX, clientY } = event;
-  bubbleStyle.value = { left: `${clientX - 25}px`, top: `${clientY - 25}px` };
+  bubbleStyle.value = { left: `${clientX}px`, top: `${clientY}px` };
   const el = document.elementFromPoint(clientX, clientY);
-  isHovered.value = !!(el && el.closest('a'));
+  const link = el && el.closest('a');
+  isHovered.value = !!link;
+  const inNav = !!(el && (el.closest('nav') || el.closest('button[aria-label*="navigation"]')));
+  isDimmed.value = route.path !== '/contact' || inNav;
 }
 
 onMounted(() => {
@@ -130,10 +134,10 @@ onBeforeUnmount(() => {
   transform: scale(1.02);
 }
 
-/* ponytail: hide native cursor only on precise-pointer devices, avoids touch flicker */
+/* ponytail: hide native cursor everywhere on precise-pointer devices, !important overrides UA cursor:pointer on a/button */
 @media (hover: hover) and (pointer: fine) {
-  body {
-    cursor: none;
+  * {
+    cursor: none !important;
   }
 }
 
@@ -152,7 +156,14 @@ onBeforeUnmount(() => {
   font-size: 0.8rem;
   font-weight: 600;
   color: #1a2230;
-  transition: width 0.3s ease, height 0.3s ease, border-radius 0.3s ease, background 0.3s ease, transform 0.3s ease;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease, border-radius 0.3s ease, background 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
+}
+
+.cursor-bubble.dimmed {
+  width: 24px;
+  height: 24px;
+  opacity: 0.4;
 }
 
 .cursor-bubble.hovered {
@@ -161,6 +172,12 @@ onBeforeUnmount(() => {
   border-radius: 20px 20px 20px 0;
   background: #efa819;
   mix-blend-mode: normal;
-  transform: scale(1.05);
+  transform: translate(-50%, -50%) scale(1.05);
+}
+
+.cursor-bubble.dimmed.hovered {
+  width: 72px;
+  height: 40px;
+  opacity: 0.65;
 }
 </style>
