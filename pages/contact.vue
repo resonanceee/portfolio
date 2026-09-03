@@ -1,5 +1,5 @@
 <template>
-  <main class="overflow-x-hidden w-full max-w-full bg-ink text-cream" @mousemove="handleMouseMove">
+  <main class="overflow-x-hidden w-full max-w-full bg-ink text-cream isolate" @mousemove="handleMouseMove">
     <!-- ambient blobs -->
     <div class="absolute top-1/4 left-1/4 -z-10 h-[28rem] w-[28rem] rounded-full bg-purple/15 blur-[140px] pointer-events-none"></div>
     <div class="absolute bottom-1/4 right-1/4 -z-10 h-[28rem] w-[28rem] rounded-full bg-orange/10 blur-[140px] pointer-events-none"></div>
@@ -35,8 +35,6 @@
               <a
                 href="mailto:res@onance.dev"
                 class="group inline-flex items-center gap-2 font-display text-2xl md:text-3xl font-semibold text-cream hover:text-orange transition-colors contact-link"
-                @mouseover="showCopyBubble"
-                @mouseleave="hideCopyBubble"
               >
                 res@onance.dev
                 <svg class="h-4 w-4 opacity-50 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>
@@ -75,11 +73,8 @@
     </section>
 
     <!-- Custom cursor bubble (desktop only) -->
-    <div v-if="!isMobile && !showCopy" class="bubble" :class="{ hovered: isHovered }" :style="bubbleStyle">
+    <div v-if="!isMobile" class="bubble" :class="{ hovered: isHovered }" :style="bubbleStyle">
       <span v-if="isHovered">click</span>
-    </div>
-    <div v-if="showCopy" class="bubble hovered" :style="bubbleStyle">
-      <span>{{ bubbleText }}</span>
     </div>
   </main>
 </template>
@@ -90,11 +85,8 @@ import { ref, onMounted } from 'vue';
 const bubbleStyle = ref({ left: '0px', top: '0px' });
 const isMobile = ref(false);
 const isHovered = ref(false);
-const showCopy = ref(false);
-const bubbleText = ref('click');
 
 onMounted(() => {
-  // ponytail: matchMedia over UA sniff — catches iPad desktop-mode + modern touch devices
   const coarse = window.matchMedia?.('(pointer: coarse)')?.matches;
   const noHover = window.matchMedia?.('(hover: none)')?.matches;
   isMobile.value = Boolean(coarse && noHover);
@@ -109,18 +101,6 @@ const handleMouseMove = (event) => {
   };
   const el = document.elementFromPoint(clientX, clientY);
   isHovered.value = !!(el && el.closest('a.contact-link'));
-};
-
-const showCopyBubble = (event) => {
-  if (isMobile.value) return;
-  const { clientX, clientY } = event;
-  bubbleStyle.value = { left: `${clientX - 25}px`, top: `${clientY - 25}px` };
-  showCopy.value = true;
-};
-
-const hideCopyBubble = () => {
-  if (isMobile.value) return;
-  showCopy.value = false;
 };
 </script>
 
