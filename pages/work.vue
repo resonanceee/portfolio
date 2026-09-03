@@ -1,5 +1,5 @@
 <template>
-  <main class="overflow-x-hidden w-full max-w-full bg-ink text-cream isolate">
+  <main class="overflow-x-hidden w-full max-w-full bg-ink text-cream">
     <!-- ====================== HERO (gradient, scrub shift) ====================== -->
     <section class="relative h-screen flex items-end overflow-hidden px-6 pb-20 md:pb-28">
       <div ref="heroBg" class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_30%_30%,theme(colors.purple)_0%,theme(colors.indigo.900)_45%,theme(colors.ink)_85%)]"></div>
