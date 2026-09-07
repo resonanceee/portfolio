@@ -9,7 +9,7 @@
 
       <div class="mx-auto w-full max-w-5xl text-center">
         <p class="mb-8 text-sm font-medium uppercase tracking-[0.3em] text-cream/50 hero-eyebrow">
-          Developer &amp; AI/ML Researcher
+          AI/ML Engineer
         </p>
 
         <!-- H1: name-first, max-w-5xl guarantees 1 line on desktop, 2 max on mobile -->

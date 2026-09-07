@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   css: ['~/assets/css/global.css'],
   app: {
     head: {
-      title: "Resonance — Developer & AI/ML Researcher",
+      title: "Resonance — AI/ML Engineer",
       htmlAttrs: { lang: 'en' },
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
