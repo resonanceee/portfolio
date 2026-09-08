@@ -72,9 +72,9 @@
           </NuxtLink>
         </div>
 
-        <!-- 4-card mini bento, grid-flow-dense, zero voids:
-             R1: WaveLab(2) + AtomHR(1) = 3 cols
-             R2: TrashTracer(1) + AI Hallucination(2) = 3 cols -->
+        <!-- 3-card mini bento, grid-flow-dense, zero voids:
+              R1: WaveLab(2) + AtomHR(1) = 3 cols
+              R2: RAG Faith(3) = 3 cols -->
         <div class="grid grid-cols-1 md:grid-cols-3 grid-flow-dense gap-5">
           <Project
             v-for="(p, i) in featured"
@@ -82,7 +82,7 @@
             v-bind="p"
             variant="feature"
             :index="i"
-            :class="(i === 0 || i === 3) ? 'md:col-span-2 md:row-span-1' : ''"
+            :class="i === 0 ? 'md:col-span-2 md:row-span-1' : i === 2 ? 'md:col-span-3 md:row-span-1' : ''"
           />
         </div>
       </div>
@@ -141,18 +141,13 @@ const featured = [
     tag: 'Startup',
   },
   {
-    head: 'TrashTracer',
-    role: 'Hackathon winner',
-    text: 'Large-format leaderboard for top recyclers — won awards at NOI Hackathon & Progetto Rocca.',
-    link: 'https://github.com/trashtracer',
-    tag: 'Award',
-  },
-  {
-    head: 'AI Hallucination Solution',
-    role: 'AI/ML',
-    text: 'A solution to AI hallucinations, built in early 2023 when hallucinations were a well-known and widespread issue without a known solution — and presented to the Italian Minister of Education and Merit.',
-    link: 'private',
-    tag: 'AI/ML',
+    head: 'RAG Faith',
+    role: 'AI/ML Research',
+    org: 'Open Source',
+    text: 'Benchmarking how faithfully RAG answers stick to their sources — multilingual NLI + LLM judges across EN/DE/IT, from synthetic hallucination injection to full judge benchmarks.',
+    link: 'https://github.com/resonanceee/rag-faithfulness-eval',
+    slug: 'rag-faith',
+    tag: 'OSS',
   },
 ];
 

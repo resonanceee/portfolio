@@ -29,13 +29,13 @@
         </div>
 
         <!-- 4-col × 3-row bento, grid-flow-dense, zero voids:
-             R1: WaveLab(2) + AtomHR(2) = 4
-             R2: WaveLab(cont 2) + TrashTracer(1) + Weather(1) = 4
-             R3: EyeHide(2) + Stats(2) = 4 -->
+              R1: WaveLab(2) + AtomHR(2) = 4
+              R2: WaveLab(cont 2) + RAG Faith(1) + Weather(1) = 4
+              R3: EyeHide(2) + Stats(2) = 4 -->
         <div class="grid grid-cols-1 md:grid-cols-4 grid-flow-dense gap-4 md:gap-5 auto-rows-[minmax(220px,auto)]">
           <Project v-bind="bento.wavelab" variant="bento" :index="0" class="md:col-span-2 md:row-span-2" />
           <Project v-bind="bento.atomhr" variant="bento" :index="1" class="md:col-span-2 md:row-span-1" />
-          <Project v-bind="bento.trashtracer" variant="bento" :index="2" class="md:col-span-1 md:row-span-1" />
+          <Project v-bind="bento.ragfaith" variant="bento" :index="2" class="md:col-span-1 md:row-span-1" />
           <Project v-bind="bento.codegram" variant="bento" :index="3" class="md:col-span-1 md:row-span-1" />
           <Project v-bind="bento.eyehide" variant="bento" :index="4" class="md:col-span-2 md:row-span-1" />
           <div class="md:col-span-2 md:row-span-1 rounded-2xl border border-cream/10 bg-indigo-900/40 p-7 flex flex-col justify-between">
@@ -156,13 +156,14 @@ const bento = {
     link: 'private',
     tag: 'Startup',
   },
-  trashtracer: {
-    head: 'TrashTracer',
-    role: 'Hackathon winner',
-    org: 'Independent',
-    text: 'Large-format leaderboard for top recyclers to encourage eco-friendly behaviour. Won awards at NOI Hackathon 2022 and Progetto Rocca.',
-    link: 'https://github.com/trashtracer',
-    tag: 'Award',
+  ragfaith: {
+    head: 'RAG Faith',
+    role: 'AI/ML Research',
+    org: 'Open Source',
+    text: 'Measuring how faithfully RAG answers stick to their sources. Multilingual NLI + LLM judges across EN/DE/IT — judge calibration on RAGTruth, cross-lingual benchmarks, error taxonomy, and a distillation negative result.',
+    link: 'https://github.com/resonanceee/rag-faithfulness-eval',
+    slug: 'rag-faith',
+    tag: 'OSS',
   },
   codegram: {
     head: 'Codegram',
@@ -183,6 +184,14 @@ const bento = {
 };
 
 const accordionProjects = [
+  {
+    head: 'TrashTracer',
+    role: 'Hackathon winner',
+    org: 'Independent',
+    text: 'Large-format leaderboard for top recyclers to encourage eco-friendly behaviour. Won awards at NOI Hackathon 2022 and Progetto Rocca.',
+    link: 'https://github.com/trashtracer',
+    tag: 'Award',
+  },
   {
     head: 'AI Hallucination Solution',
     role: 'AI/ML',
@@ -235,7 +244,7 @@ const accordionProjects = [
 
 // ponytail: counts reflect displayed projects — startups (AtomHR, EyeHide), ODH (Weather, Data Quality), awards (6 honors below)
 const stats = { startups: 2, awards: 6, odh: 2 };
-const total = 11;
+const total = 12;
 
 // ponytail: honors & awards from LinkedIn — sorted newest event first; date = event date, issuer = recognizing body
 const awards = [
