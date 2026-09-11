@@ -18,7 +18,7 @@
         {{ tag }}
       </span>
       <!-- big initials watermark for editorial feel -->
-      <span class="absolute bottom-3 right-4 font-display text-5xl font-black text-cream/10 select-none">{{ initials }}</span>
+      <span class="absolute bottom-3 right-4 font-display text-5xl font-black text-cream/10 select-none">{{ displayInitials }}</span>
       <!-- GitHub badge: card links internally, code link lives here -->
       <span
         v-if="rootTag === 'NuxtLink' && !isPrivate"
@@ -114,6 +114,7 @@ export default {
     link: { type: String, default: '' },
     slug: { type: String, default: '' },
     tag: { type: String, default: '' },
+    initials: { type: String, default: '' },
     variant: { type: String, default: 'feature' },
     index: { type: Number, default: 0 },
     open: { type: Boolean, default: false },
@@ -147,7 +148,8 @@ export default {
       ];
       return presets[this.index % presets.length];
     },
-    initials() {
+    displayInitials() {
+      if (this.initials) return this.initials;
       return (this.head || '').split(' ').map(w => w[0]).slice(0, 3).join('').toUpperCase();
     },
   },

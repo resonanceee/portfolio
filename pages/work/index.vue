@@ -29,13 +29,13 @@
         </div>
 
         <!-- 4-col × 3-row bento, grid-flow-dense, zero voids:
-              R1: WaveLab(2) + AtomHR(2) = 4
-              R2: WaveLab(cont 2) + RAG Faith(1) + Weather(1) = 4
+              R1: WaveLab(2) + RAG Faith(2) = 4
+              R2: WaveLab(cont 2) + Casavo(1) + Codegram(1) = 4
               R3: EyeHide(2) + Stats(2) = 4 -->
         <div class="grid grid-cols-1 md:grid-cols-4 grid-flow-dense gap-4 md:gap-5 auto-rows-[minmax(220px,auto)]">
           <Project v-bind="bento.wavelab" variant="bento" :index="0" class="md:col-span-2 md:row-span-2" />
-          <Project v-bind="bento.atomhr" variant="bento" :index="1" class="md:col-span-2 md:row-span-1" />
-          <Project v-bind="bento.ragfaith" variant="bento" :index="2" class="md:col-span-1 md:row-span-1" />
+          <Project v-bind="bento.ragfaith" variant="bento" :index="1" class="md:col-span-2 md:row-span-1" />
+          <Project v-bind="bento.casavo" variant="bento" :index="2" class="md:col-span-1 md:row-span-1" />
           <Project v-bind="bento.codegram" variant="bento" :index="3" class="md:col-span-1 md:row-span-1" />
           <Project v-bind="bento.eyehide" variant="bento" :index="4" class="md:col-span-2 md:row-span-1" />
           <div class="md:col-span-2 md:row-span-1 rounded-2xl border border-cream/10 bg-indigo-900/40 p-7 flex flex-col justify-between">
@@ -146,15 +146,8 @@ const bento = {
     org: 'Current',
     text: 'Smart EV charging platform. Currently leading AI/ML research: turning charging infrastructure into a smart, connected platform that generates value. Connect, activate, grow. Trusted by CDP, ELIS, NOI Techpark, Plug and Play.',
     link: 'https://wavelab.space',
+    initials: 'WL',
     tag: 'Current',
-  },
-  atomhr: {
-    head: 'AtomHR',
-    role: 'Startup',
-    org: 'Independent',
-    text: 'AI platform that slashes bureaucracy and streamlines HR processes for Italian startups and SMEs.',
-    link: 'private',
-    tag: 'Startup',
   },
   ragfaith: {
     head: 'RAG Faith',
@@ -164,6 +157,16 @@ const bento = {
     link: 'https://github.com/resonanceee/rag-faithfulness-eval',
     slug: 'rag-faith',
     tag: 'OSS',
+  },
+  casavo: {
+    head: 'Casavo Front Desk Agent',
+    role: 'Voice AI',
+    org: 'Hack The Peak 2026',
+    text: 'AI voice agent answering Casavo’s phone line — qualifies sellers into five readiness levels, prices through Casavo’s valuation service, books visits only for leads that can actually close, and hands agents a dossier before the doorbell. Built in a day.',
+    link: 'private',
+    slug: 'casavo-front-desk',
+    initials: 'CF',
+    tag: 'Hackathon',
   },
   codegram: {
     head: 'Codegram',
@@ -217,20 +220,20 @@ const accordionProjects = [
     tag: 'ODH',
   },
   {
-    head: 'WaveLab Station',
-    role: 'Computer Vision',
-    org: 'WaveLab',
-    text: 'Enhances the EV charging experience with computer vision — live-feed analysis of misuse, user mood, and personalized recommendations for nearby attractions. Confidential per WaveLab.',
-    link: 'private',
-    tag: 'CV',
-  },
-  {
     head: 'ACS Emissions',
     role: 'Dashboard',
     org: 'ACS',
     text: 'Dashboard tracking mobility emissions for ACS Data Systems.',
     link: 'https://github.com/SysWhiteDev/ACS-Challenge-2023',
     tag: 'Data',
+  },
+  {
+    head: 'AtomHR',
+    role: 'Startup',
+    org: 'Independent',
+    text: 'AI platform that slashes bureaucracy and streamlines HR processes for Italian startups and SMEs.',
+    link: 'private',
+    tag: 'Startup',
   },
   {
     head: 'Weather Component',

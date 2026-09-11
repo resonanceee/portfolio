@@ -73,8 +73,8 @@
         </div>
 
         <!-- 3-card mini bento, grid-flow-dense, zero voids:
-              R1: WaveLab(2) + AtomHR(1) = 3 cols
-              R2: RAG Faith(3) = 3 cols -->
+              R1: WaveLab(2) + RAG Faith(1) = 3 cols
+              R2: Casavo(3) = 3 cols -->
         <div class="grid grid-cols-1 md:grid-cols-3 grid-flow-dense gap-5">
           <Project
             v-for="(p, i) in featured"
@@ -131,14 +131,8 @@ const featured = [
     role: 'AI/ML Research',
     text: 'Smart EV charging platform — turning charging infrastructure into a smart, connected system that generates value.',
     link: 'https://wavelab.space',
+    initials: 'WL',
     tag: 'Current',
-  },
-  {
-    head: 'AtomHR',
-    role: 'Startup',
-    text: 'AI platform slashing bureaucracy and streamlining HR for Italian startups and SMEs.',
-    link: 'private',
-    tag: 'Startup',
   },
   {
     head: 'RAG Faith',
@@ -148,6 +142,16 @@ const featured = [
     link: 'https://github.com/resonanceee/rag-faithfulness-eval',
     slug: 'rag-faith',
     tag: 'OSS',
+  },
+  {
+    head: 'Casavo Front Desk Agent',
+    role: 'Hackathon',
+    org: 'Hack The Peak 2026',
+    text: 'AI voice agent answering Casavo’s phone line — qualifies sellers into five readiness levels, prices through Casavo’s own valuation service, books visits only for leads that can actually close, and hands agents a dossier before the doorbell.',
+    link: 'private',
+    slug: 'casavo-front-desk',
+    initials: 'CF',
+    tag: 'Voice AI',
   },
 ];
 
