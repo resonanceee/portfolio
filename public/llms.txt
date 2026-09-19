@@ -1,0 +1,24 @@
+# Resonance
+
+> Portfolio of Resonance, AI/ML engineer. Currently building AI/ML systems at WaveLab, a smart EV charging platform. Open to AI/ML research, developer tooling, and ambitious side projects.
+
+Static portfolio built with Nuxt. Pages are plain HTML; this file lists the site's pages and linked projects.
+
+## Pages
+
+- [Home](https://res.onance.dev/): Intro and featured work
+- [Work](https://res.onance.dev/work): 12 projects across startups, research, hackathons, and open source, plus honors and awards
+- [Contact](https://res.onance.dev/contact): Email res@onance.dev, GitHub @resonanceee
+
+## Projects
+
+- [RAG Faith](https://res.onance.dev/work/rag-faith): Benchmarking how faithfully RAG answers stick to their sources; multilingual NLI + LLM judges across EN/DE/IT
+- [Casavo Front Desk Agent](https://res.onance.dev/work/casavo-front-desk): AI voice agent qualifying and pricing Casavo sellers, built in a day at Hack The Peak 2026
+- [AtomHR](https://res.onance.dev/work/atomhr): HR platform for Italian SMEs: LLM-generated employment contracts, e-signature flow, leave calendar
+
+## Optional
+
+- [GitHub: ragfaith](https://github.com/resonanceee/ragfaith): RAG Faith source code
+- [GitHub: lead-desk-console](https://github.com/resonanceee/lead-desk-console): Casavo Front Desk Agent source code
+- [Codegram](https://codegram.fyi): Developer tool side project
+- [WaveLab](https://wavelab.space): Current employer, smart EV charging platform
