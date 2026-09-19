@@ -105,7 +105,7 @@ const handleMouseMove = (event) => {
 </script>
 
 <style scoped>
-/* ponytail: cursor:none only on precise-pointer devices, avoids hydration flicker on touch */
+/* cursor:none only on precise-pointer devices, avoids hydration flicker on touch */
 @media (hover: hover) and (pointer: fine) {
   main, .contact-link, .bubble {
     cursor: none;

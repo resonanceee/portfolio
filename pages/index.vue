@@ -9,7 +9,7 @@
 
       <div class="mx-auto w-full max-w-5xl text-center">
         <p class="mb-8 text-sm font-medium uppercase tracking-[0.3em] text-cream/50 hero-eyebrow">
-          Developer &amp; AI/ML Researcher
+          AI/ML Engineer
         </p>
 
         <!-- H1: name-first, max-w-5xl guarantees 1 line on desktop, 2 max on mobile -->
@@ -72,9 +72,9 @@
           </NuxtLink>
         </div>
 
-        <!-- 4-card mini bento, grid-flow-dense, zero voids:
-             R1: WaveLab(2) + AtomHR(1) = 3 cols
-             R2: TrashTracer(1) + AI Hallucination(2) = 3 cols -->
+        <!-- 3-card mini bento, grid-flow-dense, zero voids:
+              R1: WaveLab(2) + RAG Faith(1) = 3 cols
+              R2: Casavo(3) = 3 cols -->
         <div class="grid grid-cols-1 md:grid-cols-3 grid-flow-dense gap-5">
           <Project
             v-for="(p, i) in featured"
@@ -82,7 +82,7 @@
             v-bind="p"
             variant="feature"
             :index="i"
-            :class="(i === 0 || i === 3) ? 'md:col-span-2 md:row-span-1' : ''"
+            :class="i === 0 ? 'md:col-span-2 md:row-span-1' : i === 2 ? 'md:col-span-3 md:row-span-1' : ''"
           />
         </div>
       </div>
@@ -128,41 +128,40 @@ const scrubText = ref(null);
 const featured = [
   {
     head: 'WaveLab',
-    role: 'AI/ML Research',
-    text: 'Smart EV charging platform — turning charging infrastructure into a smart, connected system that generates value.',
-    link: 'https://wavelab.space',
+    role: 'AI/ML Engineering',
+    text: 'Smart EV charging platform, turning charging infrastructure into a smart, connected system that generates value.',
+    link: '',
+    initials: 'WL',
     tag: 'Current',
   },
   {
-    head: 'AtomHR',
-    role: 'Startup',
-    text: 'AI platform slashing bureaucracy and streamlining HR for Italian startups and SMEs.',
-    link: 'private',
-    tag: 'Startup',
+    head: 'RAG Faith',
+    role: 'AI/ML Engineering',
+    org: 'Open Source',
+    text: 'Benchmarking how faithfully RAG answers stick to their sources: multilingual NLI + LLM judges across EN/DE/IT. Shipped as live tooling: MCP server + universal proxy (PyPI), opencode plugin (npm) — pure LLM judging, no NLI in the shipped paths.',
+    link: 'https://github.com/resonanceee/ragfaith',
+    slug: 'rag-faith',
+    tag: 'OSS',
   },
   {
-    head: 'TrashTracer',
-    role: 'Hackathon winner',
-    text: 'Large-format leaderboard for top recyclers — won awards at NOI Hackathon & Progetto Rocca.',
-    link: 'https://github.com/trashtracer',
-    tag: 'Award',
-  },
-  {
-    head: 'AI Hallucination Solution',
-    role: 'AI/ML',
-    text: 'A solution to AI hallucinations, built in early 2023 when hallucinations were a well-known and widespread issue without a known solution — and presented to the Italian Minister of Education and Merit.',
-    link: 'private',
-    tag: 'AI/ML',
+    head: 'Casavo Front Desk Agent',
+    role: 'Hackathon',
+    org: 'Hack The Peak 2026',
+    text: 'AI voice agent answering Casavo’s phone line; it qualifies sellers into five readiness levels, prices through Casavo’s own valuation service, books visits only for leads that can actually close, and hands agents a dossier before the doorbell.',
+    link: 'https://github.com/resonanceee/lead-desk-console',
+    slug: 'casavo-front-desk',
+    initials: 'CF',
+    tag: 'Voice AI',
   },
 ];
 
-const scrubSentence = "Currently building AI/ML systems at WaveLab — turning charging infrastructure into a smart, connected platform that generates value. Connect, activate, grow.";
+const scrubSentence = "Currently building AI/ML systems at WaveLab, turning charging infrastructure into a smart, connected platform that generates value. Connect, activate, grow.";
 const scrubWords = scrubSentence.split(' ');
 
 let ctx;
 
 onMounted(() => {
-  // ponytail: scoped gsap context so animations clean up on route change
+  // scoped gsap context so animations clean up on route change
   ctx = gsap.context(() => {
     // Hero char reveal: split the name into spans, stagger fade-up
     const name = heroName.value;

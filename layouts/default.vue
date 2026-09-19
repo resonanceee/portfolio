@@ -75,7 +75,7 @@ const links = [
 
 const isOpen = ref(false);
 
-// ponytail: close overlay on route change so back/forward doesn't leave it stuck open
+// close overlay on route change so back/forward doesn't leave it stuck open
 watch(() => route.path, () => { isOpen.value = false; });
 
 function isActive(path) {

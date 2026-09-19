@@ -39,7 +39,7 @@ body {
   opacity: 0;
 }
 
-/* ponytail: respect reduced motion globally — GSAP animations gate on this too */
+/* respect reduced motion globally; GSAP animations gate on this too */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

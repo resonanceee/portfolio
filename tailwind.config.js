@@ -24,7 +24,7 @@ export default {
         coral: '#ee856e',
       },
       fontFamily: {
-        // ponytail: Cabinet Grotesk loaded via Fontshare CDN link in nuxt.config;
+        // Cabinet Grotesk loaded via Fontshare CDN link in nuxt.config;
         // Barlow kept as fallback so first paint never breaks if CDN is slow
         display: ['"Cabinet Grotesk"', 'Barlow', 'ui-sans-serif', 'system-ui', 'sans-serif'],
         sans: ['"Cabinet Grotesk"', 'Barlow', 'ui-sans-serif', 'system-ui', 'sans-serif'],

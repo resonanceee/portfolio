@@ -3,7 +3,7 @@
     <!-- ====================== HERO (gradient, scrub shift) ====================== -->
     <section class="relative h-screen flex items-end overflow-hidden px-6 pb-20 md:pb-28">
       <div ref="heroBg" class="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_30%_30%,theme(colors.purple)_0%,theme(colors.indigo.900)_45%,theme(colors.ink)_85%)]"></div>
-      <!-- ponytail: CSS texture overlay, no external image -->
+      <!-- CSS texture overlay, no external image -->
       <div class="absolute inset-0 -z-10 opacity-20 mix-blend-overlay" style="background-image: repeating-linear-gradient(135deg, transparent 0 14px, rgba(255,255,255,0.05) 14px 15px);"></div>
       <div class="absolute inset-0 -z-10 bg-gradient-to-t from-ink via-ink/40 to-transparent"></div>
 
@@ -14,7 +14,7 @@
           Work
         </h1>
         <p class="mt-6 max-w-xl text-lg md:text-xl text-cream/70 leading-relaxed">
-          A mix of startups, research, hackathon wins, and open-source contributions —
+          A mix of startups, research, hackathon wins, and open-source contributions,
           with a focus on AI/ML and developer experience.
         </p>
       </div>
@@ -29,15 +29,15 @@
         </div>
 
         <!-- 4-col × 3-row bento, grid-flow-dense, zero voids:
-             R1: WaveLab(2) + AtomHR(2) = 4
-             R2: WaveLab(cont 2) + TrashTracer(1) + Weather(1) = 4
-             R3: EyeHide(2) + Stats(2) = 4 -->
+              R1: WaveLab(2) + RAG Faith(2) = 4
+              R2: WaveLab(cont 2) + Casavo(1) + Codegram(1) = 4
+               R3: AtomHR(2) + Stats(2) = 4 -->
         <div class="grid grid-cols-1 md:grid-cols-4 grid-flow-dense gap-4 md:gap-5 auto-rows-[minmax(220px,auto)]">
           <Project v-bind="bento.wavelab" variant="bento" :index="0" class="md:col-span-2 md:row-span-2" />
-          <Project v-bind="bento.atomhr" variant="bento" :index="1" class="md:col-span-2 md:row-span-1" />
-          <Project v-bind="bento.trashtracer" variant="bento" :index="2" class="md:col-span-1 md:row-span-1" />
+          <Project v-bind="bento.ragfaith" variant="bento" :index="1" class="md:col-span-2 md:row-span-1" />
+          <Project v-bind="bento.casavo" variant="bento" :index="2" class="md:col-span-1 md:row-span-1" />
           <Project v-bind="bento.codegram" variant="bento" :index="3" class="md:col-span-1 md:row-span-1" />
-          <Project v-bind="bento.eyehide" variant="bento" :index="4" class="md:col-span-2 md:row-span-1" />
+          <Project v-bind="bento.atomhr" variant="bento" :index="4" class="md:col-span-2 md:row-span-1" />
           <div class="md:col-span-2 md:row-span-1 rounded-2xl border border-cream/10 bg-indigo-900/40 p-7 flex flex-col justify-between">
             <p class="font-display text-2xl md:text-3xl font-bold tracking-tight leading-tight text-cream">
               By the numbers
@@ -138,25 +138,57 @@ const heroBg = ref(null);
 const accordion = ref(null);
 const openIndex = ref(0); // first slice open by default
 
-// ponytail: project data stays inline — static portfolio, no CMS needed. No stock images — cards use CSS gradients.
+// project data stays inline, static portfolio, no CMS needed. No stock images, cards use CSS gradients.
 const bento = {
   wavelab: {
     head: 'WaveLab',
-    role: 'AI/ML Research',
+    role: 'AI/ML Engineering',
     org: 'Current',
-    text: 'Smart EV charging platform. Currently leading AI/ML research: turning charging infrastructure into a smart, connected platform that generates value. Connect, activate, grow. Trusted by CDP, ELIS, NOI Techpark, Plug and Play.',
-    link: 'https://wavelab.space',
+    text: 'Smart EV charging platform. One of three developers, turning charging infrastructure into a smart, connected platform that generates value. Connect, activate, grow. Backed by CDP, ELIS, NOI Techpark, Plug and Play. Customers include Powy.',
+    link: '',
+    initials: 'WL',
     tag: 'Current',
+  },
+  ragfaith: {
+    head: 'RAG Faith',
+    role: 'AI/ML Engineering',
+    org: 'Open Source',
+    text: 'Measuring how faithfully RAG answers stick to their sources. Multilingual NLI + LLM judges across EN/DE/IT: judge calibration on RAGTruth, cross-lingual benchmarks, error taxonomy, and a distillation negative result.',
+    link: 'https://github.com/resonanceee/ragfaith',
+    slug: 'rag-faith',
+    tag: 'OSS',
+  },
+  casavo: {
+    head: 'Casavo Front Desk Agent',
+    role: 'Voice AI',
+    org: 'Hack The Peak 2026',
+    text: 'AI voice agent answering Casavo’s phone line; it qualifies sellers into five readiness levels, prices through Casavo’s valuation service, books visits only for leads that can actually close, and hands agents a dossier before the doorbell. Built in a day.',
+    link: 'https://github.com/resonanceee/lead-desk-console',
+    slug: 'casavo-front-desk',
+    initials: 'CF',
+    tag: 'Hackathon',
+  },
+  codegram: {
+    head: 'Codegram',
+    role: 'Side project',
+    org: 'Independent',
+    text: 'Developer tool, see codegram.fyi.',
+    link: 'https://codegram.fyi',
+    tag: 'Dev tool',
   },
   atomhr: {
     head: 'AtomHR',
     role: 'Startup',
-    org: 'Independent',
-    text: 'AI platform that slashes bureaucracy and streamlines HR processes for Italian startups and SMEs.',
+    org: 'Co-founder',
+    text: 'HR platform for Italian SMEs: LLM-generated employment contracts with CCNL auto-suggest, e-signature flow, leave calendar with staffing visibility. Built to a working alpha with early customer conversations, then stopped.',
     link: 'private',
+    slug: 'atomhr',
     tag: 'Startup',
   },
-  trashtracer: {
+};
+
+const accordionProjects = [
+  {
     head: 'TrashTracer',
     role: 'Hackathon winner',
     org: 'Independent',
@@ -164,30 +196,11 @@ const bento = {
     link: 'https://github.com/trashtracer',
     tag: 'Award',
   },
-  codegram: {
-    head: 'Codegram',
-    role: 'Side project',
-    org: 'Independent',
-    text: 'Developer tool — see codegram.fyi.',
-    link: 'https://codegram.fyi',
-    tag: 'Dev tool',
-  },
-  eyehide: {
-    head: 'EyeHide',
-    role: 'Startup',
-    org: 'Independent',
-    text: 'Privacy-first hardware and software safeguarding users against the growing risks of AI and large language models. A secure digital experience without compromising privacy.',
-    link: 'private',
-    tag: 'Startup',
-  },
-};
-
-const accordionProjects = [
   {
     head: 'AI Hallucination Solution',
     role: 'AI/ML',
     org: 'Galileo Galilei',
-    text: 'A solution to AI hallucinations, built at the Galileo Galilei high school in early 2023 — at a time when hallucinations were already a well-known and widespread issue without a known solution — and presented to the Italian Minister of Education and Merit. Team project with Gennaro Iaccarino and Michele Magri.',
+    text: 'A solution to AI hallucinations, built at the Galileo Galilei high school in early 2023, when hallucinations were already a well-known and widespread issue without a known solution, and presented to the Italian Minister of Education and Merit. Team project with Gennaro Iaccarino and Michele Magri.',
     link: 'private',
     tag: 'AI/ML',
   },
@@ -203,17 +216,9 @@ const accordionProjects = [
     head: 'ODH Data Quality',
     role: 'Project',
     org: 'ODH',
-    text: 'Data quality checker for the NOI / Open Data Hub — automated validation tool ensuring accuracy and consistency of data within the Open Data Hub.',
+    text: 'Data quality checker for the NOI / Open Data Hub, an automated validation tool ensuring accuracy and consistency of data within the Open Data Hub.',
     link: 'https://github.com/noi-techpark/automated-data-quality-monitoring-tool/',
     tag: 'ODH',
-  },
-  {
-    head: 'WaveLab Station',
-    role: 'Computer Vision',
-    org: 'WaveLab',
-    text: 'Enhances the EV charging experience with computer vision — live-feed analysis of misuse, user mood, and personalized recommendations for nearby attractions. Confidential per WaveLab.',
-    link: 'private',
-    tag: 'CV',
   },
   {
     head: 'ACS Emissions',
@@ -224,31 +229,39 @@ const accordionProjects = [
     tag: 'Data',
   },
   {
+    head: 'EyeHide',
+    role: 'Startup',
+    org: 'Co-founder',
+    text: 'Privacy-first hardware and software safeguarding users against the growing risks of AI and large language models. A secure digital experience without compromising privacy.',
+    link: 'private',
+    tag: 'Startup',
+  },
+  {
     head: 'Weather Component',
     role: 'Project',
     org: 'ODH',
-    text: 'Modular web component visualizing Open Data Hub weather data — live map, forecasts, webcams, dark/light mode. Featured on the ODH website.',
+    text: 'Modular web component visualizing Open Data Hub weather data: live map, forecasts, webcams, dark/light mode. Featured on the ODH website.',
     link: 'https://weather.syswhite.dev/',
     tag: 'ODH',
   },
 ];
 
-// ponytail: counts reflect displayed projects — startups (AtomHR, EyeHide), ODH (Weather, Data Quality), awards (6 honors below)
+// counts reflect displayed projects: startups (AtomHR, EyeHide), ODH (Weather, Data Quality), awards (6 honors below)
 const stats = { startups: 2, awards: 6, odh: 2 };
-const total = 11;
+const total = 12;
 
-// ponytail: honors & awards from LinkedIn — sorted newest event first; date = event date, issuer = recognizing body
+// honors & awards from LinkedIn, sorted newest event first; date = event date, issuer = recognizing body
 const awards = [
   {
     date: 'Jan 2024',
     title: 'Certificate of Merit for Excellence',
-    issuer: 'Autonomous Province of Bolzano — South Tyrol',
+    issuer: 'Autonomous Province of Bolzano, South Tyrol',
     detail: 'Outstanding achievement at the FIRST Lego League competition in Rovereto (Jan 21, 2024), as a student at G. Galilei High School (LSSA program).',
   },
   {
     date: 'Nov 2023',
     title: 'Certificate of Merit for Excellence',
-    issuer: 'Autonomous Province of Bolzano — South Tyrol',
+    issuer: 'Autonomous Province of Bolzano, South Tyrol',
     detail: 'Outstanding performance at the NOI Hackathon SFSCON Edition (Nov 10–11, 2023) at NOI Techpark, Bolzano.',
   },
   {
@@ -266,13 +279,13 @@ const awards = [
   {
     date: 'Nov 2022',
     title: 'Certificate of Merit for Excellence',
-    issuer: 'Autonomous Province of Bolzano — South Tyrol',
+    issuer: 'Autonomous Province of Bolzano, South Tyrol',
     detail: 'Outstanding performance at the NOI Hackathon SFSCON Edition (Nov 11–12, 2022) at NOI Techpark, Bolzano.',
   },
   {
     date: 'May 2022',
     title: 'Certificate of Honorable Mention',
-    issuer: 'Autonomous Province of Bolzano — South Tyrol',
+    issuer: 'Autonomous Province of Bolzano, South Tyrol',
     detail: 'Honorable mention at the BR41N.io Brain-Computer Interface Designers Hackathon (Apr 30 – May 1, 2022) at NOI Techpark, Bolzano.',
   },
 ];
@@ -281,7 +294,7 @@ let ctx;
 
 onMounted(() => {
   ctx = gsap.context(() => {
-    // hero: fade the gradient backdrop as you scroll past — pure CSS bg, no image to scale
+    // hero: fade the gradient backdrop as you scroll past, pure CSS bg, no image to scale
     if (heroBg.value) {
       gsap.to(heroBg.value, {
         opacity: 0.3,
@@ -296,7 +309,7 @@ onMounted(() => {
     }
 
     // bento cards: stagger fade-up on enter
-    // ponytail: immediateRender:false so opacity:0 only applies when ScrollTrigger fires, not on load — prevents cards stuck invisible
+    // immediateRender:false so opacity:0 only applies when ScrollTrigger fires, not on load; prevents cards stuck invisible
     gsap.utils.toArray('.grid > *').forEach((card) => {
       gsap.from(card, {
         opacity: 0,
@@ -321,7 +334,7 @@ onMounted(() => {
       });
     }
   });
-  // ponytail: refresh after a tick so trigger positions match the final layout — fixes sections stuck invisible
+  // refresh after a tick so trigger positions match the final layout; fixes sections stuck invisible
   ScrollTrigger.refresh();
 });
 
