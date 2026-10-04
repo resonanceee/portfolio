@@ -104,7 +104,7 @@
               <img
                 src="/casavo-console-demo.gif"
                 alt="Casavo console demo: lead queue, dossier, and bilingual transcript"
-                class="block w-full will-change-transform"
+                class="block w-full"
                 loading="lazy"
               />
             </div>
@@ -379,15 +379,6 @@ onMounted(() => {
       scrollTrigger: { trigger: '.diagram-wrap', start: 'top 80%' },
     });
 
-    // demo gif: ken-burns settle as it enters
-    gsap.fromTo('.demo-frame img',
-      { scale: 1.15 },
-      {
-        scale: 1,
-        ease: 'none',
-        scrollTrigger: { trigger: '.demo-frame', start: 'top 95%', end: 'top 35%', scrub: true },
-      }
-    );
   });
   ScrollTrigger.refresh();
 });
